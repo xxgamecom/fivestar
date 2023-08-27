@@ -3,7 +3,7 @@
 namespace ETHotfix
 {
 	[ObjectSystem]
-	public class RealmGateAddressComponentSystem : StartSystem<RealmGateAddressComponent>
+	public class RealmGateAddressComponentAwakeSystem : StartSystem<RealmGateAddressComponent>
 	{
 		public override void Start(RealmGateAddressComponent self)
 		{
@@ -11,7 +11,7 @@ namespace ETHotfix
 		}
 	}
 	
-	public static class RealmGateAddressComponentEx
+	public static class RealmGateAddressComponentSystem
 	{
 		public static void Start(this RealmGateAddressComponent component)
 		{

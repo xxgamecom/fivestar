@@ -39,7 +39,6 @@
   <ItemGroup>
     <Folder Include="Game\Common" />
     <Folder Include="Game\Games\CardFiveStar\System\Logic" />
-    <Folder Include="Game\Servers\AuthServer" />
     <Folder Include="Module\Http\" />
   </ItemGroup>
 </Project>

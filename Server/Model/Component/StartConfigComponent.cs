@@ -42,7 +42,6 @@ namespace ETModel
         public List<StartConfig> JoyLandlordsConfigs { get; private set; }
 
         public List<StartConfig> CardFiveStartConfigs { get; private set; }
-        public List<StartConfig> MapConfigs { get; private set; }
 
         public List<StartConfig> GateConfigs { get; private set; }
 
@@ -54,7 +53,6 @@ namespace ETModel
             this.GateConfigs = new List<StartConfig>();
             this.JoyLandlordsConfigs = new List<StartConfig>();
             this.CardFiveStartConfigs = new List<StartConfig>();
-            this.MapConfigs = new List<StartConfig>();
 
             string[] ss = File.ReadAllText(path).Split('\n');
             foreach (string s in ss)
@@ -109,12 +107,7 @@ namespace ETModel
                     {
                         this.FriendsCircleConfig = startConfig;
                     }
-
-                    if (startConfig.AppType.Is(AppType.Map))
-                    {
-                        this.MapConfigs.Add(startConfig);
-                    }
-
+                    
                     if (startConfig.AppType.Is(AppType.JoyLandlords))
                     {
                         this.JoyLandlordsConfigs.Add(startConfig);

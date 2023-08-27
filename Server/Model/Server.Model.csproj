@@ -141,8 +141,6 @@
     <Compile Include="..\..\Unity\Assets\Model\Module\Config\ACategory.cs" Link="Module\Config\ACategory.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\Config\ConfigAttribute.cs" Link="Module\Config\ConfigAttribute.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\Config\IConfig.cs" Link="Module\Config\IConfig.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\Module\FrameSync\FrameMessage.cs" Link="Module\FrameSync\FrameMessage.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\Module\FrameSync\FrameOpcode.cs" Link="Module\FrameSync\FrameOpcode.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\Message\AMHandler.cs" Link="Module\Message\AMHandler.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\Message\ErrorCode.cs" Link="Module\Message\ErrorCode.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\Message\IMessage.cs" Link="Module\Message\IMessage.cs" />

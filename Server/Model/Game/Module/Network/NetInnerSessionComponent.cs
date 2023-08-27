@@ -56,9 +56,6 @@ namespace ETModel
                 StartConfig startConfig;
                 switch (appType)
                 {
-                    case AppType.Map:
-                        startConfig = StartConfigComponent.Instance.MapConfigs[index];
-                        break;
                     case AppType.Gate:
                         startConfig = StartConfigComponent.Instance.GateConfigs[index];
                         break;

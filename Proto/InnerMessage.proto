@@ -13,34 +13,6 @@ message A2M_Reload // IResponse
   string Message = 92;
 }
 
-message G2G_LockRequest // IRequest
-{
-  int32 RpcId = 90;
-  int64 Id = 1;
-  string Address = 2;
-}
-
-message G2G_LockResponse // IResponse
-{
-  int32 RpcId = 90;
-  int32 Error = 91;
-  string Message = 92;
-}
-
-message G2G_LockReleaseRequest // IRequest
-{
-  int32 RpcId = 90;
-  int64 Id = 1;
-  string Address = 2;
-}
-
-message G2G_LockReleaseResponse // IResponse
-{
-  int32 RpcId = 90;
-  int32 Error = 91;
-  string Message = 92;
-}
-
 message DBSaveRequest // IRequest
 {
   int32 RpcId = 90;

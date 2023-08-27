@@ -21,50 +21,6 @@ namespace ETModel
 
 	}
 
-	[Message(InnerOpcode.G2G_LockRequest)]
-	public partial class G2G_LockRequest: IRequest
-	{
-		public int RpcId { get; set; }
-
-		public long Id { get; set; }
-
-		public string Address { get; set; }
-
-	}
-
-	[Message(InnerOpcode.G2G_LockResponse)]
-	public partial class G2G_LockResponse: IResponse
-	{
-		public int RpcId { get; set; }
-
-		public int Error { get; set; }
-
-		public string Message { get; set; }
-
-	}
-
-	[Message(InnerOpcode.G2G_LockReleaseRequest)]
-	public partial class G2G_LockReleaseRequest: IRequest
-	{
-		public int RpcId { get; set; }
-
-		public long Id { get; set; }
-
-		public string Address { get; set; }
-
-	}
-
-	[Message(InnerOpcode.G2G_LockReleaseResponse)]
-	public partial class G2G_LockReleaseResponse: IResponse
-	{
-		public int RpcId { get; set; }
-
-		public int Error { get; set; }
-
-		public string Message { get; set; }
-
-	}
-
 	[Message(InnerOpcode.DBSaveRequest)]
 	public partial class DBSaveRequest: IRequest
 	{

@@ -85,13 +85,6 @@ namespace App
                         Game.Scene.AddComponent<LocationComponent>();
                         break;
                     }
-                    case AppType.Map:
-                    {
-                        Game.Scene.AddComponent<UnitComponent>();
-                        Game.Scene.AddComponent<ServerFrameComponent>();
-                        Game.Scene.AddComponent<HeartbeatMgrComponent>(); // 与客户端有连接都要加, 心跳管理组件
-                        break;
-                    }
                     // 大厅服
                     case AppType.Lobby:
                     {
@@ -154,15 +147,13 @@ namespace App
                     case AppType.AllServer:
                     {
                         Game.Scene.AddComponent<PlayerComponent>();
-                        Game.Scene.AddComponent<UnitComponent>();
-
+                        
                         Game.Scene.AddComponent<LocationComponent>(); // 本地实体组件 
 
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address); // 外网地址组件
                         Game.Scene.AddComponent<AppManagerComponent>();                          // 服务器管理组件
                         Game.Scene.AddComponent<RealmGateAddressComponent>();                    // 验证服组件
                         Game.Scene.AddComponent<GateSessionKeyComponent>();                      // 网关秘钥组件
-                        Game.Scene.AddComponent<ServerFrameComponent>();                         // 帧同步组件
 
                         // DB服
                         Game.Scene.AddComponent<DBComponent>();
