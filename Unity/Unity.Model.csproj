@@ -483,9 +483,6 @@
     <Compile Include="Assets\Model\Module\Filter\IFilter.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\AnimatorComponent.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\CameraComponent.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\ClientFrameComponent.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\FrameMessage.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\FrameOpcode.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\MoveComponent.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\Player.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\PlayerComponent.cs" />
