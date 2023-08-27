@@ -3,7 +3,7 @@
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class ServerFrameComponentSystem : AwakeSystem<ServerFrameComponent>
+    public class ServerFrameComponentAwakeSystem : AwakeSystem<ServerFrameComponent>
     {
 	    public override void Awake(ServerFrameComponent self)
 	    {
@@ -11,7 +11,7 @@ namespace ETHotfix
 	    }
     }
 	
-    public static class ServerFrameComponentEx
+    public static class ServerFrameComponentSystem
     {
         public static void Awake(this ServerFrameComponent self)
         {
