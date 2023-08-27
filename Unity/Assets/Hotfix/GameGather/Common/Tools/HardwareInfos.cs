@@ -23,7 +23,7 @@ namespace ETHotfix
          public static int pCurrentPlatform = PlatformType.IOS;
 #endif
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
         public static int pCurrentPlatform = PlatformType.PC;
 #endif
         

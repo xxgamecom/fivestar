@@ -8,12 +8,16 @@ namespace ETHotfix
 	[Message(LobbyOpcode.L2C_GetAnnouncement)]
 	public partial class L2C_GetAnnouncement : IResponse {}
 
-//发起购买请求
+//请求购买商品
 	[Message(LobbyOpcode.C2L_BuyCommodity)]
 	public partial class C2L_BuyCommodity : IUserRequest {}
 
 	[Message(LobbyOpcode.L2C_BuyCommodity)]
 	public partial class L2C_BuyCommodity : IResponse {}
+
+//单次充值信息
+	[Message(LobbyOpcode.TopUpRecord)]
+	public partial class TopUpRecord {}
 
 //查询充值记录
 	[Message(LobbyOpcode.C2L_QueryTopUpRecord)]
@@ -28,10 +32,6 @@ namespace ETHotfix
 
 	[Message(LobbyOpcode.L2C_TopUpRepairOrder)]
 	public partial class L2C_TopUpRepairOrder : IResponse {}
-
-//单次充值信息
-	[Message(LobbyOpcode.TopUpRecord)]
-	public partial class TopUpRecord {}
 
 //向大厅服请求商品数据
 	[Message(LobbyOpcode.C2L_GetCommodityList)]
@@ -259,11 +259,11 @@ namespace ETHotfix
 		 public const ushort L2C_GetAnnouncement = 18002;
 		 public const ushort C2L_BuyCommodity = 18003;
 		 public const ushort L2C_BuyCommodity = 18004;
-		 public const ushort C2L_QueryTopUpRecord = 18005;
-		 public const ushort L2C_QueryTopUpRecord = 18006;
-		 public const ushort C2L_TopUpRepairOrder = 18007;
-		 public const ushort L2C_TopUpRepairOrder = 18008;
-		 public const ushort TopUpRecord = 18009;
+		 public const ushort TopUpRecord = 18005;
+		 public const ushort C2L_QueryTopUpRecord = 18006;
+		 public const ushort L2C_QueryTopUpRecord = 18007;
+		 public const ushort C2L_TopUpRepairOrder = 18008;
+		 public const ushort L2C_TopUpRepairOrder = 18009;
 		 public const ushort C2L_GetCommodityList = 18010;
 		 public const ushort L2C_GetCommodityList = 18011;
 		 public const ushort C2L_GetTheFirstShareAward = 18012;
