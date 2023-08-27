@@ -18,19 +18,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Libs\**" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Administrator\TopUpStateType.cs" Link="GameGather\Module\TopUp\TopUpStateType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Administrator\TopUpStateType.cs" Link="Game\Module\TopUp\TopUpStateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\FiveStarOverTime.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\FiveStarOverTime.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\RoomStateType.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\RoomStateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoOpcode.cs" Link="Game\Games\CardFiveStar\VideoEntity\FiveStarVideoOpcode.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Config\FiveStarRoomConfig.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\FiveStarRoomConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Logic\FiveStarOperateType.cs" Link="Game\Games\CardFiveStar\FiveStarOperate\FiveStarOperateType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\GoodsId.cs" Link="GameGather\Module\Goods\GoodsId.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\KCP\LoginType.cs" Link="GameGather\Module\User\LoginType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\RoomType.cs" Link="GameGather\Module\Match\RoomType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\ToyGame\ToyGameId.cs" Link="GameGather\Module\ToyGameId\ToyGameId.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\GoodsChangeType.cs" Link="GameGather\Module\User\GoodsChangeType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\SexType.cs" Link="GameGather\Module\User\SexType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\VoteResultType.cs" Link="GameGather\Module\Vote\VoteResultType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\GoodsId.cs" Link="Game\Module\Goods\GoodsId.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\KCP\LoginType.cs" Link="Game\Module\User\LoginType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\RoomType.cs" Link="Game\Module\Match\RoomType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\ToyGame\ToyGameId.cs" Link="Game\Module\ToyGameId\ToyGameId.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\GoodsChangeType.cs" Link="Game\Module\User\GoodsChangeType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\SexType.cs" Link="Game\Module\User\SexType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\VoteResultType.cs" Link="Game\Module\Vote\VoteResultType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\Module\Message\CardFiveStarMessage.cs" Link="Module\Message\CardFiveStarMessage.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\Module\Message\CardFiveStarOpcode.cs" Link="Module\Message\CardFiveStarOpcode.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\Module\Message\CommonModelMessage.cs" Link="Module\Message\CommonModelMessage.cs" />
@@ -58,9 +58,9 @@
     <Compile Include="..\..\Unity\Assets\Model\Base\Async\IAwaiter.cs" Link="Base\Async\IAwaiter.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Base\Async\MoveNextRunner.cs" Link="Base\Async\MoveNextRunner.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Base\Object\IDeserializeSystem.cs" Link="Base\Base\IDeserializeSystem.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\RandomTool.cs" Link="GameGather\Module\Tools\RandomTool.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\SeatIndexTool.cs" Link="GameGather\Module\Tools\SeatIndexTool.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\TimeTool.cs" Link="GameGather\Module\Tools\TimeTool.cs" />
+    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\RandomTool.cs" Link="Game\Module\Tools\RandomTool.cs" />
+    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\SeatIndexTool.cs" Link="Game\Module\Tools\SeatIndexTool.cs" />
+    <Compile Include="..\..\Unity\Assets\Model\GameGather\Tools\TimeTool.cs" Link="Game\Module\Tools\TimeTool.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Helper\IListHelper.cs" Link="Helper\IListHelper.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Module\ActorLocation\IActorLocationMessage.cs">
       <Link>Module\ActorLocation\IActorLocationMessage.cs</Link>
@@ -194,9 +194,7 @@
     <Folder Include="Base\Base\" />
     <Folder Include="Base\Async\" />
     <Folder Include="Component\Config\" />
-    <Folder Include="GameGather\Module\Tools\" />
-    <Folder Include="GameGather\Module\ToyGameId\" />
-    <Folder Include="GameGather\Module\Vote\" />
+    <Folder Include="Game\Module\Tools" />
     <Folder Include="Module\Message\Network\KCP\" />
     <Folder Include="Module\Message\Network\TCP\" />
     <Folder Include="Module\Message\MessagePool\" />

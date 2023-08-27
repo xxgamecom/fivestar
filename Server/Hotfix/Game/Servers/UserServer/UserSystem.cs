@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
 {
-  public static class UserSystem
+    public static class UserSystem
     {
         //发送消息给User对应的客户端 发给网关Sesssion会有拦截器 自动转发给客户端
         public static void SendeSessionClientActor(this User user, IActorMessage iActorMessage)
@@ -14,7 +13,7 @@ namespace ETHotfix
             if (user.GetComponent<UserGateActorIdComponent>() != null)
             {
                 long actorId = user.GetComponent<UserGateActorIdComponent>().ActorId;
-                ActorHelp.SendeActor(actorId, iActorMessage);
+                ActorHelp.SendActor(actorId, iActorMessage);
             }
         }
 
@@ -27,23 +26,23 @@ namespace ETHotfix
                 return;
             }
             IPEndPoint ipEndPoint = StartConfigComponent.Instance.GetInnerAddress(IdGenerater.GetAppId(actorId));
-            Game.Scene.GetComponent<NetInnerComponent>().Get(ipEndPoint).Send(iMessage);//发送消息给用户所在的网关
+            Game.Scene.GetComponent<NetInnerComponent>().Get(ipEndPoint).Send(iMessage); //发送消息给用户所在的网关
         }
 
         //改变用户物品
-        public static async Task GoodsChange(this User user,long goodId,int amount, int changeType, bool isShowHint = false,bool isSynchronizationGoods=true)
+        public static async Task GoodsChange(this User user, long goodId, int amount, int changeType, bool isShowHint = false, bool isSynchronizationGoods = true)
         {
             User newUser = await UserHelp.GoodsChange(user.UserId, goodId, amount, changeType, isShowHint);
-            if (isSynchronizationGoods&&newUser != null)
+            if (isSynchronizationGoods && newUser != null)
             {
                 user.Beans = newUser.Beans;
                 user.Beans = newUser.Jewel;
             }
         }
         //改变用户物品
-        public static async Task GoodsChange(this User user, List<GetGoodsOne> getGoodsOnes, int changeType, bool isShowHint=false)
+        public static async Task GoodsChange(this User user, List<GetGoodsOne> getGoodsOnes, int changeType, bool isShowHint = false)
         {
-            User newUser=await UserHelp.GoodsChange(user.UserId, getGoodsOnes, changeType, isShowHint);
+            User newUser = await UserHelp.GoodsChange(user.UserId, getGoodsOnes, changeType, isShowHint);
             if (newUser != null)
             {
                 user.Beans = newUser.Beans;
@@ -83,9 +82,9 @@ namespace ETHotfix
                         break;
                 }
             }
-            if (user.Beans<0)
+            if (user.Beans < 0)
             {
-                if (user.UserId > 1000)//UserId小于1000 肯定是AI机器人 豆子可以为负数
+                if (user.UserId > 1000) //UserId小于1000 肯定是AI机器人 豆子可以为负数
                 {
                     user.Beans = 0;
                 }
@@ -103,7 +102,10 @@ namespace ETHotfix
         //网关通知客户端玩家被挤号了
         public static void ByCompelAccount(this User user)
         {
-            user.SendeSessionClientActor(new Actor_CompelAccount() { Message = "账号在别处登陆" });//客户端收到这条消息后要主动断开连接
+            user.SendeSessionClientActor(new Actor_CompelAccount()
+            {
+                Message = "账号在别处登陆"
+            }); //客户端收到这条消息后要主动断开连接
         }
     }
 

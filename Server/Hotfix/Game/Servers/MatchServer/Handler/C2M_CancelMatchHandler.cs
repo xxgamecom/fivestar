@@ -21,10 +21,7 @@
 //                ReplyError(response, e, reply);
 //            }
 //        }
-
-//        public bool tsasdc(User s)
-//        {
-//            return true;
-//        }
+//
 //    }
 //}
+
