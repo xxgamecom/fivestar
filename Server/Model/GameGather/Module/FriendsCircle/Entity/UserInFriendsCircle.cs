@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ETModel;
+﻿using ETModel;
 using Google.Protobuf.Collections;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -11,9 +8,12 @@ namespace ETHotfix
     /// 用户所在的亲友圈列表
     /// </summary>
     [BsonIgnoreExtraElements]
-    public class UserInFriendsCircle : Entity
+    public class UserInFriendsCircle: Entity
     {
-        public long UserId { get; set; }//用户ID
-        public RepeatedField<int> FriendsCircleIdList = new RepeatedField<int>();//用户所在的亲友圈id
+        // 用户ID
+        public long UserId { get; set; }
+
+        // 用户所在的亲友圈id
+        public RepeatedField<int> FriendsCircleIdList = new RepeatedField<int>();
     }
 }

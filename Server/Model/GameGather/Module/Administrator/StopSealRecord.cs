@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ETModel;
+﻿using ETModel;
 
 namespace ETHotfix
 {
-    public partial class StopSealRecord : Entity
+    public partial class StopSealRecord: Entity
     {
     }
 }

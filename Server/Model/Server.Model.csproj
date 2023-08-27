@@ -19,11 +19,11 @@
   <ItemGroup>
     <Compile Remove="Libs\**" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Administrator\TopUpStateType.cs" Link="GameGather\Module\TopUp\TopUpStateType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\FiveStarOverTime.cs" Link="GameGather\CardFiveStar\CardFiveRoom\FiveStarOverTime.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\RoomStateType.cs" Link="GameGather\CardFiveStar\CardFiveRoom\RoomStateType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoOpcode.cs" Link="GameGather\CardFiveStar\VideoEntity\FiveStarVideoOpcode.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Config\FiveStarRoomConfig.cs" Link="GameGather\CardFiveStar\CardFiveRoom\FiveStarRoomConfig.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Logic\FiveStarOperateType.cs" Link="GameGather\CardFiveStar\FiveStarOperate\FiveStarOperateType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\FiveStarOverTime.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\FiveStarOverTime.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\RoomStateType.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\RoomStateType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoOpcode.cs" Link="Game\Games\CardFiveStar\VideoEntity\FiveStarVideoOpcode.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Config\FiveStarRoomConfig.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\FiveStarRoomConfig.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Logic\FiveStarOperateType.cs" Link="Game\Games\CardFiveStar\FiveStarOperate\FiveStarOperateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\GoodsId.cs" Link="GameGather\Module\Goods\GoodsId.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\KCP\LoginType.cs" Link="GameGather\Module\User\LoginType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\RoomType.cs" Link="GameGather\Module\Match\RoomType.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="..\..\Unity\Assets\Model\Base\TryLocker.cs" Link="Base\TryLocker.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Base\UnOrderMultiMap.cs" Link="Base\UnOrderMultiMap.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Component\Config\ClientConfig.cs" Link="Component\Config\ClientConfig.cs" />
-    <Compile Include="..\..\Unity\Assets\Model\Component\Config\DBConfig.cs" Link="Module\DB\DBConfig.cs" />
+    <Compile Include="..\..\Unity\Assets\Model\Component\Config\DBConfig.cs" Link="Game\Servers\DBServer\DBConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Component\Config\HttpConfig.cs" Link="Module\Http\HttpConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Component\Config\InnerConfig.cs" Link="Module\Message\InnerConfig.cs" />
     <Compile Include="..\..\Unity\Assets\Model\Component\Config\OuterConfig.cs" Link="Module\Message\OuterConfig.cs" />
