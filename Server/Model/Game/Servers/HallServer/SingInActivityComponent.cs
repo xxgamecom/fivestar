@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ETHotfix;
-
 
 namespace ETModel
 {
     [ObjectSystem]
-    public class SingInActivityConfigComponentAwakeSystem : AwakeSystem<SingInActivityComponent>
+    public class SingInActivityConfigComponentAwakeSystem: AwakeSystem<SingInActivityComponent>
     {
         public override void Awake(SingInActivityComponent self)
         {
             self.Awake();
         }
     }
-    public class SingInActivityComponent : Component
+
+    public class SingInActivityComponent: Component
     {
+        public static SingInActivityComponent Ins;
+        
         public List<SignInAward> mSignInAwardList = new List<SignInAward>();
         public DBProxyComponent dbProxyComponent;
-        public static SingInActivityComponent Ins;
+
         public async void Awake()
         {
             Ins = this;

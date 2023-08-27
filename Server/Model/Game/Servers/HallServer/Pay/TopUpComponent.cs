@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ETModel
+﻿namespace ETModel
 {
     [ObjectSystem]
-    public class TopUpComponentAwakeSystem : AwakeSystem<TopUpComponent>
+    public class TopUpComponentAwakeSystem: AwakeSystem<TopUpComponent>
     {
         public override void Awake(TopUpComponent self)
         {
             self.Awake();
         }
     }
-    public class TopUpComponent : Component
+
+    public class TopUpComponent: Component
     {
         public static TopUpComponent Ins { private set; get; }
 

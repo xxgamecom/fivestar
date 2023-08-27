@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ETHotfix;
-using ETModel;
 
 namespace ETModel
 {
     [ObjectSystem]
-    public class ShoppingCommodityAwakeSystem : AwakeSystem<ShoppingCommodityComponent>
+    public class ShoppingCommodityAwakeSystem: AwakeSystem<ShoppingCommodityComponent>
     {
         public override void Awake(ShoppingCommodityComponent self)
         {
@@ -17,25 +12,25 @@ namespace ETModel
         }
     }
 
-    public class ShoppingCommodityComponent : Component
+    public class ShoppingCommodityComponent: Component
     {
         public static ShoppingCommodityComponent Ins { private set; get; }
 
         private DBProxyComponent dbProxyComponent;
 
-
         private List<Commodity> BeansList = new List<Commodity>();
 
         private List<Commodity> JewelList = new List<Commodity>();
 
-        private Dictionary<long,Commodity> CommdityDic=new Dictionary<long, Commodity>();
+        private Dictionary<long, Commodity> CommdityDic = new Dictionary<long, Commodity>();
 
         public async void Awake()
         {
             Ins = this;
+
             dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
-            List<Commodity> commodities =await dbProxyComponent.Query<Commodity>(commodity => true);
-            if (commodities.Count>0)
+            var commodities = await dbProxyComponent.Query<Commodity>(commodity => true);
+            if (commodities.Count > 0)
             {
                 SetCommodityData(commodities);
             }
@@ -43,7 +38,6 @@ namespace ETModel
             {
                 SaveInitDefaultCommodityInfo();
             }
-           
         }
 
         public void SetCommodityData(List<Commodity> commodities)
@@ -62,10 +56,12 @@ namespace ETModel
                 CommdityDic[commodity.CommodityId] = commodity;
             }
         }
+
         public List<Commodity> GetBeansList()
         {
             return BeansList;
         }
+
         public List<Commodity> GetJewelList()
         {
             return JewelList;
@@ -81,14 +77,13 @@ namespace ETModel
             Commodity commodity;
             if (CommdityDic.TryGetValue(commodityId, out commodity))
             {
-                
             }
             return commodity;
         }
         public async void SaveInitDefaultCommodityInfo()
         {
-            Dictionary<int,int> beans=new Dictionary<int, int>();
-            beans.Add(30,36000);
+            Dictionary<int, int> beans = new Dictionary<int, int>();
+            beans.Add(30, 36000);
             beans.Add(60, 75600);
             beans.Add(100, 132000);
             beans.Add(200, 276000);
@@ -96,13 +91,13 @@ namespace ETModel
             beans.Add(1000, 1500000);
             beans.Add(2000, 3120000);
             int i = 0;
-          
+
             foreach (var bean in beans)
             {
                 i++;
                 Commodity commodity = ComponentFactory.Create<Commodity>();
                 commodity.Id = 1000 + i;
-                commodity.CommodityId = 1000+i;
+                commodity.CommodityId = 1000 + i;
                 commodity.CommodityType = GoodsId.Besans;
                 commodity.Amount = bean.Value;
                 commodity.Price = bean.Key;
@@ -122,7 +117,7 @@ namespace ETModel
             Jewes.Add(168, 2000);
             Jewes.Add(328, 4000);
             i = 0;
-           
+
             foreach (var bean in Jewes)
             {
                 i++;
@@ -138,7 +133,6 @@ namespace ETModel
                 CommdityDic[commodity.CommodityId] = commodity;
                 await dbProxyComponent.Save(commodity);
             }
-
         }
     }
 }

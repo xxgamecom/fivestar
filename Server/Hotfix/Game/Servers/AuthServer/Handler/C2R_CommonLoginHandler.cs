@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using ETModel;
 
 namespace ETHotfix
@@ -9,18 +8,19 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2R_CommonLogin message, Action<R2C_CommonLogin> reply)
         {
-            R2C_CommonLogin response = new R2C_CommonLogin();
+            var response = new R2C_CommonLogin();
             try
             {
                 // 向用户服验证（注册/登陆）并获得一个用户ID
-                Session userSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.User);
-                U2R_VerifyUser u2RVerifyUser = (U2R_VerifyUser)await userSession.Call(new R2U_VerifyUser()
+                var userSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.User);
+                var u2RVerifyUser = await userSession.Call(new R2U_VerifyUser()
                 {
                     LoginType = message.LoginType,
                     PlatformType = message.PlatformType,
                     DataStr = message.DataStr,
                     // IpAddress=session.RemoteAddress.Address.ToString(),
-                });
+                }) as U2R_VerifyUser;
+                
                 // 如果Message不为空 说明 验证失败
                 if (!string.IsNullOrEmpty(u2RVerifyUser.Message))
                 {
@@ -28,15 +28,16 @@ namespace ETHotfix
                     reply(response);
                     return;
                 }
+
                 // 随机分配一个Gate
-                StartConfig config = Game.Scene.GetComponent<RealmGateAddressComponent>().GetAddress();
-                IPEndPoint innerAddress = config.GetComponent<InnerConfig>().IPEndPoint;
-                Session gateSession = Game.Scene.GetComponent<NetInnerComponent>().Get(innerAddress);
+                var config = Game.Scene.GetComponent<RealmGateAddressComponent>().GetGateAddress();
+                var innerAddress = config.GetComponent<InnerConfig>().IPEndPoint;
+                var gateSession = Game.Scene.GetComponent<NetInnerComponent>().Get(innerAddress);
                 // 向gate请求一个key,客户端可以拿着这个key连接gate
-                G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey)await gateSession.Call(new R2G_GetLoginKey()
+                var g2RGetLoginKey = await gateSession.Call(new R2G_GetLoginKey()
                 {
                     UserId = u2RVerifyUser.UserId
-                });
+                }) as G2R_GetLoginKey;
 
                 string outerAddress = config.GetComponent<OuterConfig>().Address2;
                 response.Address = outerAddress;

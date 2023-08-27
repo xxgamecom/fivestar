@@ -17,17 +17,20 @@ namespace ETModel
 
     public class GameLobby: Entity
     {
-        public DBProxyComponent dbProxyComponent;
         public static GameLobby Ins;
+
+        public DBProxyComponent dbProxyComponent;
         public List<ServiceInfo> mServiceInfos;
         public RepeatedField<ServiceInfo> ServiceInfosRepeatedField = new RepeatedField<ServiceInfo>();
-        public const int _TheFirstShareAwarNum = 5;    //每日首次分享到朋友圈的奖励数
-        public const int ReliefPaymentBeansNum = 3000; //每次领取救济金豆子的数量
-        public const int ReliefPaymentNumber = 3;      //每日能领取救济金的次数上限
-        public Action WeekRefreshAction;               //每周一00 会调一次
+        public const int _TheFirstShareAwarNum = 5;    // 每日首次分享到朋友圈的奖励数
+        public const int ReliefPaymentBeansNum = 3000; // 每次领取救济金豆子的数量
+        public const int ReliefPaymentNumber = 3;      // 每日能领取救济金的次数上限
+        public Action WeekRefreshAction;               // 每周一00 会调一次
+
         public async void Awake()
         {
             Ins = this;
+
             dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
             this.AddComponent<SingInActivityComponent>();
             this.AddComponent<TurntableComponent>();

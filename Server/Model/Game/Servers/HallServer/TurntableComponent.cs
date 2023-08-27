@@ -1,40 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ETHotfix;
 using Google.Protobuf.Collections;
-
 
 namespace ETModel
 {
     [ObjectSystem]
-    public class TurntableComponentAwakeSystem : AwakeSystem<TurntableComponent>
+    public class TurntableComponentAwakeSystem: AwakeSystem<TurntableComponent>
     {
         public override void Awake(TurntableComponent self)
         {
             self.Awake();
         }
     }
-    public class TurntableComponent : Component
+
+    public class TurntableComponent: Component
     {
 
         public DBProxyComponent dbProxyComponent;
         public static TurntableComponent Ins;
         public List<TurntableGoods> mTurntableGoodses;
-        public RepeatedField<TurntableGoods> mTurntableGoodsesRepeatedField=new RepeatedField<TurntableGoods>();
-        public int MaxWinPrizeId=0;//当前最大中奖记录Id
+        public RepeatedField<TurntableGoods> mTurntableGoodsesRepeatedField = new RepeatedField<TurntableGoods>();
+        public int MaxWinPrizeId = 0; //当前最大中奖记录Id
         public async void Awake()
         {
             Ins = this;
             dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
             mTurntableGoodses = await dbProxyComponent.Query<TurntableGoods>(signInAward => true);
-            if (mTurntableGoodses.Count<=0)
+            if (mTurntableGoodses.Count <= 0)
             {
                 InitDefaultTurntableGoodsConfigs();
             }
             mTurntableGoodsesRepeatedField.Add(mTurntableGoodses.ToArray());
-            List< WinPrizeRecord > winPrizeRecords =await dbProxyComponent.SortQuery<WinPrizeRecord>(prize => true, prize => prize.WinPrizeId == -1, -1);
+            List<WinPrizeRecord> winPrizeRecords = await dbProxyComponent.SortQuery<WinPrizeRecord>(prize => true, prize => prize.WinPrizeId == -1, -1);
             if (winPrizeRecords.Count > 0)
             {
                 MaxWinPrizeId = winPrizeRecords[0].WinPrizeId;
@@ -54,7 +51,7 @@ namespace ETModel
             for (int i = 0; i < 8; i++)
             {
                 TurntableGoods turntableGoods = ComponentFactory.Create<TurntableGoods>();
-                turntableGoods.TurntableGoodsId = i+1;
+                turntableGoods.TurntableGoodsId = i + 1;
                 switch (i)
                 {
                     case 0:
@@ -101,7 +98,6 @@ namespace ETModel
                 mTurntableGoodses.Add(turntableGoods);
                 await dbProxyComponent.Save(turntableGoods);
             }
-            
         }
     }
 }

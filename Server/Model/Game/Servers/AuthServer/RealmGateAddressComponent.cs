@@ -6,7 +6,7 @@ namespace ETModel
 	{
 		public readonly List<StartConfig> GateAddress = new List<StartConfig>();
 
-		public StartConfig GetAddress()
+		public StartConfig GetGateAddress()
 		{
 			int n = RandomHelper.RandomNumber(0, this.GateAddress.Count);
 			return this.GateAddress[n];
