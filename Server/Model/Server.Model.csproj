@@ -18,7 +18,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Libs\**" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Administrator\TopUpStateType.cs" Link="Game\Module\TopUp\TopUpStateType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Administrator\TopUpStateType.cs" Link="Game\Servers\HallServer\Pay\TopUpStateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\FiveStarOverTime.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\FiveStarOverTime.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\RoomStateType.cs" Link="Game\Games\CardFiveStar\CardFiveRoom\RoomStateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoOpcode.cs" Link="Game\Games\CardFiveStar\VideoEntity\FiveStarVideoOpcode.cs" />
@@ -26,7 +26,7 @@
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\CardFiveStar\Logic\FiveStarOperateType.cs" Link="Game\Games\CardFiveStar\FiveStarOperate\FiveStarOperateType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\GoodsId.cs" Link="Game\Module\Goods\GoodsId.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\KCP\LoginType.cs" Link="Game\Module\User\LoginType.cs" />
-    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\RoomType.cs" Link="Game\Module\Match\RoomType.cs" />
+    <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\RoomType.cs" Link="Game\Servers\MatchServer\RoomType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\ToyGame\ToyGameId.cs" Link="Game\Module\ToyGameId\ToyGameId.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\GoodsChangeType.cs" Link="Game\Module\User\GoodsChangeType.cs" />
     <Compile Include="..\..\Unity\Assets\Hotfix\GameGather\Common\Module\User\SexType.cs" Link="Game\Module\User\SexType.cs" />
