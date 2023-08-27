@@ -19,6 +19,7 @@ namespace ETHotfix
                 iResponse.Message = "不能卖给自己";
                 return;
             }
+            
             User sellerUser = await UserHelper.QueryUserInfo(sellerUserId);
             User buyerUser = await UserHelper.QueryUserInfo(buyerUserId);
             if (buyerUser == null)
@@ -26,6 +27,7 @@ namespace ETHotfix
                 iResponse.Message = "买家不存在";
                 return;
             }
+            
             if (sellerUser.Jewel >= jewelNum)
             {
                 UserHelper.GoodsChange(sellerUserId, GoodsId.Jewel, jewelNum * -1, GoodsChangeType.AgencyDeal);

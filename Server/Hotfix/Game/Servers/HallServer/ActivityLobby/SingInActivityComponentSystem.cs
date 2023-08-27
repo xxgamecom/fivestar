@@ -28,7 +28,7 @@ namespace ETHotfix
             }
             await singInActivityComponent.dbProxyComponent.Save(userSingInStates);
         }
-        
+
         // 获取玩家签到信息
         public static async Task<UserSingInState> GetUserSingInState(this SingInActivityComponent singInActivityComponent, long userId)
         {
@@ -37,13 +37,14 @@ namespace ETHotfix
             {
                 return userSingInStates[0];
             }
+            
             return null;
         }
-        
+
         // 进去签到
         public static async Task<bool> UserTodaySingIn(this SingInActivityComponent singInActivityComponent, long userId)
         {
-            List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
+            var userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
             if (userSingInStates.Count > 0)
             {
                 if (userSingInStates[0].SingInTime != 0 && TimeTool.TimeStampIsToday(userSingInStates[0].SingInTime))
@@ -51,7 +52,7 @@ namespace ETHotfix
                     return false;
                 }
             }
-            UserSingInState sueSingInState = ComponentFactory.CreateWithId<UserSingInState>(userId);
+            var sueSingInState = ComponentFactory.CreateWithId<UserSingInState>(userId);
             sueSingInState.SingInTime = TimeTool.GetCurrenTimeStamp();
             sueSingInState.UserId = userId;
             sueSingInState.SingInDays = 1;
@@ -68,10 +69,10 @@ namespace ETHotfix
         // 发送玩家获得物品的信息
         public static async Task SendUserGetGoods(this SingInActivityComponent singInActivityComponent, long userId, int singInDays)
         {
-            SignInAward signInAward = singInActivityComponent.mSignInAwardList[singInDays - 1];
+            var signInAward = singInActivityComponent.mSignInAwardList[singInDays - 1];
             await UserHelper.GoodsChange(userId, signInAward.GoodsId, signInAward.Amount, GoodsChangeType.SignIn, true);
         }
-        
+
         // 获得签到奖励列表
         public static List<SignInAward> GetSignInAwardList(this SingInActivityComponent singInActivityComponent)
         {

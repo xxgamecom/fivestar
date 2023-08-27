@@ -8,7 +8,7 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2L_TodaySignIn message, Action<L2C_TodaySignIn> reply)
         {
-            L2C_TodaySignIn response = new L2C_TodaySignIn();
+            var response = new L2C_TodaySignIn();
             try
             {
                 bool isSucceed = await SingInActivityComponent.Ins.UserTodaySingIn(message.UserId);

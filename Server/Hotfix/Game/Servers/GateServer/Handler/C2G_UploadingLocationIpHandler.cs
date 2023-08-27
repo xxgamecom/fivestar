@@ -11,7 +11,7 @@ namespace ETHotfix
     {
         protected override void Run(Session session, C2G_UploadingLocationIp message, Action<S2C_UploadingLocationIp> reply)
         {
-            S2C_UploadingLocationIp response = new S2C_UploadingLocationIp();
+            var response = new S2C_UploadingLocationIp();
             try
             {
                 //G2U_UploadingLocationIp g2UUploadingLocationIp=new G2U_UploadingLocationIp();

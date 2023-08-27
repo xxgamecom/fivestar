@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ETModel;
 
 namespace ETHotfix
@@ -9,11 +7,11 @@ namespace ETHotfix
     /// 修改亲友圈是否推荐给陌生人
     /// </summary>
     [MessageHandler(AppType.FriendsCircle)]
-    public class C2F_AlterIsRecommendHandler : AMRpcHandler<C2F_AlterIsRecommend, F2C_AlterIsRecommend>
+    public class C2F_AlterIsRecommendHandler: AMRpcHandler<C2F_AlterIsRecommend, F2C_AlterIsRecommend>
     {
         protected override async void Run(Session session, C2F_AlterIsRecommend message, Action<F2C_AlterIsRecommend> reply)
         {
-            F2C_AlterIsRecommend response = new F2C_AlterIsRecommend();
+            var response = new F2C_AlterIsRecommend();
             try
             {
                 FriendsCircle friendsCircle = await FriendsCircleComponent.Ins.QueryFriendsCircle(message.FriendsCrircleId);
@@ -29,6 +27,7 @@ namespace ETHotfix
                     reply(response);
                     return;
                 }
+
                 friendsCircle.AlterIsRecommend(message.IsRecommend);
                 reply(response);
             }

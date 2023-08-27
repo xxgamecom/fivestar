@@ -9,7 +9,7 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2L_GetReliefPayment message, Action<L2C_GetReliefPayment> reply)
         {
-            L2C_GetReliefPayment response = new L2C_GetReliefPayment();
+            var response = new L2C_GetReliefPayment();
             try
             {
                 List<ReliefPaymentInfo> reliefPaymentInfos = await GameLobby.Ins.dbProxyComponent.Query<ReliefPaymentInfo>(info => info.UserId == message.UserId);

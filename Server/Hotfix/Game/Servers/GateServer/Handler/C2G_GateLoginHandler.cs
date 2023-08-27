@@ -22,6 +22,7 @@ namespace ETHotfix
                     reply(response);
                     return;
                 }
+
                 // 记录客户端session在User中
                 user.AddComponent<UserClientSessionComponent>().session = session;
                 // 给Session组件添加下线监听组件和添加User实体

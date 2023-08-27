@@ -8,7 +8,7 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, G2G_LockRequest message, Action<G2G_LockResponse> reply)
         {
-            G2G_LockResponse response = new G2G_LockResponse();
+            var response = new G2G_LockResponse();
             try
             {
                 Unit unit = Game.Scene.GetComponent<UnitComponent>().Get(message.Id);

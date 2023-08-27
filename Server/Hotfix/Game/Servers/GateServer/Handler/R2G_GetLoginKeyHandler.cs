@@ -11,9 +11,9 @@ namespace ETHotfix
             G2R_GetLoginKey response = new G2R_GetLoginKey();
             try
             {
-                long key = RandomHelper.RandInt64();
-                Game.Scene.GetComponent<GateSessionKeyComponent>().Add(key, message.UserId);
-                response.Key = key;
+                long accessToken = RandomHelper.RandInt64();
+                Game.Scene.GetComponent<GateSessionKeyComponent>().Add(accessToken, message.UserId);
+                response.Key = accessToken;
                 reply(response);
             }
             catch (Exception e)

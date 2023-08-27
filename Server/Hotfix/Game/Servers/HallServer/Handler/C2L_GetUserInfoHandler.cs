@@ -12,7 +12,7 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2L_GetUserInfo message, Action<L2C_GetUserInfo> reply)
         {
-            L2C_GetUserInfo response = new L2C_GetUserInfo();
+            var response = new L2C_GetUserInfo();
             try
             {
                 List<User> users = await UserHelper.QueryUserInfo(message.QueryUserIds);

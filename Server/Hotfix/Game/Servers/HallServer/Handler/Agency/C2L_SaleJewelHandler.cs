@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ETModel;
 
 namespace ETHotfix
@@ -9,14 +7,14 @@ namespace ETHotfix
     /// 销售钻石
     /// </summary>
     [MessageHandler(AppType.Lobby)]
-    public class C2L_SaleJewelHandler : AMRpcHandler<C2L_SaleJewel, L2C_SaleJewel>
+    public class C2L_SaleJewelHandler: AMRpcHandler<C2L_SaleJewel, L2C_SaleJewel>
     {
         protected override async void Run(Session session, C2L_SaleJewel message, Action<L2C_SaleJewel> reply)
         {
-            L2C_SaleJewel response = new L2C_SaleJewel();
+            var response = new L2C_SaleJewel();
             try
             {
-                await AgencyComponent.Ins.SaleJewel(message.UserId,message.MaiJiaUser,message.JewelNum, response);
+                await AgencyComponent.Ins.SaleJewel(message.UserId, message.MaiJiaUser, message.JewelNum, response);
                 reply(response);
             }
             catch (Exception e)

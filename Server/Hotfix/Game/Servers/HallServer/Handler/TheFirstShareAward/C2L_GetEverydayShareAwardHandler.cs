@@ -12,10 +12,10 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2L_GetEverydayShareAward message, Action<L2C_GetEverydayShareAward> reply)
         {
-            L2C_GetEverydayShareAward response = new L2C_GetEverydayShareAward();
+            var response = new L2C_GetEverydayShareAward();
             try
             {
-                List<EverydayShareInfo> everydayShareInfos = await GameLobby.Ins.dbProxyComponent.Query<EverydayShareInfo>(every => every.UserId == message.UserId);
+                var everydayShareInfos = await GameLobby.Ins.dbProxyComponent.Query<EverydayShareInfo>(every => every.UserId == message.UserId);
                 if (everydayShareInfos.Count > 0)
                 {
                     if (TimeTool.TimeStampIsToday(everydayShareInfos[0].ShareTime))

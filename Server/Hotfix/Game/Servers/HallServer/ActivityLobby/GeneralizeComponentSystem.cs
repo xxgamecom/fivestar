@@ -24,7 +24,8 @@ namespace ETHotfix
                 iResponse.Message = "邀请码不对";
                 return;
             }
-            //存储个领取新手奖励信息
+
+            // 存储个领取新手奖励信息
             GetGreenGiftInfo getGreenGiftInfo = ComponentFactory.Create<GetGreenGiftInfo>();
             getGreenGiftInfo.GetUserId = getUserId;
             getGreenGiftInfo.InviteUserId = initeUserId;

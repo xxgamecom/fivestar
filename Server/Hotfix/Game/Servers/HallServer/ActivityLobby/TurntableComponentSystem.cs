@@ -17,7 +17,7 @@ namespace ETHotfix
             }
             return 0;
         }
-        
+
         // 玩家完成一局游戏 增加每日抽奖的次数
         public static async void FinishTaskAddLotteryCount(this TurntableComponent turntableComponent, IList<long> userIds)
         {
@@ -80,7 +80,7 @@ namespace ETHotfix
         // 玩家抽奖
         public static async Task<TurntableGoods> DarwLottery(this TurntableComponent turntableComponent, long userId, IResponse response)
         {
-            List<FreeDrawLottery> freeDrawInfo = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => free.UserId == userId);
+            var freeDrawInfo = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => free.UserId == userId);
 
             if (freeDrawInfo.Count > 0 && freeDrawInfo[0].Count > 0)
             {
@@ -103,6 +103,7 @@ namespace ETHotfix
                     response.Message = "钻石不足";
                 }
             }
+
             return null;
         }
 
