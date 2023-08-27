@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ETModel;
 using Google.Protobuf.Collections;
 
@@ -8,7 +6,7 @@ namespace ETHotfix
 {
     public static class AIAndCollocationSystem
     {
-        //设置托管的状态
+        // 设置托管的状态
         public static void SetCollocation(this FiveStarPlayer fiveStarPlayer, bool isCollocation)
         {
             if (fiveStarPlayer.IsCollocation == isCollocation)
@@ -33,12 +31,14 @@ namespace ETHotfix
             {
                 fiveStarPlayer.CollocationAIOperate();
             }
-            fiveStarPlayer.SendMessageUser(
-                new Actor_FiveStar_CollocationChange() {IsCollocation = fiveStarPlayer.IsCollocation});
+            fiveStarPlayer.SendMessageUser(new Actor_FiveStar_CollocationChange()
+            {
+                IsCollocation = fiveStarPlayer.IsCollocation
+            });
         }
 
         //托管和AI状态下出牌 判断出牌
-        public static void AICollcationPlayCard(this FiveStarPlayer fiveStarPlayer,int playCard)
+        public static void AICollcationPlayCard(this FiveStarPlayer fiveStarPlayer, int playCard)
         {
             if (fiveStarPlayer.IsLiangDao)
             {
@@ -51,7 +51,7 @@ namespace ETHotfix
                 {
                     if (!fiveStarPlayer.FiveStarRoom.LiangDaoCanHuCards.Contains(fiveStarPlayer.Hands[i]))
                     {
-                        fiveStarPlayer.PlayCard(fiveStarPlayer.Hands[i]);  //如果手牌中没有 最后摸的牌 或者摸的牌是放炮的牌 就出第一张手牌
+                        fiveStarPlayer.PlayCard(fiveStarPlayer.Hands[i]); //如果手牌中没有 最后摸的牌 或者摸的牌是放炮的牌 就出第一张手牌
                         return;
                     }
                 }
@@ -73,8 +73,7 @@ namespace ETHotfix
                 {
                     if (fiveStarPlayer.IsAI) //如果是AI就随便漂
                     {
-                        fiveStarPlayer.DaPiao(
-                            RandomTool.Random(0, fiveStarPlayer.FiveStarRoom.RoomConfig.MaxPiaoNum + 1)); //随机打漂
+                        fiveStarPlayer.DaPiao(RandomTool.Random(0, fiveStarPlayer.FiveStarRoom.RoomConfig.MaxPiaoNum + 1)); //随机打漂
                     }
                     else
                     {
@@ -85,10 +84,10 @@ namespace ETHotfix
                 {
                     if (fiveStarPlayer.IsAI) //如果是AI出牌 保留手牌中有多张相同的
                     {
-                        fiveStarPlayer.Hands.Sort(); //手牌排序
-                        fiveStarPlayer.intData =fiveStarPlayer.Hands.IndexOf(fiveStarPlayer.MoEndHand); //获取摸到的牌 首次出现的位置
+                        fiveStarPlayer.Hands.Sort();                                                     //手牌排序
+                        fiveStarPlayer.intData = fiveStarPlayer.Hands.IndexOf(fiveStarPlayer.MoEndHand); //获取摸到的牌 首次出现的位置
 
-                        if (fiveStarPlayer.intData < fiveStarPlayer.Hands.Count - 2 &&fiveStarPlayer.Hands[fiveStarPlayer.intData + 1] == fiveStarPlayer.MoEndHand)
+                        if (fiveStarPlayer.intData < fiveStarPlayer.Hands.Count - 2 && fiveStarPlayer.Hands[fiveStarPlayer.intData + 1] == fiveStarPlayer.MoEndHand)
                         {
                             fiveStarPlayer.AICollcationPlayCard(fiveStarPlayer.Hands[fiveStarPlayer.Hands.Count - 1]); //摸到的牌有相同的 出牌组里最后一张牌
                         }
@@ -102,8 +101,7 @@ namespace ETHotfix
                         fiveStarPlayer.AICollcationPlayCard(fiveStarPlayer.MoEndHand); //不是AI出牌直接出 最后摸到的牌 
                     }
                 }
-                else if (fiveStarPlayer.FiveStarRoom.CanOperatePlayerIndex.Contains(fiveStarPlayer.SeatIndex)
-                ) //如果玩家可操作索引列表里面有自己 则直接操作
+                else if (fiveStarPlayer.FiveStarRoom.CanOperatePlayerIndex.Contains(fiveStarPlayer.SeatIndex)) //如果玩家可操作索引列表里面有自己 则直接操作
                 {
                     FiveStarOperateInfo fiveStarOperateInfo;
                     if (fiveStarPlayer.canOperateLists.Contains(FiveStarOperateType.FangChongHu)) //如果可以胡 就胡
@@ -112,8 +110,7 @@ namespace ETHotfix
                     }
                     else
                     {
-                        fiveStarOperateInfo =
-                            FiveStarOperateInfoFactory.Create(0, FiveStarOperateType.None, 0); //不能胡就放弃
+                        fiveStarOperateInfo = FiveStarOperateInfoFactory.Create(0, FiveStarOperateType.None, 0); //不能胡就放弃
                     }
                     if (fiveStarPlayer.IsAI) //如果是AI 就是能碰就碰 能杠就杠 因为发的牌会做特殊手脚
                     {
@@ -129,7 +126,6 @@ namespace ETHotfix
                                 fiveStarOperateInfo.Card = canGang.Key;
                                 fiveStarOperateInfo.OperateType = canGang.Value;
                             }
-
                         }
                     }
                     fiveStarPlayer.OperatePengGangHu(fiveStarOperateInfo); //执行操作
@@ -157,10 +153,11 @@ namespace ETHotfix
             {
                 return card;
             }
+
             fiveStarPlayer.MoCardCount++;
             if (fiveStarPlayer.MoCardCount == HuMoCount)
             {
-                int wincard = fiveStarPlayer.FiveStarRoom.ResidueCards[fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1];//获取必赢牌的 最后摸的牌
+                int wincard = fiveStarPlayer.FiveStarRoom.ResidueCards[fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1]; //获取必赢牌的 最后摸的牌
                 fiveStarPlayer.FiveStarRoom.ResidueCards.Remove(wincard);
                 fiveStarPlayer.FiveStarRoom.ResidueCards.Add(card);
                 return wincard;
@@ -175,44 +172,47 @@ namespace ETHotfix
             {
                 return;
             }
-            if (!fiveStarPlayer.IsLiangDao&&fiveStarPlayer.MoCardCount == LiangDaoMoCount)
+
+            if (!fiveStarPlayer.IsLiangDao && fiveStarPlayer.MoCardCount == LiangDaoMoCount)
             {
                 //替换手牌
 
-                List<int> newHands = fiveStarPlayer.FiveStarRoom.ResidueCards.GetRange(fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1 - fiveStarPlayer.Hands.Count,fiveStarPlayer.Hands.Count);//获取隐藏在 剩余牌尾部必赢的牌
-                int wincard=fiveStarPlayer.FiveStarRoom.ResidueCards[fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1];//获取必赢牌的 最后摸的牌
+                List<int> newHands = fiveStarPlayer.FiveStarRoom.ResidueCards.GetRange(fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1 - fiveStarPlayer.Hands.Count, fiveStarPlayer.Hands.Count); //获取隐藏在 剩余牌尾部必赢的牌
+                int wincard = fiveStarPlayer.FiveStarRoom.ResidueCards[fiveStarPlayer.FiveStarRoom.ResidueCards.Count - 1];                                                                          //获取必赢牌的 最后摸的牌
 
-                fiveStarPlayer.FiveStarRoom.ResidueCards.Remove(wincard);//删除必赢摸的牌
+                fiveStarPlayer.FiveStarRoom.ResidueCards.Remove(wincard); //删除必赢摸的牌
                 for (int i = 0; i < newHands.Count; i++)
                 {
-                    fiveStarPlayer.FiveStarRoom.ResidueCards.Remove(newHands[i]);//删除必赢的牌
+                    fiveStarPlayer.FiveStarRoom.ResidueCards.Remove(newHands[i]); //删除必赢的牌
                 }
-                fiveStarPlayer.FiveStarRoom.ResidueCards.AddRange(fiveStarPlayer.Hands);//把现有的手牌添加到剩余牌数组里面
-                fiveStarPlayer.FiveStarRoom.ResidueCards.Add(wincard);//添加必赢摸的牌 到最后
+                fiveStarPlayer.FiveStarRoom.ResidueCards.AddRange(fiveStarPlayer.Hands); //把现有的手牌添加到剩余牌数组里面
+                fiveStarPlayer.FiveStarRoom.ResidueCards.Add(wincard);                   //添加必赢摸的牌 到最后
 
-
-                fiveStarPlayer.Hands.Clear();//清除当前手牌
-                fiveStarPlayer.Hands.Add(newHands);//添加必赢的牌
-                fiveStarPlayer.LiangDao();//正常情况下决定可以亮倒
+                fiveStarPlayer.Hands.Clear();       //清除当前手牌
+                fiveStarPlayer.Hands.Add(newHands); //添加必赢的牌
+                fiveStarPlayer.LiangDao();          //正常情况下决定可以亮倒
             }
         }
 
         public static List<int> GetRange(this RepeatedField<int> repFieldInt, int index, int count)
         {
-            List<int> array=new List<int>();
-            for (int i = index; i < index+count; i++)
+            List<int> array = new List<int>();
+            for (int i = index; i < index + count; i++)
             {
                 array.Add(repFieldInt[i]);
             }
+
             return array;
         }
-        //延迟打漂AI打漂
+
+        // 延迟打漂AI打漂
         public static async void AIDelayDaPiao(this FiveStarPlayer fiveStarPlayer)
         {
-            if (!fiveStarPlayer.IsAI)//不是AI直接 返回
+            if (!fiveStarPlayer.IsAI) //不是AI直接 返回
             {
                 return;
             }
+
             await Game.Scene.GetComponent<TimerComponent>().WaitAsync(RandomTool.Random(1, 4) * 1000);
             fiveStarPlayer.CollocationAIOperate();
         }

@@ -20,7 +20,7 @@ namespace ETHotfix.GameGather.Common.Handler.User
                 else
                 {
                     // 通知客户端 用户不在游戏中
-                    ActorHelp.SendActor(message.SessionActorId, new Actor_BeingInGame()
+                    ActorHelper.SendActor(message.SessionActorId, new Actor_BeingInGame()
                     {
                         IsGameBeing = false
                     });

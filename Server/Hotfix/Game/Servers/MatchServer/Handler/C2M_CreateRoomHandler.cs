@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ETModel;
-using Google.Protobuf.Collections;
 
 namespace ETHotfix
 {
     [MessageHandler(AppType.Match)]
-    public class C2M_CreateRoomHandler : AMRpcHandler<C2M_CreateRoom, M2C_CreateRoom>
+    public class C2M_CreateRoomHandler: AMRpcHandler<C2M_CreateRoom, M2C_CreateRoom>
     {
         protected override async void Run(Session session, C2M_CreateRoom message, Action<M2C_CreateRoom> reply)
         {
@@ -22,10 +21,10 @@ namespace ETHotfix
                 }
                 int needJeweNumCount = 0;
                 long userJewel = message.User.Jewel;
-                User friendsCreateUser=null;
+                User friendsCreateUser = null;
                 if (message.FriendsCircleId > 0)
                 {
-                    friendsCreateUser=await  GetFriendsCircleCreateUser(message.FriendsCircleId, response);
+                    friendsCreateUser = await GetFriendsCircleCreateUser(message.FriendsCircleId, response);
                     if (friendsCreateUser == null)
                     {
                         reply(response);
@@ -44,7 +43,7 @@ namespace ETHotfix
                     //记录亲友圈 主人的id
                     room.FriendsCreateUserId = friendsCreateUser.UserId;
                 }
-                
+
                 //创建者加入房间
                 matchRoomComponent.JoinRoom(room.RoomId, message.User, message.SessionActorId, response);
                 response.RoomInfo = RoomInfoFactory.Creator(matchRoomComponent.GetRoomUserIdIn(message.UserId));
@@ -58,7 +57,7 @@ namespace ETHotfix
         }
 
         //查询亲友创建者User
-        public static async Task<User>  GetFriendsCircleCreateUser(int friendsCircleId, IResponse iResponse)
+        public static async Task<User> GetFriendsCircleCreateUser(int friendsCircleId, IResponse iResponse)
         {
             List<FriendsCircle> friendsCircles = await Game.Scene.GetComponent<DBProxyComponent>().Query<FriendsCircle>(friends => (friends.FriendsCircleId == friendsCircleId));
             if (friendsCircles.Count <= 0)
@@ -66,9 +65,8 @@ namespace ETHotfix
                 iResponse.Message = "亲友圈不存在";
                 return null;
             }
-            return await UserHelp.QueryUserInfo(friendsCircles[0].CreateUserId);
+            return await UserHelper.QueryUserInfo(friendsCircles[0].CreateUserId);
         }
-
 
     }
 }

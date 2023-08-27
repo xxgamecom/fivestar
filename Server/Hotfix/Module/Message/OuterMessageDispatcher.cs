@@ -59,7 +59,7 @@ namespace ETHotfix
                             }
                             if (iUserRequest is IAdministratorRequest administratorRequest)
                             {
-                                if (!AdministratorHelp.VerifyAdministrator(administratorRequest))
+                                if (!AdminHelper.VerifyAdministrator(administratorRequest))
                                 {
                                     //如果账号密码错误 直接返回 不如直接封号
                                     return;

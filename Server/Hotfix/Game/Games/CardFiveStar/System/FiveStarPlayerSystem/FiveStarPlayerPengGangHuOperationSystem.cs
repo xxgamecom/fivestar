@@ -1,13 +1,10 @@
 ﻿using ETModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ETHotfix
 {
     public static class FiveStarPlayerPengGangHuOperationSystem
     {
-        //玩家执行操作
+        // 玩家执行操作
         public static void ExecuteOperate(this FiveStarPlayer fiveStarPlayer, FiveStarOperateInfo operateInfo)
         {
             fiveStarPlayer.boolData = false;
@@ -18,10 +15,10 @@ namespace ETHotfix
                     Log.Error("玩家要杠的牌 不在可杠列表里面" + operateInfo.Card);
                     return;
                 }
-                operateInfo.OperateType = fiveStarPlayer.canGangCards[operateInfo.Card];//玩家只发明杠 需要服务器判断是什么杠
+                operateInfo.OperateType = fiveStarPlayer.canGangCards[operateInfo.Card]; //玩家只发明杠 需要服务器判断是什么杠
             }
 
-            if (fiveStarPlayer.IsLiangDao)//如果玩家亮倒了 可以胡 却选择不胡 强制胡
+            if (fiveStarPlayer.IsLiangDao) //如果玩家亮倒了 可以胡 却选择不胡 强制胡
             {
                 if (operateInfo.OperateType == FiveStarOperateType.None && fiveStarPlayer.canOperateLists.Contains(FiveStarOperateType.FangChongHu))
                 {
@@ -59,7 +56,6 @@ namespace ETHotfix
                     }
                     fiveStarPlayer.boolData = fiveStarPlayer.HuPai(operateInfo.Card, fiveStarPlayer.FiveStarRoom.CurrChuPaiIndex);
                     break;
-
             }
             if (!fiveStarPlayer.boolData)
             {
@@ -77,16 +73,16 @@ namespace ETHotfix
                 case FiveStarOperateType.Peng:
                 case FiveStarOperateType.MingGang:
                 case FiveStarOperateType.FangChongHu:
-                    fiveStarPlayer.FiveStarRoom.FiveStarPlayerDic[fiveStarPlayer.FiveStarRoom.CurrChuPaiIndex].PlayCardByEatOff();//玩家打出牌被吃掉
+                    fiveStarPlayer.FiveStarRoom.FiveStarPlayerDic[fiveStarPlayer.FiveStarRoom.CurrChuPaiIndex].PlayCardByEatOff(); //玩家打出牌被吃掉
                     break;
             }
             //操作完成后续
             switch (operateInfo.OperateType)
             {
-                case FiveStarOperateType.None://玩家不操作
+                case FiveStarOperateType.None: //玩家不操作
                     if (fiveStarPlayer.FiveStarRoom.QiOperateNextStep == FiveStarOperateType.MoCard)
                     {
-                        fiveStarPlayer.FiveStarRoom.PlayerMoPai();//可出牌的人 和当前出牌的是同一个 证明 刚刚摸牌玩家已经出牌了 所以按正常流程摸牌
+                        fiveStarPlayer.FiveStarRoom.PlayerMoPai(); //可出牌的人 和当前出牌的是同一个 证明 刚刚摸牌玩家已经出牌了 所以按正常流程摸牌
                     }
                     else if (fiveStarPlayer.FiveStarRoom.QiOperateNextStep == FiveStarOperateType.ChuCard)
                     {
@@ -94,14 +90,14 @@ namespace ETHotfix
                     }
                     break;
                 case FiveStarOperateType.Peng:
-                    fiveStarPlayer.SendNewestHands();//发送玩家最新的手牌信息
-                    fiveStarPlayer.CanChuPai();//碰了就可以出牌
+                    fiveStarPlayer.SendNewestHands(); //发送玩家最新的手牌信息
+                    fiveStarPlayer.CanChuPai();       //碰了就可以出牌
                     break;
                 case FiveStarOperateType.MingGang:
                 case FiveStarOperateType.AnGang:
                 case FiveStarOperateType.CaGang:
-                    fiveStarPlayer.SendNewestHands();//发送玩家最新的手牌信息
-                    fiveStarPlayer.FiveStarRoom.PlayerMoPai(fiveStarPlayer.SeatIndex);//杠的话就摸一张牌
+                    fiveStarPlayer.SendNewestHands();                                  //发送玩家最新的手牌信息
+                    fiveStarPlayer.FiveStarRoom.PlayerMoPai(fiveStarPlayer.SeatIndex); //杠的话就摸一张牌
                     break;
             }
         }
@@ -111,8 +107,7 @@ namespace ETHotfix
         {
             if (fiveStarPlayer.RemoveCardCount(card, count))
             {
-                FiveStarOperateInfo fiveStarOperateInfo = FiveStarOperateInfoFactory.Create(card, operateType,
-                    fiveStarPlayer.FiveStarRoom.CurrChuPaiIndex);
+                FiveStarOperateInfo fiveStarOperateInfo = FiveStarOperateInfoFactory.Create(card, operateType, fiveStarPlayer.FiveStarRoom.CurrChuPaiIndex);
                 fiveStarPlayer.OperateInfos.Add(fiveStarOperateInfo);
                 return true;
             }
@@ -124,8 +119,7 @@ namespace ETHotfix
         {
             for (int i = 0; i < fiveStarPlayer.OperateInfos.Count; i++)
             {
-                if (fiveStarPlayer.OperateInfos[i].OperateType == FiveStarOperateType.Peng &&
-                    fiveStarPlayer.OperateInfos[i].Card == card)
+                if (fiveStarPlayer.OperateInfos[i].OperateType == FiveStarOperateType.Peng && fiveStarPlayer.OperateInfos[i].Card == card)
                 {
                     if (fiveStarPlayer.RemoveCardCount(card, 1))
                     {

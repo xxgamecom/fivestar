@@ -12,7 +12,18 @@ namespace ETHotfix
     public static class RoomConfigIntended
     {
         private static Dictionary<long, CardFiveStarRoomConfig> _cardFiveStarRoomConfigDic;
-        private static RepeatedField<int> DefaultCardFiveStarConfigLists = new RepeatedField<int>() { 1, 8, 30, 1, 3, 3, 2, 1, 0 };
+        private static RepeatedField<int> DefaultCardFiveStarConfigLists = new RepeatedField<int>()
+        {
+            1,
+            8,
+            30,
+            1,
+            3,
+            3,
+            2,
+            1,
+            0
+        };
 
         private static void InitCardFiveStarRoomConfigDic()
         {
@@ -29,9 +40,9 @@ namespace ETHotfix
         private static bool isAADeductJewel;
         public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long toyGameId)
         {
-            return IntendedRoomConfigParameter(roomConfigLists, toyGameId,ref defaulneedJeweNumCount, ref defaulNumber,ref isAADeductJewel);
+            return IntendedRoomConfigParameter(roomConfigLists, toyGameId, ref defaulneedJeweNumCount, ref defaulNumber, ref isAADeductJewel);
         }
-        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long toyGameId,ref int needJeweNumCount,ref int number,ref bool isAADeductJewel)
+        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long toyGameId, ref int needJeweNumCount, ref int number, ref bool isAADeductJewel)
         {
             if (_cardFiveStarRoomConfigDic == null)
             {
@@ -41,34 +52,30 @@ namespace ETHotfix
             switch (toyGameId)
             {
                 case ToyGameId.CardFiveStar:
-                    //参数的数量不等于规定的数量
-                    if (roomConfigLists==null||roomConfigLists.Count != CardFiveStarRoomConfig.ConfigCount)
+                    // 参数的数量不等于规定的数量
+                    if (roomConfigLists == null || roomConfigLists.Count != CardFiveStarRoomConfig.ConfigCount)
                     {
                         roomConfigLists = DefaultCardFiveStarConfigLists;
                     }
                     for (int i = 0; i < roomConfigLists.Count; i++)
                     {
-                        roomConfigLists[i] = _cardFiveStarRoomConfigDic[i].IsValueExist(roomConfigLists[i], ref needJeweNumCount);//修改不正常的参数 和获取需要的钻石数
+                        roomConfigLists[i] = _cardFiveStarRoomConfigDic[i].IsValueExist(roomConfigLists[i], ref needJeweNumCount); //修改不正常的参数 和获取需要的钻石数
                     }
                     int RepetitionDectJewel = 0;
                     switch (roomConfigLists[CardFiveStarRoomConfig.EndTypeId])
                     {
                         case FiveStarEndType.FenTuoDi:
-                            _cardFiveStarRoomConfigDic[CardFiveStarRoomConfig.JuShuId]
-                                .IsValueExist(roomConfigLists[CardFiveStarRoomConfig.JuShuId], ref RepetitionDectJewel);
+                            _cardFiveStarRoomConfigDic[CardFiveStarRoomConfig.JuShuId].IsValueExist(roomConfigLists[CardFiveStarRoomConfig.JuShuId], ref RepetitionDectJewel);
                             break;
                         case FiveStarEndType.JuShu:
-                            _cardFiveStarRoomConfigDic[CardFiveStarRoomConfig.FenTuoDiId]
-                                .IsValueExist(roomConfigLists[CardFiveStarRoomConfig.FenTuoDiId], ref RepetitionDectJewel);
+                            _cardFiveStarRoomConfigDic[CardFiveStarRoomConfig.FenTuoDiId].IsValueExist(roomConfigLists[CardFiveStarRoomConfig.FenTuoDiId], ref RepetitionDectJewel);
                             break;
                     }
                     needJeweNumCount -= RepetitionDectJewel;
                     isAADeductJewel = roomConfigLists[CardFiveStarRoomConfig.PayMoneyId] == FiveStarPayMoneyType.JunTan;
                     if (roomConfigLists[CardFiveStarRoomConfig.PayMoneyId] == FiveStarPayMoneyType.JunTan)
                     {
-                        needJeweNumCount =
-                            (int)Math.Ceiling(needJeweNumCount * 1.00f /
-                                              roomConfigLists[CardFiveStarRoomConfig.NumberId]);//如果是均摊 就要向上取整
+                        needJeweNumCount = (int)Math.Ceiling(needJeweNumCount * 1.00f / roomConfigLists[CardFiveStarRoomConfig.NumberId]); //如果是均摊 就要向上取整
                     }
                     number = roomConfigLists[CardFiveStarRoomConfig.NumberId];
                     return true;

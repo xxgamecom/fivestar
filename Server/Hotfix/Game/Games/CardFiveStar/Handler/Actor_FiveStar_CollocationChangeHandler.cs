@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
@@ -9,7 +7,7 @@ namespace ETHotfix
     /// 玩家托管
     /// </summary>
     [ActorMessageHandler(AppType.CardFiveStar)]
-    public class Actor_FiveStar_CollocationChangeHandler : AMActorHandler<FiveStarPlayer, Actor_FiveStar_CollocationChange>
+    public class Actor_FiveStar_CollocationChangeHandler: AMActorHandler<FiveStarPlayer, Actor_FiveStar_CollocationChange>
     {
         protected override void Run(FiveStarPlayer fiveStarPlayer, Actor_FiveStar_CollocationChange message)
         {
@@ -22,7 +20,6 @@ namespace ETHotfix
                 Log.Error(e);
                 throw;
             }
-
         }
     }
 }

@@ -6,9 +6,9 @@ namespace ETHotfix
     public static class GateUserComponentSystem
     {
         // 获取当前网关连接User中的信息
-        public static User GetUser(this GateUserComponent gateUserComponent, long userId)
+        public static User GetUser(this GateUserComponent self, long userId)
         {
-            if (!gateUserComponent.mUserDic.TryGetValue(userId, out var user))
+            if (!self.mUserDic.TryGetValue(userId, out var user))
             {
                 //Log.Error($"玩家{userId}不存在或不在游戏中");
             }
@@ -17,9 +17,9 @@ namespace ETHotfix
         }
 
         // 玩家上线事件
-        public static async Task<User> UserOnLine(this GateUserComponent gateUserComponent, long userId, long sessionActorId)
+        public static async Task<User> UserOnLine(this GateUserComponent self, long userId, long sessionActorId)
         {
-            var user = await UserHelp.QueryUserInfo(userId);
+            var user = await UserHelper.QueryUserInfo(userId);
             if (user == null)
             {
                 return null;
@@ -28,53 +28,53 @@ namespace ETHotfix
             // 改变在线状态
             user.IsOnLine = true;
             // 给其他服务器广播玩家上线消息
-            gateUserComponent.BroadcastOnAndOffLineMessage(new G2S_UserOnline()
+            self.BroadcastOnAndOffLineMessage(new G2S_UserOnline()
             {
                 UserId = userId,
                 SessionActorId = sessionActorId
             });
             // 记录玩家信息
-            gateUserComponent.mUserDic[userId] = user;
+            self.mUserDic[userId] = user;
 
             return user;
         }
 
-        //玩家下线事件
-        public static void UserOffline(this GateUserComponent gateUserComponent, long userId)
+        // 玩家下线事件
+        public static void UserOffline(this GateUserComponent self, long userId)
         {
             long playerSessionActorId = 0;
-            if (gateUserComponent.mUserDic.ContainsKey(userId))
+            if (self.mUserDic.ContainsKey(userId))
             {
-                playerSessionActorId = gateUserComponent.mUserDic[userId].GetUserClientSession().GetComponent<SessionUserComponent>().GamerSessionActorId;
+                playerSessionActorId = self.mUserDic[userId].GetUserClientSession().GetComponent<SessionUserComponent>().GamerSessionActorId;
             }
             if (playerSessionActorId != 0)
             {
                 // 告诉游戏服 用户下线
-                ActorHelp.SendActor(playerSessionActorId, new Actor_UserOffLine());
+                ActorHelper.SendActor(playerSessionActorId, new Actor_UserOffLine());
             }
-            if (gateUserComponent.mUserDic.ContainsKey(userId))
+            if (self.mUserDic.ContainsKey(userId))
             {
-                gateUserComponent.mUserDic.Remove(userId);
+                self.mUserDic.Remove(userId);
             }
-            //给其他服务器广播玩家下线消息
-            gateUserComponent.BroadcastOnAndOffLineMessage(new G2S_UserOffline()
+            // 给其他服务器广播玩家下线消息
+            self.BroadcastOnAndOffLineMessage(new G2S_UserOffline()
             {
                 UserId = userId
             });
         }
-        
+
         // 给其他服务器广播用户 上 下线消息
-        public static void BroadcastOnAndOffLineMessage(this GateUserComponent gateUserComponent, IMessage iMessage)
+        public static void BroadcastOnAndOffLineMessage(this GateUserComponent self, IMessage iMessage)
         {
-            AppType appType = StartConfigComponent.Instance.StartConfig.AppType;
+            var appType = StartConfigComponent.Instance.StartConfig.AppType;
             if (appType == AppType.AllServer)
             {
-                gateUserComponent.MatchSession.Send(iMessage);
+                self.MatchSession.Send(iMessage);
             }
             else
             {
-                gateUserComponent.UserSession.Send(iMessage);
-                gateUserComponent.MatchSession.Send(iMessage);
+                self.UserSession.Send(iMessage);
+                self.MatchSession.Send(iMessage);
             }
         }
     }

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
 {
-  public static class AgencyComponentSystem
+    public static class AgencyComponentSystem
     {
         //代理卖钻石
-        public static async Task SaleJewel(this AgencyComponent agencyComponent,long sellerUserId,long buyerUserId,int jewelNum, IResponse iResponse)
+        public static async Task SaleJewel(this AgencyComponent agencyComponent, long sellerUserId, long buyerUserId, int jewelNum, IResponse iResponse)
         {
             if (!agencyComponent.JudgeIsAgency(sellerUserId))
             {
@@ -21,17 +19,17 @@ namespace ETHotfix
                 iResponse.Message = "不能卖给自己";
                 return;
             }
-            User sellerUser= await UserHelp.QueryUserInfo(sellerUserId);
-            User buyerUser = await UserHelp.QueryUserInfo(buyerUserId);
-            if (buyerUser==null)
+            User sellerUser = await UserHelper.QueryUserInfo(sellerUserId);
+            User buyerUser = await UserHelper.QueryUserInfo(buyerUserId);
+            if (buyerUser == null)
             {
                 iResponse.Message = "买家不存在";
                 return;
             }
             if (sellerUser.Jewel >= jewelNum)
             {
-                UserHelp.GoodsChange(sellerUserId, GoodsId.Jewel, jewelNum*-1, GoodsChangeType.AgencyDeal);
-                UserHelp.GoodsChange(buyerUserId, GoodsId.Jewel, jewelNum, GoodsChangeType.AgencyDeal);
+                UserHelper.GoodsChange(sellerUserId, GoodsId.Jewel, jewelNum * -1, GoodsChangeType.AgencyDeal);
+                UserHelper.GoodsChange(buyerUserId, GoodsId.Jewel, jewelNum, GoodsChangeType.AgencyDeal);
                 agencyComponent.RecordMarketInfo(sellerUserId, buyerUser, jewelNum);
                 iResponse.Message = "销售成功";
             }
@@ -57,9 +55,9 @@ namespace ETHotfix
             return records;
         }
         //记录销售信息
-        public static async void RecordMarketInfo(this AgencyComponent agencyComponent, long sellerUserId, User buyerUser,int jewelNum)
+        public static async void RecordMarketInfo(this AgencyComponent agencyComponent, long sellerUserId, User buyerUser, int jewelNum)
         {
-            MarketInfo marketInfo=ComponentFactory.Create<MarketInfo>();
+            MarketInfo marketInfo = ComponentFactory.Create<MarketInfo>();
             marketInfo.SellUserId = sellerUserId;
             marketInfo.MaiJiaUserId = buyerUser.UserId;
             marketInfo.MaiJiaName = buyerUser.Name;
@@ -72,7 +70,7 @@ namespace ETHotfix
         //更改代理等级
         public static async void AlterAgencyLv(this AgencyComponent agencyComponent, long userId, int lv)
         {
-            List<AgecyInfo> agecyInfos=await agencyComponent.dbProxyComponent.Query<AgecyInfo>(agecyInfo => agecyInfo.UserId== userId);
+            List<AgecyInfo> agecyInfos = await agencyComponent.dbProxyComponent.Query<AgecyInfo>(agecyInfo => agecyInfo.UserId == userId);
             if (agecyInfos.Count <= 0)
             {
                 AgecyInfo agecyInfo = ComponentFactory.Create<AgecyInfo>();
@@ -80,7 +78,7 @@ namespace ETHotfix
                 agecyInfos.Add(agecyInfo);
             }
             agecyInfos[0].Level = lv;
-            await  agencyComponent.dbProxyComponent.Save(agecyInfos[0]);
+            await agencyComponent.dbProxyComponent.Save(agecyInfos[0]);
             //设置为0级 就是撤销
             if (lv <= 0)
             {

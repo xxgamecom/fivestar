@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ETModel;
+﻿using ETModel;
 
 namespace ETHotfix
 {
-    public static class AdministratorHelp
+    public static class AdminHelper
     {
         public const string Account = "wufan";
         public const string Password = "123";
@@ -16,6 +13,7 @@ namespace ETHotfix
             {
                 return true;
             }
+
             return false;
         }
     }

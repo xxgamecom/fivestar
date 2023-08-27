@@ -9,7 +9,7 @@ namespace ETHotfix
         protected override async void Run(Session session, C2M_Reload message, Action<M2C_Reload> reply)
         {
             M2C_Reload response = new M2C_Reload();
-            if (message.Account != AdministratorHelp.Account && message.Password != AdministratorHelp.Password)
+            if (message.Account != AdminHelper.Account && message.Password != AdminHelper.Password)
             {
                 Log.Error($"error reload account and password: {MongoHelper.ToJson(message)}");
                 return;

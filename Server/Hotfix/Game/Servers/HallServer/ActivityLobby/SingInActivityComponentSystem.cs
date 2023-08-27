@@ -1,35 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class SingInActivityComponentAwakeSystem : AwakeSystem<SingInActivityComponent>
+    public class SingInActivityComponentAwakeSystem: AwakeSystem<SingInActivityComponent>
     {
 
-        public override  void Awake(SingInActivityComponent self)
+        public override void Awake(SingInActivityComponent self)
         {
             //注册每周整点刷新事件
             GameLobby.Ins.WeekRefreshAction -= self.WeekRefreshSingState;
             GameLobby.Ins.WeekRefreshAction += self.WeekRefreshSingState;
         }
     }
+
     public static class SingInActivityComponentSystem
     {
-        //每周刷新一次
+        // 每周刷新一次
         public static async void WeekRefreshSingState(this SingInActivityComponent singInActivityComponent)
         {
             List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(state => true);
             for (int i = 0; i < userSingInStates.Count; i++)
             {
-                userSingInStates[i].SingInDays = 0;//所有人签到的天 都被置为0
+                userSingInStates[i].SingInDays = 0; //所有人签到的天 都被置为0
             }
             await singInActivityComponent.dbProxyComponent.Save(userSingInStates);
         }
-        //获取玩家签到信息
+        
+        // 获取玩家签到信息
         public static async Task<UserSingInState> GetUserSingInState(this SingInActivityComponent singInActivityComponent, long userId)
         {
             List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
@@ -39,7 +39,8 @@ namespace ETHotfix
             }
             return null;
         }
-        //进去签到
+        
+        // 进去签到
         public static async Task<bool> UserTodaySingIn(this SingInActivityComponent singInActivityComponent, long userId)
         {
             List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
@@ -64,13 +65,14 @@ namespace ETHotfix
             return true;
         }
 
-        //发送玩家获得物品的信息
+        // 发送玩家获得物品的信息
         public static async Task SendUserGetGoods(this SingInActivityComponent singInActivityComponent, long userId, int singInDays)
         {
             SignInAward signInAward = singInActivityComponent.mSignInAwardList[singInDays - 1];
-            await UserHelp.GoodsChange(userId, signInAward.GoodsId, signInAward.Amount,GoodsChangeType.SignIn, true);
+            await UserHelper.GoodsChange(userId, signInAward.GoodsId, signInAward.Amount, GoodsChangeType.SignIn, true);
         }
-        //获得签到奖励列表
+        
+        // 获得签到奖励列表
         public static List<SignInAward> GetSignInAwardList(this SingInActivityComponent singInActivityComponent)
         {
             return singInActivityComponent.mSignInAwardList;

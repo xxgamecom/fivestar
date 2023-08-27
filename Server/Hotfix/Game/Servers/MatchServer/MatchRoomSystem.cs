@@ -5,7 +5,7 @@ namespace ETHotfix
 {
     public static partial class MatchRoomSystem
     {
-        //玩家加入房间
+        // 玩家加入房间
         public static bool UserJoinRoom(this MatchRoom matchRoom, User user, long sessionActorId)
         {
             for (int i = 0; i < matchRoom.RoomConfig.GameNumber; i++)
@@ -23,14 +23,17 @@ namespace ETHotfix
             }
             return false;
         }
-        //玩家退出房间
+
+        // 玩家退出房间
         public static bool UserOutRoom(this MatchRoom matchRoom, long userId)
         {
             if (matchRoom.RoomType == RoomType.Match)
             {
-                return true; //随机匹配房间无法退出 只能等待游戏结束 回复成功让玩家回到大厅
+                // 随机匹配房间无法退出 只能等待游戏结束 回复成功让玩家回到大厅
+                return true;
             }
-            //如果正在游戏接发起投票解散房间
+
+            // 如果正在游戏接发起投票解散房间
             if (matchRoom.IsGameBeing)
             {
                 matchRoom.RommEnterVoteDissolve(userId); //开始投票
@@ -60,26 +63,28 @@ namespace ETHotfix
             {
                 Log.Error("退出房间玩家不在房间中");
             }
+
             return true;
         }
-        //进入投票状态
+
+        // 进入投票状态
         public static void RommEnterVoteDissolve(this MatchRoom matchRoom, long userId)
         {
             if (matchRoom.IsVoteDissolveIn)
             {
                 return; //已经在投票状态 无法再次投票
             }
-            matchRoom.IsVoteDissolveIn = true;                             //状态改为投票中
-            matchRoom.VoteTimeResidue = FiveStarOverTime.DissolveOverTime; //更改投票 超时剩余时间
-            MatchRoomComponent.Ins.VoteInRooms.Add(matchRoom);             //把自己房间 加入到 投票超时房间里面
-            //让游戏服的房间暂停游戏
-            ActorHelp.SendActor(matchRoom.GameServeRoomActorId, new Actor_PauseRoomGame()
+            matchRoom.IsVoteDissolveIn = true;                             // 状态改为投票中
+            matchRoom.VoteTimeResidue = FiveStarOverTime.DissolveOverTime; // 更改投票 超时剩余时间
+            MatchRoomComponent.Ins.VoteInRooms.Add(matchRoom);             // 把自己房间 加入到 投票超时房间里面
+            // 让游戏服的房间暂停游戏
+            ActorHelper.SendActor(matchRoom.GameServeRoomActorId, new Actor_PauseRoomGame()
             {
                 IsPause = true
             });
-            matchRoom.VoteDissolveResult = new Actor_VoteDissolveRoomResult(); //new 出发送个客户端的投票结果
-            matchRoom.VoteDissolveResult.SponsorUserId = userId;               //记录发起人的UserId
-            matchRoom.PlayerVoteDissolveRoom(userId, true);                    //发起投票解散房间
+            matchRoom.VoteDissolveResult = new Actor_VoteDissolveRoomResult(); // new 出发送个客户端的投票结果
+            matchRoom.VoteDissolveResult.SponsorUserId = userId;               // 记录发起人的UserId
+            matchRoom.PlayerVoteDissolveRoom(userId, true);                    // 发起投票解散房间
         }
 
         // 投票超时处理
@@ -87,16 +92,16 @@ namespace ETHotfix
         {
             //超时默认结果为同意
             matchRoom.VoteDissolveResult.Result = VoteResultType.Consent;
-            //广播投票的消息
+            // 广播投票的消息
             matchRoom.BroadcastActorMessage(matchRoom.VoteDissolveResult);
-            //通知游戏服 房间解散 销毁游戏服的房间 游戏服会通知匹配服的
-            ActorHelp.SendActor(matchRoom.GameServeRoomActorId, new Actor_RoomDissolve());
+            // 通知游戏服 房间解散 销毁游戏服的房间 游戏服会通知匹配服的
+            ActorHelper.SendActor(matchRoom.GameServeRoomActorId, new Actor_RoomDissolve());
         }
 
         // 玩家投票解散房间
         public static void PlayerVoteDissolveRoom(this MatchRoom matchRoom, long userId, bool isConsent)
         {
-            if (!matchRoom.IsVoteDissolveIn) //不是投票中收到投票消息 不予理会
+            if (!matchRoom.IsVoteDissolveIn) // 不是投票中收到投票消息 不予理会
             {
                 return;
             }
@@ -128,23 +133,23 @@ namespace ETHotfix
                 }
                 if (matchRoom.VoteDissolveResult.Result == VoteResultType.NoConsent)
                 {
-                    //让游戏服的房间开始游戏
-                    ActorHelp.SendActor(matchRoom.GameServeRoomActorId, new Actor_PauseRoomGame()
+                    // 让游戏服的房间开始游戏
+                    ActorHelper.SendActor(matchRoom.GameServeRoomActorId, new Actor_PauseRoomGame()
                     {
                         IsPause = false
                     });
                 }
                 else if (matchRoom.VoteDissolveResult.Result == VoteResultType.Consent)
                 {
-                    //通知游戏服 房间解散 销毁游戏服的房间 游戏服会通知匹配服的
-                    ActorHelp.SendActor(matchRoom.GameServeRoomActorId, new Actor_RoomDissolve());
+                    // 通知游戏服 房间解散 销毁游戏服的房间 游戏服会通知匹配服的
+                    ActorHelper.SendActor(matchRoom.GameServeRoomActorId, new Actor_RoomDissolve());
                 }
                 matchRoom.IsVoteDissolveIn = false;  //改变投票状态
                 matchRoom.VoteDissolveResult = null; //清空投票信息
             }
         }
 
-        //玩家下线
+        // 玩家下线
         public static void PlayerOffline(this MatchRoom matchRoom, long userId)
         {
             for (int i = 0; i < matchRoom.PlayerInfoDic.Count; i++)
@@ -162,7 +167,8 @@ namespace ETHotfix
                 UserId = userId
             });
         }
-        //获取房间内玩家信息
+
+        // 获取房间内玩家信息
         public static MatchPlayerInfo GetPlayerInfo(this MatchRoom matchRoom, long userId)
         {
             foreach (var player in matchRoom.PlayerInfoDic)
@@ -175,7 +181,7 @@ namespace ETHotfix
             return null;
         }
 
-        //玩家上线
+        // 玩家上线
         public static void PlayerOnLine(this MatchRoom matchRoom, long userId, long sessionActorId)
         {
             MatchPlayerInfo playerInfo = matchRoom.GetPlayerInfo(userId);
@@ -192,12 +198,13 @@ namespace ETHotfix
             });
         }
 
-        //检测可不可以开始游戏
+        // 检测可不可以开始游戏
         public static bool DetetionMayStartGame(this MatchRoom matchRoom)
         {
             return matchRoom.PlayerInfoDic.Count == matchRoom.RoomConfig.GameNumber;
         }
-        //开始游戏
+
+        // 开始游戏
         public static void StartGame(this MatchRoom matchRoom)
         {
             M2S_StartGame m2SStartGame = new M2S_StartGame();
@@ -210,7 +217,8 @@ namespace ETHotfix
             Session toyGameSession = Game.Scene.GetComponent<NetInnerSessionComponent>().GetGameServerSession(matchRoom.RoomConfig.ToyGameId);
             toyGameSession.Send(m2SStartGame);
         }
-        //游戏结束扣除玩家钻石
+
+        // 游戏结束扣除玩家钻石
         public static async Task DeductJewel(this MatchRoom matchRoom)
         {
             if (matchRoom.RoomType != RoomType.RoomCard)
@@ -220,7 +228,7 @@ namespace ETHotfix
             //亲友圈房间 亲友圈主人扣除钻石
             if (matchRoom.FriendsCreateUserId > 0)
             {
-                await UserHelp.GoodsChange(matchRoom.FriendsCreateUserId, GoodsId.Jewel, matchRoom.NeedJeweNumCount * -1, GoodsChangeType.RoomCard, false);
+                await UserHelper.GoodsChange(matchRoom.FriendsCreateUserId, GoodsId.Jewel, matchRoom.NeedJeweNumCount * -1, GoodsChangeType.RoomCard, false);
             }
             else if (matchRoom.IsAADeductJewel)
             {
@@ -239,7 +247,8 @@ namespace ETHotfix
                 }
             }
         }
-        //游戏结束扣除玩家豆子
+
+        // 游戏结束扣除玩家豆子
         public static async Task DeductBeans(this MatchRoom matchRoom)
         {
             if (matchRoom.RoomType == RoomType.Match)
@@ -255,13 +264,14 @@ namespace ETHotfix
             }
         }
 
-        //游戏通知匹配服开始游戏了
+        // 游戏通知匹配服开始游戏了
         public static void GameServeStartGame(this MatchRoom matchRoom, long serveRoomActorId)
         {
             matchRoom.IsGameBeing = true; //状态改为在游戏中
             matchRoom.GameServeRoomActorId = serveRoomActorId;
         }
-        //广播消息
+
+        // 广播消息
         public static void BroadcastActorMessage(this MatchRoom matchRoom, IActorMessage iActorMessage)
         {
             foreach (var player in matchRoom.PlayerInfoDic)

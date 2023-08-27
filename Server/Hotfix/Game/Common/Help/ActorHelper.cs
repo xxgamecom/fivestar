@@ -2,7 +2,7 @@
 
 namespace ETHotfix
 {
-    public static class ActorHelp
+    public static class ActorHelper
     {
         public static void SendActor(long actorId, IActorMessage iActorMessage)
         {
@@ -10,7 +10,7 @@ namespace ETHotfix
             {
                 return;
             }
-            
+
             var actorSender = Game.Scene.GetComponent<ActorMessageSenderComponent>().Get(actorId);
             actorSender.Send(iActorMessage);
         }

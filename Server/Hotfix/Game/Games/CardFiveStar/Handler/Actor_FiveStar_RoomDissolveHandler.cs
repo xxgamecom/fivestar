@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
@@ -9,7 +7,7 @@ namespace ETHotfix
     /// 强制解散房间
     /// </summary>
     [ActorMessageHandler(AppType.CardFiveStar)]
-    public class Actor_FiveStar_RoomDissolveHandler : AMActorHandler<FiveStarRoom, Actor_RoomDissolve>
+    public class Actor_FiveStar_RoomDissolveHandler: AMActorHandler<FiveStarRoom, Actor_RoomDissolve>
     {
         protected override void Run(FiveStarRoom fiveStarRoom, Actor_RoomDissolve message)
         {
@@ -21,14 +19,13 @@ namespace ETHotfix
                     fiveStarRoom.Dispose();
                     return;
                 }
-                fiveStarRoom.RoomTotalResult();//房间直接总结算
+                fiveStarRoom.RoomTotalResult(); //房间直接总结算
             }
             catch (Exception e)
             {
                 Log.Error(e);
                 throw;
             }
-
         }
     }
 }

@@ -189,7 +189,7 @@ namespace ETHotfix
             if (matchRoomComponent.UserIdInRoomIdDic.ContainsKey(userId))
             {
                 // 通知客户端 用户在游戏中
-                ActorHelp.SendActor(userSessionActorId, new Actor_BeingInGame()
+                ActorHelper.SendActor(userSessionActorId, new Actor_BeingInGame()
                 {
                     IsGameBeing = true
                 });

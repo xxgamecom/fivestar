@@ -13,7 +13,7 @@ namespace ETHotfix
             if (user.GetComponent<UserGateActorIdComponent>() != null)
             {
                 long actorId = user.GetComponent<UserGateActorIdComponent>().ActorId;
-                ActorHelp.SendActor(actorId, iActorMessage);
+                ActorHelper.SendActor(actorId, iActorMessage);
             }
         }
 
@@ -29,20 +29,21 @@ namespace ETHotfix
             Game.Scene.GetComponent<NetInnerComponent>().Get(ipEndPoint).Send(iMessage); //发送消息给用户所在的网关
         }
 
-        //改变用户物品
+        // 改变用户物品
         public static async Task GoodsChange(this User user, long goodId, int amount, int changeType, bool isShowHint = false, bool isSynchronizationGoods = true)
         {
-            User newUser = await UserHelp.GoodsChange(user.UserId, goodId, amount, changeType, isShowHint);
+            User newUser = await UserHelper.GoodsChange(user.UserId, goodId, amount, changeType, isShowHint);
             if (isSynchronizationGoods && newUser != null)
             {
                 user.Beans = newUser.Beans;
                 user.Beans = newUser.Jewel;
             }
         }
-        //改变用户物品
+        
+        // 改变用户物品
         public static async Task GoodsChange(this User user, List<GetGoodsOne> getGoodsOnes, int changeType, bool isShowHint = false)
         {
-            User newUser = await UserHelp.GoodsChange(user.UserId, getGoodsOnes, changeType, isShowHint);
+            User newUser = await UserHelper.GoodsChange(user.UserId, getGoodsOnes, changeType, isShowHint);
             if (newUser != null)
             {
                 user.Beans = newUser.Beans;
@@ -50,7 +51,7 @@ namespace ETHotfix
             }
         }
 
-        //刷新 同步 物品数量
+        // 刷新 同步 物品数量
         public static void RefreshGoods(this User user, IList<GetGoodsOne> getGoodsOnes)
         {
             for (int i = 0; i < getGoodsOnes.Count; i++)

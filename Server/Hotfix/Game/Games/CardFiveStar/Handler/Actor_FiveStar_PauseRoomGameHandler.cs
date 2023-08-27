@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
@@ -9,7 +7,7 @@ namespace ETHotfix
     /// 房间暂停和结束暂停
     /// </summary>
     [ActorMessageHandler(AppType.CardFiveStar)]
-    public class Actor_FiveStar_PauseRoomGameHandler : AMActorHandler<FiveStarRoom, Actor_PauseRoomGame>
+    public class Actor_FiveStar_PauseRoomGameHandler: AMActorHandler<FiveStarRoom, Actor_PauseRoomGame>
     {
         protected override void Run(FiveStarRoom fiveStarPlayer, Actor_PauseRoomGame message)
         {
@@ -24,7 +22,6 @@ namespace ETHotfix
                 Log.Error(e);
                 throw;
             }
-
         }
     }
 }

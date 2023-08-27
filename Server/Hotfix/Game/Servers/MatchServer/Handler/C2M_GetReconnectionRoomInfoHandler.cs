@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using ETModel;
-using Google.Protobuf.Collections;
 
 namespace ETHotfix
 {
@@ -30,12 +28,12 @@ namespace ETHotfix
                     var m2SUserRequest = new Actor_UserRequestReconnectionRoom();
                     m2SUserRequest.UserId = message.UserId;
                     m2SUserRequest.UserActorId = matchRoom.GetPlayerInfo(message.UserId).SessionActorId;
-                    ActorHelp.SendActor(matchRoom.GameServeRoomActorId, m2SUserRequest);
+                    ActorHelper.SendActor(matchRoom.GameServeRoomActorId, m2SUserRequest);
 
                     // 如果正在投票解散中 补发一条投票结果消息
                     if (matchRoom.IsVoteDissolveIn)
                     {
-                        ActorHelp.SendActor(m2SUserRequest.UserActorId, matchRoom.VoteDissolveResult);
+                        ActorHelper.SendActor(m2SUserRequest.UserActorId, matchRoom.VoteDissolveResult);
                     }
                 }
                 else
