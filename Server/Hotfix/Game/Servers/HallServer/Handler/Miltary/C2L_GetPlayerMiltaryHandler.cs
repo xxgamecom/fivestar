@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ETModel;
 
 namespace ETHotfix
@@ -12,7 +11,7 @@ namespace ETHotfix
             var response = new L2C_GetPlayerMiltary();
             try
             {
-                List<Miltary> miltaries = await MiltaryComponent.Ins.GetMiltary(message.QueryUserId, message.FriendCircleId);
+                var miltaries = await MiltaryComponent.Ins.GetMiltary(message.QueryUserId, message.FriendCircleId);
                 response.Miltarys.Add(miltaries.ToArray());
                 reply(response);
             }

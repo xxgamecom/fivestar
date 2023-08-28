@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ETModel;
 
 namespace ETHotfix
@@ -15,7 +14,7 @@ namespace ETHotfix
             var response = new L2C_QueryTopUpRecord();
             try
             {
-                List<TopUpRecord> stopSealRecords = await Game.Scene.GetComponent<DBProxyComponent>().Query<TopUpRecord>(stopSeal => stopSeal.TopUpUserId == message.QueryUserId);
+                var stopSealRecords = await Game.Scene.GetComponent<DBProxyComponent>().Query<TopUpRecord>(stopSeal => stopSeal.TopUpUserId == message.QueryUserId);
                 response.TopUpRecords.Add(stopSealRecords.ToArray());
                 reply(response);
             }

@@ -15,7 +15,7 @@ namespace ETHotfix
             var response = new L2C_GetMarketRecord();
             try
             {
-                List<MarketInfo> marketInfos = await AgencyComponent.Ins.GetMarketRecord(message.UserId, response);
+                var marketInfos = await AgencyComponent.Ins.GetMarketRecord(message.UserId, response);
                 if (marketInfos != null)
                 {
                     response.MarketInfos.Add(marketInfos.ToArray());

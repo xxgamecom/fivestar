@@ -12,6 +12,9 @@ namespace ETModel
 		}
 	}
 	
+	/// <summary>
+	/// 
+	/// </summary>
 	public class PlayerComponent : Component
 	{
 		public static PlayerComponent Instance { get; private set; }

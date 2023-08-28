@@ -14,6 +14,7 @@ namespace ETHotfix
             {
                 return userfriendsCircles[0];
             }
+            
             return UserInFriendsCircleFactory.Create(userId);
         }
 
@@ -25,6 +26,7 @@ namespace ETHotfix
             {
                 return friendsCircles[0];
             }
+            
             return FriendsCirleMemberInfoFactory.Create(friendsCircleId);
         }
 
@@ -36,6 +38,7 @@ namespace ETHotfix
             {
                 return friendsCircles[0];
             }
+            
             return null;
         }
 

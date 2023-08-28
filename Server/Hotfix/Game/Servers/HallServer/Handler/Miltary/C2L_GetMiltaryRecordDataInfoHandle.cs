@@ -12,7 +12,6 @@ namespace ETHotfix
             try
             {
                 response.RecordDataInfo = await MiltaryComponent.Ins.GetParticularMiltaryRecordData(message.DataId);
-
                 reply(response);
             }
             catch (Exception e)

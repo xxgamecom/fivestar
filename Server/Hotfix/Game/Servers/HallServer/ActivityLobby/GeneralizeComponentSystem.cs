@@ -26,14 +26,14 @@ namespace ETHotfix
             }
 
             // 存储个领取新手奖励信息
-            GetGreenGiftInfo getGreenGiftInfo = ComponentFactory.Create<GetGreenGiftInfo>();
+            var getGreenGiftInfo = ComponentFactory.Create<GetGreenGiftInfo>();
             getGreenGiftInfo.GetUserId = getUserId;
             getGreenGiftInfo.InviteUserId = initeUserId;
             getGreenGiftInfo.GetJewelNum = GeneralizeComponent.AwardJewelNum;
             await generalizeComponent.dbProxyComponent.Save(getGreenGiftInfo);
 
             //存储推广奖励信息
-            GeneralizeAwardInfo generalizeAwardInfo = await generalizeComponent.GetGeneralizeAwardInfo(initeUserId);
+            var generalizeAwardInfo = await generalizeComponent.GetGeneralizeAwardInfo(initeUserId);
             if (generalizeAwardInfo == null)
             {
                 generalizeAwardInfo = CreateGeneralizeAwardInfo(initeUserId);

@@ -16,6 +16,7 @@ namespace ETHotfix
             friendsCircle.ManageUserIds.Add(createUserId);
             friendsCircle.Announcement = announcement;
             friendsCircle.IsRecommend = false;
+
             return friendsCircle;
         }
     }

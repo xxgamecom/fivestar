@@ -15,7 +15,7 @@ namespace ETHotfix
             var response = new L2C_GetUserInfo();
             try
             {
-                List<User> users = await UserHelper.QueryUserInfo(message.QueryUserIds);
+                var users = await UserHelper.QueryUserInfo(message.QueryUserIds);
                 response.UserInfos.Add(users.ToArray());
                 reply(response);
             }

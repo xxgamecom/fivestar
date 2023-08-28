@@ -63,7 +63,7 @@ namespace ETHotfix
         // 记录销售信息
         public static async void RecordMarketInfo(this AgencyComponent agencyComponent, long sellerUserId, User buyerUser, int jewelNum)
         {
-            MarketInfo marketInfo = ComponentFactory.Create<MarketInfo>();
+            var marketInfo = ComponentFactory.Create<MarketInfo>();
             marketInfo.SellUserId = sellerUserId;
             marketInfo.MaiJiaUserId = buyerUser.UserId;
             marketInfo.MaiJiaName = buyerUser.Name;
@@ -76,7 +76,7 @@ namespace ETHotfix
         //更改代理等级
         public static async void AlterAgencyLv(this AgencyComponent agencyComponent, long userId, int lv)
         {
-            List<AgecyInfo> agecyInfos = await agencyComponent.dbProxyComponent.Query<AgecyInfo>(agecyInfo => agecyInfo.UserId == userId);
+            var agecyInfos = await agencyComponent.dbProxyComponent.Query<AgecyInfo>(agecyInfo => agecyInfo.UserId == userId);
             if (agecyInfos.Count <= 0)
             {
                 AgecyInfo agecyInfo = ComponentFactory.Create<AgecyInfo>();

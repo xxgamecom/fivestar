@@ -22,7 +22,7 @@ namespace ETModel
         public DBProxyComponent dbProxyComponent;
         public List<ServiceInfo> mServiceInfos;
         public RepeatedField<ServiceInfo> ServiceInfosRepeatedField = new RepeatedField<ServiceInfo>();
-        public const int _TheFirstShareAwarNum = 5;    // 每日首次分享到朋友圈的奖励数
+        public const int _TheFirstShareRewardNum = 5;  // 每日首次分享到朋友圈的奖励数
         public const int ReliefPaymentBeansNum = 3000; // 每次领取救济金豆子的数量
         public const int ReliefPaymentNumber = 3;      // 每日能领取救济金的次数上限
         public Action WeekRefreshAction;               // 每周一00 会调一次
@@ -47,11 +47,11 @@ namespace ETModel
 
         public async Task InitDefaultList()
         {
-            ServiceInfo serviceInfo1 = ComponentFactory.Create<ServiceInfo>();
+            var serviceInfo1 = ComponentFactory.Create<ServiceInfo>();
             serviceInfo1.Number = "470499850";
             serviceInfo1.Type = "QQ";
 
-            ServiceInfo serviceInfo2 = ComponentFactory.Create<ServiceInfo>();
+            var serviceInfo2 = ComponentFactory.Create<ServiceInfo>();
             serviceInfo2.Number = "ckxmjkf";
             serviceInfo2.Type = "VX";
 

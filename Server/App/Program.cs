@@ -19,8 +19,8 @@ namespace App
                 Game.EventSystem.Add(DLLType.Model, typeof(Game).Assembly);
                 Game.EventSystem.Add(DLLType.Hotfix, DllHelper.GetHotfixAssembly());
 
-                Options options = Game.Scene.AddComponent<OptionComponent, string[]>(args).Options;
-                StartConfig startConfig = Game.Scene.AddComponent<StartConfigComponent, string, int>(options.Config, options.AppId).StartConfig;
+                var options = Game.Scene.AddComponent<OptionComponent, string[]>(args).Options;
+                var startConfig = Game.Scene.AddComponent<StartConfigComponent, string, int>(options.Config, options.AppId).StartConfig;
 
                 if (!options.AppType.Is(startConfig.AppType))
                 {
@@ -49,9 +49,9 @@ namespace App
                 Game.Scene.AddComponent<NetInnerSessionComponent>(); // 获取服务器内部之间的Session
 
                 // 根据不同的AppType添加不同的组件
-                OuterConfig outerConfig = startConfig.GetComponent<OuterConfig>();
-                InnerConfig innerConfig = startConfig.GetComponent<InnerConfig>();
-                ClientConfig clientConfig = startConfig.GetComponent<ClientConfig>();
+                var outerConfig = startConfig.GetComponent<OuterConfig>();
+                var innerConfig = startConfig.GetComponent<InnerConfig>();
+                var clientConfig = startConfig.GetComponent<ClientConfig>();
 
                 Game.Scene.AddComponent<NetInnerComponent, string>(innerConfig.Address); // 不需要测试服务器 所有服务器必须要有这个 内网组件
 

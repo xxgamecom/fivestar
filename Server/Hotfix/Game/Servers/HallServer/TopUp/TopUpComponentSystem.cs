@@ -9,11 +9,11 @@ namespace ETHotfix
         // 请求购买商品 如果要微信支付就会返回 如果只是需要钻石就会直接购买
         public static async Task<WeChatOrderInfo> RequestTopUp(this TopUpComponent topUpComponent, long userId, long commodityId, IResponse iResponse)
         {
-            Commodity commodity = ShoppingCommodityComponent.Ins.GetCommdity(commodityId);
+            var commodity = ShoppingCommodityComponent.Ins.GetCommdity(commodityId);
             if (commodity.MonetaryType == GoodsId.CNY)
             {
                 var weChatOrderInfo = WeChatPayComponent.Ins.WeChatPlaceOrder(commodity.Price);
-                TopUpRecord topUpRecord = TopUpRecordFactory.Create(weChatOrderInfo.outTradeNo, userId, commodity);
+                var topUpRecord = TopUpRecordFactory.Create(weChatOrderInfo.outTradeNo, userId, commodity);
                 await Game.Scene.GetComponent<DBProxyComponent>().Save(topUpRecord); //存储充值记录
                 return weChatOrderInfo;
             }

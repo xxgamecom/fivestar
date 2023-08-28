@@ -8,7 +8,7 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2G_GateLogin message, Action<G2C_GateLogin> reply)
         {
-            G2C_GateLogin response = new G2C_GateLogin();
+            var response = new G2C_GateLogin();
             try
             {
                 long userId = Game.Scene.GetComponent<GateSessionKeyComponent>().Get(message.Key);

@@ -74,10 +74,7 @@ namespace ETModel
         /// <returns></returns>
         public Commodity GetCommdity(long commodityId)
         {
-            Commodity commodity;
-            if (CommdityDic.TryGetValue(commodityId, out commodity))
-            {
-            }
+            CommdityDic.TryGetValue(commodityId, out var commodity);
             return commodity;
         }
         public async void SaveInitDefaultCommodityInfo()

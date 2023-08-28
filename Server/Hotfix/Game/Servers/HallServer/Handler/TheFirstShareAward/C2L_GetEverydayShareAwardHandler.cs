@@ -28,12 +28,12 @@ namespace ETHotfix
                 }
                 else
                 {
-                    EverydayShareInfo everydayShareInfo = ComponentFactory.Create<EverydayShareInfo>();
+                    var everydayShareInfo = ComponentFactory.Create<EverydayShareInfo>();
                     everydayShareInfo.UserId = message.UserId;
                     everydayShareInfo.ShareTime = TimeTool.GetCurrenTimeStamp();
                     everydayShareInfos.Add(everydayShareInfo);
                 }
-                UserHelper.GoodsChange(message.UserId, GoodsId.Jewel, GameLobby._TheFirstShareAwarNum, GoodsChangeType.EverydayShare, true);
+                UserHelper.GoodsChange(message.UserId, GoodsId.Jewel, GameLobby._TheFirstShareRewardNum, GoodsChangeType.EverydayShare, true);
                 await GameLobby.Ins.dbProxyComponent.Save(everydayShareInfos[0]);
                 reply(response);
             }

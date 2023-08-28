@@ -10,7 +10,7 @@ namespace ETHotfix
         {
             long nextModayGapStamp = TimeTool.GetNextModayGapTimeStamp();
             await Game.Scene.GetComponent<TimerComponent>().WaitAsync(TimeTool.TicksConvertMillisecond(nextModayGapStamp));
-            Session friendsSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.FriendsCircle); //获取亲友圈 Session
+            var friendsSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.FriendsCircle); //获取亲友圈 Session
 
             while (true)
             {

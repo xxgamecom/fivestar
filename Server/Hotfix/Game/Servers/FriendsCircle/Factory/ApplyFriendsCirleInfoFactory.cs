@@ -8,6 +8,7 @@ namespace ETHotfix
         {
             var applyFriendsCirleInfo = ComponentFactory.Create<ApplyFriendsCirleInfo>();
             applyFriendsCirleInfo.FriendsCirleId = friendsCirleId;
+
             return applyFriendsCirleInfo;
         }
     }

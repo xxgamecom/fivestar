@@ -41,10 +41,8 @@ namespace ETHotfix
             {
                 return self.RecommendFriendsCircleList.GetRange(self.RecommendFriendsCircleList.Count - count, count);
             }
-            else
-            {
-                return self.RecommendFriendsCircleList;
-            }
+            
+            return self.RecommendFriendsCircleList;
         }
 
         // 修改推荐亲友圈配置

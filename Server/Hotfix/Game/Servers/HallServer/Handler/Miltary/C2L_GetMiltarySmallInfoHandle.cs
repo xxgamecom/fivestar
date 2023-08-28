@@ -12,7 +12,6 @@ namespace ETHotfix
             try
             {
                 response.MiltarySmallAllInfo = await MiltaryComponent.Ins.GetMiltarySmallInfo(message.MiltaryId);
-
                 reply(response);
             }
             catch (Exception e)

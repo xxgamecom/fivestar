@@ -24,7 +24,8 @@ namespace ETHotfix
             var userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(state => true);
             for (int i = 0; i < userSingInStates.Count; i++)
             {
-                userSingInStates[i].SingInDays = 0; //所有人签到的天 都被置为0
+                // 所有人签到的天 都被置为0
+                userSingInStates[i].SingInDays = 0;
             }
             await singInActivityComponent.dbProxyComponent.Save(userSingInStates);
         }
@@ -37,7 +38,7 @@ namespace ETHotfix
             {
                 return userSingInStates[0];
             }
-            
+
             return null;
         }
 
@@ -52,6 +53,7 @@ namespace ETHotfix
                     return false;
                 }
             }
+            
             var sueSingInState = ComponentFactory.CreateWithId<UserSingInState>(userId);
             sueSingInState.SingInTime = TimeTool.GetCurrenTimeStamp();
             sueSingInState.UserId = userId;
@@ -63,6 +65,7 @@ namespace ETHotfix
 
             await singInActivityComponent.SendUserGetGoods(userId, sueSingInState.SingInDays);
             await singInActivityComponent.dbProxyComponent.Save(sueSingInState);
+
             return true;
         }
 

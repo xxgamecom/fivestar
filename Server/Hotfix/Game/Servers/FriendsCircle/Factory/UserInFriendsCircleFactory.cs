@@ -8,6 +8,7 @@ namespace ETHotfix
         {
             var userInFriendsCircle = ComponentFactory.Create<UserInFriendsCircle>();
             userInFriendsCircle.UserId = userId;
+
             return userInFriendsCircle;
         }
     }

@@ -8,7 +8,7 @@ namespace ETHotfix
     {
         protected override void Run(Session session, R2G_GetLoginKey message, Action<G2R_GetLoginKey> reply)
         {
-            G2R_GetLoginKey response = new G2R_GetLoginKey();
+            var response = new G2R_GetLoginKey();
             try
             {
                 long accessToken = RandomHelper.RandInt64();

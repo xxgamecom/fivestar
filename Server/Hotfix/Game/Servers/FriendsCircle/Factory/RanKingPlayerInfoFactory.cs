@@ -9,6 +9,7 @@ namespace ETHotfix
             var friendsCircle = ComponentFactory.Create<RanKingPlayerInfo>();
             friendsCircle.FriendsCircleId = friendsCircleId;
             friendsCircle.UserId = userId;
+            
             return friendsCircle;
         }
     }

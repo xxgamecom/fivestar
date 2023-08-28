@@ -14,7 +14,7 @@ namespace ETHotfix
             var response = new L2C_BuyCommodity();
             try
             {
-                WeChatOrderInfo weChatOrderInfo = await TopUpComponent.Ins.RequestTopUp(message.UserId, message.CommodityId, response);
+                var weChatOrderInfo = await TopUpComponent.Ins.RequestTopUp(message.UserId, message.CommodityId, response);
                 if (weChatOrderInfo != null)
                 {
                     response.PrepayId = weChatOrderInfo.prepayId;

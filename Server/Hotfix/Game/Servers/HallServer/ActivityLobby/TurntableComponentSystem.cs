@@ -110,7 +110,8 @@ namespace ETHotfix
         // 直接随机出现一个抽奖物品
         public static TurntableGoods RandomDarwLottery(this TurntableComponent turntableComponent, long userId)
         {
-            int randNum = RandomTool.Random(0, 100); //默认概率是 100 所有物品的概率加起来也是要100
+            // 默认概率是 100 所有物品的概率加起来也是要100
+            int randNum = RandomTool.Random(0, 100); 
             int currProbability = 0;
             for (int i = 0; i < turntableComponent.mTurntableGoodses.Count; i++)
             {

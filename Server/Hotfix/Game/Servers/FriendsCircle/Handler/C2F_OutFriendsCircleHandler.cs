@@ -14,7 +14,7 @@ namespace ETHotfix
             var response = new F2C_OutFriendsCircle();
             try
             {
-                FriendsCircle friendsCircle = await FriendsCircleComponent.Ins.QueryFriendsCircle(message.FriendsCrircleId);
+                var friendsCircle = await FriendsCircleComponent.Ins.QueryFriendsCircle(message.FriendsCrircleId);
                 if (friendsCircle == null)
                 {
                     response.Message = "亲友圈不存在";
@@ -27,6 +27,7 @@ namespace ETHotfix
                     reply(response);
                     return;
                 }
+
                 friendsCircle.SucceedOutriendsCircle(message.UserId);
                 reply(response);
             }

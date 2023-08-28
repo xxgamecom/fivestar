@@ -30,6 +30,7 @@ namespace ETHotfix
                     reply(response);
                     return;
                 }
+                
                 reliefPaymentInfos[0].Time = TimeTool.GetCurrenTimeStamp(); //记录当前领取的时机
                 reliefPaymentInfos[0].Number++;                             //领取的次数++
                 // 给用户加上豆子

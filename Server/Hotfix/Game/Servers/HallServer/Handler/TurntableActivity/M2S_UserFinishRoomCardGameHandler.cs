@@ -11,9 +11,9 @@ namespace ETHotfix
     {
         protected override void Run(Session session, M2S_UserFinishRoomCardGame message)
         {
+            // 玩家完成一局 游戏 增加免费抽奖次数
             try
             {
-                // 玩家完成一局 游戏 增加免费抽奖次数
                 TurntableComponent.Ins.FinishTaskAddLotteryCount(message.UserIds);
             }
             catch (Exception e)

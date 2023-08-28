@@ -14,7 +14,7 @@ namespace ETHotfix
             var response = new L2C_GetTheFirstShareAward();
             try
             {
-                response.JeweleAmount = GameLobby._TheFirstShareAwarNum;
+                response.JeweleAmount = GameLobby._TheFirstShareRewardNum;
                 reply(response);
             }
             catch (Exception e)
