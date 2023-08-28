@@ -32,7 +32,7 @@ namespace ETHotfix
                     }
                     userJewel = friendsCreateUser.Jewel;
                 }
-                MatchRoom room = matchRoomComponent.CreateRoom(message.RoomConfigLists, message.FriendsCircleId, message.ToyGameId, userJewel, response);
+                MatchRoom room = matchRoomComponent.CreateRoom(message.RoomConfigLists, message.FriendsCircleId, message.GameEntryId, userJewel, response);
                 if (room == null)
                 {
                     reply(response);

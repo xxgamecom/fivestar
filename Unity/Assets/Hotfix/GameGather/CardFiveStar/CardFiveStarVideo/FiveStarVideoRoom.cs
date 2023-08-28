@@ -67,7 +67,7 @@ namespace ETHotfix
         {
             ClearUIAndCoroutine();
             Time.timeScale = 1;
-            Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+            Game.Scene.GetComponent<GameEntryComponent>().EndGame();
         }
         //清空面板和协程还要所有玩家的牌
         public void ClearUIAndCoroutine()

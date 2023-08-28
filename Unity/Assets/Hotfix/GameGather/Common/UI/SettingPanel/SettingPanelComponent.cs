@@ -35,7 +35,7 @@ namespace ETHotfix
         public void ExitBtnEvnet()
         {
             Hide();
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
         }
         public void MusicToggleEvent(bool bol)
         {

@@ -88,7 +88,7 @@ namespace ETHotfix
                     _mStateManage.pKCPNetWorkState = KCPNetWorkState.Disconnectl;                                                    //状态改为断开连接
 
                     // 进入登陆界面
-                    Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+                    Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
                     return;
                 }
                 PlayerPrefs.SetString(GlobalConstant.LoginVoucher, r2CLogin.LoginVoucher); //记录登陆凭证
@@ -209,7 +209,7 @@ namespace ETHotfix
                 //case ErrorCode.ERR_SocketDisconnected://这是服务 没了
                 //    UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("服务器断开连接", (bol) =>
                 //    {
-                //        Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+                //        Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
                 //    }, PopOptionType.Single);
                 //    break;
                 default:

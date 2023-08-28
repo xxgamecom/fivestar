@@ -36,16 +36,16 @@ namespace ETModel
         {
             foreach (var matchRoomConfig in matchRoomConfigs)
             {
-                if (!mMatachRoomConfigs.ContainsKey(matchRoomConfig.ToyGameId))
+                if (!mMatachRoomConfigs.ContainsKey(matchRoomConfig.GameEntryId))
                 {
-                    mMatachRoomConfigs.Add(matchRoomConfig.ToyGameId, new List<MatchRoomConfig>()
+                    mMatachRoomConfigs.Add(matchRoomConfig.GameEntryId, new List<MatchRoomConfig>()
                     {
                         matchRoomConfig
                     });
                 }
                 else
                 {
-                    mMatachRoomConfigs[matchRoomConfig.ToyGameId].Add(matchRoomConfig);
+                    mMatachRoomConfigs[matchRoomConfig.GameEntryId].Add(matchRoomConfig);
                 }
             }
         }
@@ -82,12 +82,12 @@ namespace ETModel
             }
             return mMatachIdInRoomConfigs.Values.ToArray();
         }
-        public List<MatchRoomConfig> GetMatachRoomConfigs(long toyGameId)
+        public List<MatchRoomConfig> GetMatachRoomConfigs(long gameEntryId)
         {
             List<MatchRoomConfig> matchRoomConfigs;
-            if (!mMatachRoomConfigs.TryGetValue(toyGameId, out matchRoomConfigs))
+            if (!mMatachRoomConfigs.TryGetValue(gameEntryId, out matchRoomConfigs))
             {
-                Log.Error("要获取游戏配置表不存在游戏Id:" + toyGameId);
+                Log.Error("要获取游戏配置表不存在游戏Id:" + gameEntryId);
             }
             return matchRoomConfigs;
         }
@@ -104,7 +104,7 @@ namespace ETModel
         {
             MatchRoomConfig matchRoomConfig = ComponentFactory.Create<MatchRoomConfig>();
             matchRoomConfig.MatchRoomId = 1001;
-            matchRoomConfig.ToyGameId = ToyGameId.JoyLandlords;
+            matchRoomConfig.GameEntryId = GameEntryId.JoyLandlords;
             matchRoomConfig.BaseScore = 5;
             matchRoomConfig.GameNumber = 3;
             matchRoomConfig.BesansLowest = 3000;
@@ -115,7 +115,7 @@ namespace ETModel
 
             MatchRoomConfig matchRoomConfig2 = ComponentFactory.Create<MatchRoomConfig>();
             matchRoomConfig2.MatchRoomId = 1002;
-            matchRoomConfig2.ToyGameId = ToyGameId.JoyLandlords;
+            matchRoomConfig2.GameEntryId = GameEntryId.JoyLandlords;
             matchRoomConfig2.BaseScore = 20;
             matchRoomConfig2.GameNumber = 3;
             matchRoomConfig2.BesansLowest = 10000;
@@ -167,7 +167,7 @@ namespace ETModel
             MatchRoomConfig matchRoomConfig3 = ComponentFactory.Create<MatchRoomConfig>();
             matchRoomConfig3.RoomConfigs = RoomConfigs3;
             matchRoomConfig3.MatchRoomId = 2001;
-            matchRoomConfig3.ToyGameId = ToyGameId.CardFiveStar;
+            matchRoomConfig3.GameEntryId = GameEntryId.CardFiveStar;
             matchRoomConfig3.BaseScore = 300;
             matchRoomConfig3.GameNumber = 3;
             matchRoomConfig3.CostConsume = 220;
@@ -177,7 +177,7 @@ namespace ETModel
             MatchRoomConfig matchRoomConfig4 = ComponentFactory.Create<MatchRoomConfig>();
             matchRoomConfig4.RoomConfigs = RoomConfigs4;
             matchRoomConfig4.MatchRoomId = 2002;
-            matchRoomConfig4.ToyGameId = ToyGameId.CardFiveStar;
+            matchRoomConfig4.GameEntryId = GameEntryId.CardFiveStar;
             matchRoomConfig4.BaseScore = 1000;
             matchRoomConfig4.GameNumber = 3;
             matchRoomConfig4.CostConsume = 800;
@@ -187,7 +187,7 @@ namespace ETModel
             MatchRoomConfig matchRoomConfig5 = ComponentFactory.Create<MatchRoomConfig>();
             matchRoomConfig5.RoomConfigs = RoomConfigs5;
             matchRoomConfig5.MatchRoomId = 2003;
-            matchRoomConfig5.ToyGameId = ToyGameId.CardFiveStar;
+            matchRoomConfig5.GameEntryId = GameEntryId.CardFiveStar;
             matchRoomConfig5.BaseScore = 5000;
             matchRoomConfig5.GameNumber = 3;
             matchRoomConfig5.CostConsume = 2000;

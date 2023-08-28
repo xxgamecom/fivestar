@@ -5,9 +5,9 @@ using ETModel;
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class ToyGameComponentAwakeSystem: AwakeSystem<ToyGameComponent>
+    public class GameEntryComponentAwakeSystem: AwakeSystem<GameEntryComponent>
     {
-        public override void Awake(ToyGameComponent self)
+        public override void Awake(GameEntryComponent self)
         {
             self.Awake();
         }
@@ -16,11 +16,11 @@ namespace ETHotfix
     /// <summary>
     /// 游戏类型管理组件
     /// </summary>
-    public class ToyGameComponent: Component
+    public class GameEntryComponent: Component
     {
-        public long CurrToyGame = ToyGameId.None;
+        public long CurrToyGame = GameEntryId.None;
 
-        // 游戏通道字典, { key: ToyGameId, value: 游戏通道 }
+        // 游戏通道字典, { key: GameEntryId, value: 游戏通道 }
         private readonly Dictionary<long, AGameEntry> _gameEntryDict = new Dictionary<long, AGameEntry>();
 
         public void Awake()
@@ -49,7 +49,7 @@ namespace ETHotfix
         {
             if (_gameEntryDict.ContainsKey(gameType))
             {
-                if (CurrToyGame != ToyGameId.None)
+                if (CurrToyGame != GameEntryId.None)
                 {
                     _gameEntryDict[CurrToyGame].EndAndStartOtherGame();
                 }

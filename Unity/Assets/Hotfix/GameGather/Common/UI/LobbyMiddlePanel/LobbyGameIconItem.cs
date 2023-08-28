@@ -79,7 +79,7 @@ namespace ETHotfix
         public void EnterGame()
         {
            // Log.Debug($"开始游戏{mData.Name}");
-          //  Game.Scene.GetComponent<ToyGameComponent>().StartGame(mData.Id);
+          //  Game.Scene.GetComponent<GameEntryComponent>().StartGame(mData.Id);
         }
 
         public bool isBeDownload = false;

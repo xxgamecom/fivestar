@@ -62,9 +62,9 @@ namespace ETHotfix
             Show();
          //  mCurrGameVersionsConfig= Game.Scene.GetComponent<GameVersionsConfigComponent>().GetGameVersionsConfig(toyGameType);
            // mGameNameText.text = mCurrGameVersionsConfig.Name;
-            if (toyGameType == ToyGameId.JoyLandlords)
+            if (toyGameType == GameEntryId.JoyLandlords)
             {
-                L2C_GetMatchRoomConfigs g2CGetMatchRoomConfigs =(L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Session.Call(new C2L_GetMatchRoomConfigs(){ToyGameId = toyGameType });
+                L2C_GetMatchRoomConfigs g2CGetMatchRoomConfigs =(L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Session.Call(new C2L_GetMatchRoomConfigs(){GameEntryId = toyGameType });
                 InitMatchRoomInfo(g2CGetMatchRoomConfigs.MatchRoomConfigs);
                Log.Info(g2CGetMatchRoomConfigs.MatchRoomConfigs[0].MatchRoomId.ToString()); 
             }

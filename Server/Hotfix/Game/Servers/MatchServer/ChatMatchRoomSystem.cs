@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ETModel;
-using Google.Protobuf.Collections;
+﻿using ETModel;
 
 namespace ETHotfix
 {
     public static partial class MatchRoomSystem
     {
-        //玩家聊天
+        // 玩家聊天
         public static bool UserChat(this MatchRoom matchRoom, long userId, ChatInfo chatInfo)
         {
             if (userId == 0)
             {
                 return false;
             }
-            Actor_UserChatInfo actorUserChatInfo=new Actor_UserChatInfo();
+
+            var actorUserChatInfo = new Actor_UserChatInfo();
             actorUserChatInfo.UserId = userId;
             actorUserChatInfo.ChatInfo = chatInfo;
             for (int i = 0; i < matchRoom.PlayerInfoDic.Count; i++)
             {
-                  matchRoom.PlayerInfoDic[i].User.SendeSessionClientActor(actorUserChatInfo);
+                matchRoom.PlayerInfoDic[i].User.SendeSessionClientActor(actorUserChatInfo);
             }
+
             return true;
         }
-        //根据UserId获取玩家索引
+
+        // 根据UserId获取玩家索引
         public static int GetSeatIndex(this MatchRoom matchRoom, long userId)
         {
             for (int i = 0; i < matchRoom.PlayerInfoDic.Count; i++)
@@ -34,6 +33,7 @@ namespace ETHotfix
                     return i;
                 }
             }
+
             return -1;
         }
     }

@@ -6,7 +6,7 @@ namespace ETHotfix
 {
     public static class AgencyComponentSystem
     {
-        //代理卖钻石
+        // 代理卖钻石
         public static async Task SaleJewel(this AgencyComponent agencyComponent, long sellerUserId, long buyerUserId, int jewelNum, IResponse iResponse)
         {
             if (!agencyComponent.JudgeIsAgency(sellerUserId))
@@ -19,7 +19,7 @@ namespace ETHotfix
                 iResponse.Message = "不能卖给自己";
                 return;
             }
-            
+
             User sellerUser = await UserHelper.QueryUserInfo(sellerUserId);
             User buyerUser = await UserHelper.QueryUserInfo(buyerUserId);
             if (buyerUser == null)
@@ -27,7 +27,7 @@ namespace ETHotfix
                 iResponse.Message = "买家不存在";
                 return;
             }
-            
+
             if (sellerUser.Jewel >= jewelNum)
             {
                 UserHelper.GoodsChange(sellerUserId, GoodsId.Jewel, jewelNum * -1, GoodsChangeType.AgencyDeal);
@@ -40,12 +40,14 @@ namespace ETHotfix
                 iResponse.Message = "钻石不足";
             }
         }
-        //获取是不是代理
+        
+        // 获取是不是代理
         public static bool JudgeIsAgency(this AgencyComponent agencyComponent, long uerId)
         {
             return agencyComponent.AgecyUserIdList.Contains(uerId);
         }
-        //获取销售记录
+        
+        // 获取销售记录
         public static async Task<List<MarketInfo>> GetMarketRecord(this AgencyComponent agencyComponent, long userId, IResponse iResponse)
         {
             if (!agencyComponent.JudgeIsAgency(userId))
@@ -53,10 +55,12 @@ namespace ETHotfix
                 iResponse.Message = "权限不足";
                 return null;
             }
+           
             List<MarketInfo> records = await agencyComponent.dbProxyComponent.Query<MarketInfo>((record) => record.SellUserId == userId);
             return records;
         }
-        //记录销售信息
+        
+        // 记录销售信息
         public static async void RecordMarketInfo(this AgencyComponent agencyComponent, long sellerUserId, User buyerUser, int jewelNum)
         {
             MarketInfo marketInfo = ComponentFactory.Create<MarketInfo>();

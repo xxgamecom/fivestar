@@ -681,7 +681,6 @@
     <Compile Include="Assets\Model\SDK\IOSSdk.cs" />
     <Compile Include="Assets\Model\SDK\SdkMgr.cs" />
     <Compile Include="Assets\Model\Single\Single.cs" />
-    <Compile Include="Assets\Model\test.cs" />
     <Compile Include="Assets\Model\UI\UILoading\Component\UILoadingComponent.cs" />
     <Compile Include="Assets\Model\UI\UILoading\Event\LoadingBeginEvent_CreateLoadingUI.cs" />
     <Compile Include="Assets\Model\UI\UILoading\Event\LoadingFinishEvent_RemoveLoadingUI.cs" />

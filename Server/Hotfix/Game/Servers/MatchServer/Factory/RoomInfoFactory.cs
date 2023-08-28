@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ETHotfix;
 using ETModel;
 using Google.Protobuf.Collections;
 
 namespace ETHotfix
-{ 
-  public static  class RoomInfoFactory
+{
+    public static class RoomInfoFactory
     {
-       private static List<RoomInfo> _roomInfoPool=new List<RoomInfo>();
+        private static List<RoomInfo> _roomInfoPool = new List<RoomInfo>();
+
         public static RoomInfo Creator(MatchRoom mactchRoom)
         {
             RoomInfo roomInfo;
@@ -21,13 +19,14 @@ namespace ETHotfix
             }
             else
             {
-                roomInfo =new RoomInfo();
+                roomInfo = new RoomInfo();
             }
             roomInfo.RoomConfigLists = mactchRoom.RoomConfig.RoomConfigs;
             roomInfo.RoomId = mactchRoom.RoomId;
             roomInfo.FriendsCircleId = mactchRoom.FriendsCircleId;
             roomInfo.MatchPlayerInfos.Clear();
             roomInfo.MatchPlayerInfos.Add(mactchRoom.PlayerInfoDic.Values.ToArray());
+
             return roomInfo;
         }
 
@@ -37,16 +36,18 @@ namespace ETHotfix
             {
                 return;
             }
+
             _roomInfoPool.Add(roomInfo);
         }
 
-        public static RepeatedField<RoomInfo> Creator(List<MatchRoom>  mactchRoom)
+        public static RepeatedField<RoomInfo> Creator(List<MatchRoom> mactchRoom)
         {
-            RepeatedField<RoomInfo> listRooms = new RepeatedField<RoomInfo>();
+            var listRooms = new RepeatedField<RoomInfo>();
             for (int i = 0; i < mactchRoom.Count; i++)
             {
-                listRooms.Add(Creator(mactchRoom[i])); ;
+                listRooms.Add(Creator(mactchRoom[i]));
             }
+
             return listRooms;
         }
 

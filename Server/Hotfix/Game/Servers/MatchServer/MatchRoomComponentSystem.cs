@@ -132,8 +132,8 @@ namespace ETHotfix
                     }
                     matchRoomComponent.PlayerStartGame(matchRoomId, matchRoomConfig.GameNumber);
                     //随机分配一个游戏服务器并告知他开始一局游戏
-                    long toyGameId = Game.Scene.GetComponent<GameMatchRoomConfigComponent>().GetMatachRoomInfo(matchRoomId).ToyGameId;
-                    matchRoomComponent.RoomStartGame(toyGameId, m2SStartGame);
+                    long gameEntryId = Game.Scene.GetComponent<GameMatchRoomConfigComponent>().GetMatachRoomInfo(matchRoomId).GameEntryId;
+                    matchRoomComponent.RoomStartGame(gameEntryId, m2SStartGame);
                 }
             }
             catch (Exception e)
@@ -192,12 +192,12 @@ namespace ETHotfix
         }
 
         //开始游戏 并创建房间记录 返回房间ID
-        private static void RoomStartGame(this MatchRoomComponent matchRoomComponent, long toyGameId, M2S_StartGame message)
+        private static void RoomStartGame(this MatchRoomComponent matchRoomComponent, long gameEntryId, M2S_StartGame message)
         {
             try
             {
                 //记录玩家信息
-                MatchRoom matchRoom = MatchRoomFactory.CreateRandomMatchRoom(toyGameId, matchRoomComponent.RandomRoomId(), message.MatchPlayerInfos, message.RoomConfig);
+                MatchRoom matchRoom = MatchRoomFactory.CreateRandomMatchRoom(gameEntryId, matchRoomComponent.RandomRoomId(), message.MatchPlayerInfos, message.RoomConfig);
                 matchRoomComponent.MatchRoomDic[matchRoom.RoomId] = matchRoom;
                 for (int i = 0; i < message.MatchPlayerInfos.count; i++)
                 {
@@ -209,7 +209,7 @@ namespace ETHotfix
                 }
 
                 message.RoomType = RoomType.Match;
-                Session toyGameSession = Game.Scene.GetComponent<NetInnerSessionComponent>().GetGameServerSession(toyGameId);
+                Session toyGameSession = Game.Scene.GetComponent<NetInnerSessionComponent>().GetGameServerSession(gameEntryId);
                 message.RoomId = matchRoom.RoomId;
                 toyGameSession.Send(message);
             }

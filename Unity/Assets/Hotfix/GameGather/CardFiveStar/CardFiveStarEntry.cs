@@ -6,7 +6,7 @@ namespace ETHotfix
     /// <summary>
     /// 
     /// </summary>
-    [GameEntry(ToyGameId.CardFiveStar)]
+    [GameEntry(GameEntryId.CardFiveStar)]
     public class CardFiveStarEntry: AGameEntry
     {
 
@@ -28,7 +28,7 @@ namespace ETHotfix
         //房卡模式正常进入进入游戏 加入房间 创建房间 在等待开局状态重连
         public static void RoomCardEnterRoom(RoomInfo roomInfo)
         {
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.CardFiveStar, roomInfo.RoomConfigLists, roomInfo.RoomId, RoomType.RoomCard);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.CardFiveStar, roomInfo.RoomConfigLists, roomInfo.RoomId, RoomType.RoomCard);
             CardFiveStarRoom.Ins._RoomState = RoomStateType.AwaitPerson;                         //状态改为等待中
             CardFiveStarRoom.Ins._FriendsCircleId = roomInfo.FriendsCircleId;                    //更改亲友圈id
             EventMsgMgr.SendEvent(CardFiveStarEventID.HideAllPlayer);                            //先隐藏所有玩家
@@ -39,7 +39,7 @@ namespace ETHotfix
         // 匹配模式进入房间
         public static void MatchingEnterRoom(int roomId, RepeatedField<int> roomConfigs)
         {
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.CardFiveStar, roomConfigs, roomId, RoomType.Match);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.CardFiveStar, roomConfigs, roomId, RoomType.Match);
             EventMsgMgr.SendEvent(CardFiveStarEventID.HideAllPlayer);                                                                                                                                                            //先隐藏所有玩家
             CardFiveStarPlayerFactory.Creator(Game.Scene.GetComponent<UserComponent>().pSelfUser, 1, 0, UIComponent.GetUiView<CardFiveStarRoomPanelComponent>().mPlayerUIsGo.transform, (int)UserComponent.Ins.pSelfUser.Beans); //显示自己的信息
             UIComponent.GetUiView<CardFiveStarRoomPanelComponent>().CutBeginStartPrepareUI();                                                                                                                                    //UI切换为准备开始匹配
@@ -56,7 +56,7 @@ namespace ETHotfix
         {
             C2M_CreateRoom c2MCreateRoom = new C2M_CreateRoom();
             c2MCreateRoom.RoomConfigLists = configs;
-            c2MCreateRoom.ToyGameId = ToyGameId.CardFiveStar;
+            c2MCreateRoom.GameEntryId = GameEntryId.CardFiveStar;
             c2MCreateRoom.FriendsCircleId = friendsCircleId;
             M2C_CreateRoom m2CCreate = (M2C_CreateRoom)await SessionComponent.Instance.Call(c2MCreateRoom);
             if (!string.IsNullOrEmpty(m2CCreate.Message))
@@ -100,7 +100,7 @@ namespace ETHotfix
         // 重连进入游戏
         public static void Reconnection(Actor_FiveStar_Reconnection roomData)
         {
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.CardFiveStar, roomData.Configs, roomData.RoomId, roomData.RoomType);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.CardFiveStar, roomData.Configs, roomData.RoomId, roomData.RoomType);
             CardFiveStarRoom.Ins._RoomState = roomData.CurrRoomStateType;     //状态改为等待中
             CardFiveStarRoom.Ins._FriendsCircleId = roomData.FriendsCircleId; //更改亲友圈id
             if (roomData.ResidueCardCount > 0)

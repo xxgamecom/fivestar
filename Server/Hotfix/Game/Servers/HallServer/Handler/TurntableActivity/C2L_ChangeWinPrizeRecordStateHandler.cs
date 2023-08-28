@@ -15,7 +15,7 @@ namespace ETHotfix
             var response = new L2C_ChangeWinPrizeRecordState();
             try
             {
-                List<WinPrizeRecord> winPrizeRecords = await TurntableComponent.Ins.dbProxyComponent.Query<WinPrizeRecord>(winPrizeRecord => winPrizeRecord.WinPrizeId == message.UserId);
+                var winPrizeRecords = await TurntableComponent.Ins.dbProxyComponent.Query<WinPrizeRecord>(winPrizeRecord => winPrizeRecord.WinPrizeId == message.UserId);
                 if (winPrizeRecords.Count > 0)
                 {
                     winPrizeRecords[0].Remark = message.Remark;

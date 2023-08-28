@@ -15,7 +15,7 @@ namespace ETHotfix
             try
             {
                 Log.Info("卡五星服收到开始游戏消息");
-                if (message.RoomConfig.ToyGameId != ToyGameId.CardFiveStar)
+                if (message.RoomConfig.GameEntryId != GameEntryId.CardFiveStar)
                 {
                     return;
                 }

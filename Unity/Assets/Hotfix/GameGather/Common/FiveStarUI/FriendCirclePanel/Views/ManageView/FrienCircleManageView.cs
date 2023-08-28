@@ -118,7 +118,7 @@ namespace ETHotfix
             F2C_AlterWanFa f2CAlterWanFa = (F2C_AlterWanFa)await SessionComponent.Instance.Call(new C2F_AlterWanFa()
             {
                 FriendsCrircleId = FrienCircleComponet.Ins.CuurSelectFriendsCircle.FriendsCircleId,
-                ToyGameId = ToyGameId.CardFiveStar,
+                GameEntryId = GameEntryId.CardFiveStar,
                 WanFaCofigs = config
             });
             if (string.IsNullOrEmpty(f2CAlterWanFa.Message))

@@ -7,9 +7,11 @@ using UnityEngine.UI;
 namespace ETHotfix
 {
     [UIComponent(UIType.CreateFriendCiclePanel)]
-    public class CreateFriendCiclePanelComponent : PopUpUIView
+    public class CreateFriendCiclePanelComponent: PopUpUIView
     {
-        #region 脚本工具生成的代码
+
+#region 脚本工具生成的代码
+
         private Button mCloseBtn;
         private Button mConfirmCreateBtn;
         private Button mSelectWanFaBtn;
@@ -28,9 +30,10 @@ namespace ETHotfix
             mAnnouncementInputField = rc.Get<GameObject>("AnnouncementInputField").GetComponent<InputField>();
             InitPanel();
         }
-        #endregion
 
-        private RepeatedField<int> _CurrSelectWanFaConfigs;//当前选择的玩法
+#endregion
+
+        private RepeatedField<int> _CurrSelectWanFaConfigs; //当前选择的玩法
         public void InitPanel()
         {
             mCloseBtn.Add(Hide);
@@ -48,26 +51,26 @@ namespace ETHotfix
 
         public async void ConfirmCreateBtnEvent()
         {
-            C2F_CreatorFriendCircle   c2FCreatorFriendCircle=new C2F_CreatorFriendCircle();
+            var c2FCreatorFriendCircle = new C2F_CreatorFriendCircle();
             c2FCreatorFriendCircle.Name = mFriendCicleNameInputField.text;
             c2FCreatorFriendCircle.Announcement = mAnnouncementInputField.text;
             c2FCreatorFriendCircle.WanFaCofigs = _CurrSelectWanFaConfigs;
-            c2FCreatorFriendCircle.ToyGameId = ToyGameId.CardFiveStar;
+            c2FCreatorFriendCircle.GameEntryId = GameEntryId.CardFiveStar;
             if (string.IsNullOrEmpty(c2FCreatorFriendCircle.Name))
             {
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel("亲友圈名字不能为空");
                 return;
             }
-            if (_CurrSelectWanFaConfigs==null||!RoomConfigIntended.IntendedRoomConfigParameter(c2FCreatorFriendCircle.WanFaCofigs, c2FCreatorFriendCircle.ToyGameId))
+            if (_CurrSelectWanFaConfigs == null || !RoomConfigIntended.IntendedRoomConfigParameter(c2FCreatorFriendCircle.WanFaCofigs, c2FCreatorFriendCircle.GameEntryId))
             {
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel("玩法配置出错请重新选择");
                 return;
             }
 
-            F2C_CreatorFriendCircle f2CCreatorFriend=(F2C_CreatorFriendCircle)await SessionComponent.Instance.Call(c2FCreatorFriendCircle);
+            var f2CCreatorFriend = (F2C_CreatorFriendCircle)await SessionComponent.Instance.Call(c2FCreatorFriendCircle);
             if (string.IsNullOrEmpty(f2CCreatorFriend.Message))
             {
-                 FrienCircleComponet.Ins.SucceedCreatorFriendsCircle(f2CCreatorFriend.FriendsCircle);
+                FrienCircleComponet.Ins.SucceedCreatorFriendsCircle(f2CCreatorFriend.FriendsCircle);
                 Hide();
             }
             else

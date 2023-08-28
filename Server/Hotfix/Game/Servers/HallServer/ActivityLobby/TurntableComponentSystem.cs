@@ -10,7 +10,7 @@ namespace ETHotfix
         // 获取剩余免费抽奖次数
         public static async Task<int> GetFreeDrawLotteryCount(this TurntableComponent turntableComponent, long userId)
         {
-            List<FreeDrawLottery> freeDrawInfo = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => free.UserId == userId);
+            var freeDrawInfo = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => free.UserId == userId);
             if (freeDrawInfo.Count > 0)
             {
                 return freeDrawInfo[0].Count;
@@ -21,8 +21,8 @@ namespace ETHotfix
         // 玩家完成一局游戏 增加每日抽奖的次数
         public static async void FinishTaskAddLotteryCount(this TurntableComponent turntableComponent, IList<long> userIds)
         {
-            //如果本来有免费 抽奖次数信息 就直接加次数
-            List<FreeDrawLottery> freeDrawInfos = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => userIds.Contains(free.UserId));
+            // 如果本来有免费 抽奖次数信息 就直接加次数
+            var freeDrawInfos = await turntableComponent.dbProxyComponent.Query<FreeDrawLottery>((free) => userIds.Contains(free.UserId));
             for (int i = 0; i < freeDrawInfos.Count; i++)
             {
                 if (!TimeTool.TimeStampIsToday(freeDrawInfos[i].UpAddFreeDrawLotteryTime))
@@ -65,7 +65,7 @@ namespace ETHotfix
         // 获取中奖记录
         public static async Task<List<WinPrizeRecord>> GetWinPrizeRecord(this TurntableComponent turntableComponent, long userId)
         {
-            List<WinPrizeRecord> records = await turntableComponent.dbProxyComponent.Query<WinPrizeRecord>((record) => record.UserId == userId);
+            var records = await turntableComponent.dbProxyComponent.Query<WinPrizeRecord>((record) => record.UserId == userId);
             return records;
         }
 
@@ -138,7 +138,7 @@ namespace ETHotfix
                 return;
             }
 
-            WinPrizeRecord winPrizeRecord = ComponentFactory.Create<WinPrizeRecord>();
+            var winPrizeRecord = ComponentFactory.Create<WinPrizeRecord>();
             if (goods.GoodsId == GoodsId.Besans || goods.GoodsId == GoodsId.Jewel)
             {
                 winPrizeRecord.Type = 1; //默认Type是0 其他就是兑奖了

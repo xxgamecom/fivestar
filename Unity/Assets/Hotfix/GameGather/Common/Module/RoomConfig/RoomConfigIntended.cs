@@ -38,20 +38,20 @@ namespace ETHotfix
         private static int defaulNumber;
         private static int defaulneedJeweNumCount;
         private static bool isAADeductJewel;
-        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long toyGameId)
+        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long gameEntryId)
         {
-            return IntendedRoomConfigParameter(roomConfigLists, toyGameId, ref defaulneedJeweNumCount, ref defaulNumber, ref isAADeductJewel);
+            return IntendedRoomConfigParameter(roomConfigLists, gameEntryId, ref defaulneedJeweNumCount, ref defaulNumber, ref isAADeductJewel);
         }
-        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long toyGameId, ref int needJeweNumCount, ref int number, ref bool isAADeductJewel)
+        public static bool IntendedRoomConfigParameter(RepeatedField<int> roomConfigLists, long gameEntryId, ref int needJeweNumCount, ref int number, ref bool isAADeductJewel)
         {
             if (_cardFiveStarRoomConfigDic == null)
             {
                 InitCardFiveStarRoomConfigDic();
             }
             needJeweNumCount = 0;
-            switch (toyGameId)
+            switch (gameEntryId)
             {
-                case ToyGameId.CardFiveStar:
+                case GameEntryId.CardFiveStar:
                     // 参数的数量不等于规定的数量
                     if (roomConfigLists == null || roomConfigLists.Count != CardFiveStarRoomConfig.ConfigCount)
                     {
@@ -80,7 +80,7 @@ namespace ETHotfix
                     number = roomConfigLists[CardFiveStarRoomConfig.NumberId];
                     return true;
                 default:
-                    Log.Error("创建房间的游戏类型暂不支持:" + toyGameId);
+                    Log.Error("创建房间的游戏类型暂不支持:" + gameEntryId);
                     return false;
             }
         }

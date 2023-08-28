@@ -5,12 +5,12 @@ namespace ETHotfix
     /// <summary>
     /// 大厅通道
     /// </summary>
-    [GameEntry(ToyGameId.Lobby)]
+    [GameEntry(GameEntryId.Lobby)]
     public class LobbyEntry: AGameEntry
     {
 
         /// <summary>
-        /// 在StartGame(ToyGameId.Lobby)时执行
+        /// 在StartGame(GameEntryId.Lobby)时执行
         /// </summary>
         /// <param name="objs"></param>
         public override void StartGame(params object[] objs)
@@ -24,7 +24,7 @@ namespace ETHotfix
         public override void EndGame()
         {
             //base.EndGame();
-            pToyGameComponent.StartGame(ToyGameId.Login);
+            pToyGameComponent.StartGame(GameEntryId.Login);
         }
     }
 }

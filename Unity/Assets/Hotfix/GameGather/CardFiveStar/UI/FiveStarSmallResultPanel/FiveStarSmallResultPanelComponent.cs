@@ -104,7 +104,7 @@ namespace ETHotfix
                 FiveStarVideoRoom.Ins.OutPlay();
                 return;
             }
-            Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+            Game.Scene.GetComponent<GameEntryComponent>().EndGame();
         }
         //初始化小结算玩家信息
         public void InitSmallPlayerList()

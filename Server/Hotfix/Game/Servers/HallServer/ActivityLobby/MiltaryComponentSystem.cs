@@ -10,7 +10,9 @@ namespace ETHotfix
         public static async Task<List<Miltary>> GetMiltary(this MiltaryComponent miltaryComponent, long userId, int friendCircleId)
         {
             List<Miltary> miltaries = null;
-            long beforeMoths = TimeTool.GetCurrenTimeStamp() - TimeTool.MonthsTime; //一个月之前的时间
+            
+            // 一个月之前的时间
+            long beforeMoths = TimeTool.GetCurrenTimeStamp() - TimeTool.MonthsTime;
             if (friendCircleId == 0)
             {
                 miltaries = await miltaryComponent.dbProxyComponent.Query<Miltary>(miltary => miltary.PlayerUserIds.Contains(userId) && miltary.Time > beforeMoths);
@@ -23,7 +25,7 @@ namespace ETHotfix
             {
                 miltaries = await miltaryComponent.dbProxyComponent.Query<Miltary>(miltary => miltary.PlayerUserIds.Contains(userId) && miltary.FriendCircleId == friendCircleId && miltary.Time > beforeMoths);
             }
-            
+
             return miltaries;
         }
 
@@ -35,10 +37,10 @@ namespace ETHotfix
             {
                 return miltarySmallInfos[0];
             }
-           
+
             return null;
         }
-        
+
         // 获取一局游戏里面 游戏过程数据
         public static async Task<ParticularMiltaryRecordDataInfo> GetParticularMiltaryRecordData(this MiltaryComponent miltaryComponent, int dataId)
         {
@@ -47,7 +49,7 @@ namespace ETHotfix
             {
                 return dataInfos[0];
             }
-            
+
             return null;
         }
     }

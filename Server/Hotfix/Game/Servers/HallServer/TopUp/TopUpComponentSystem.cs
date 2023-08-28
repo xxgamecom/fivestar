@@ -12,7 +12,7 @@ namespace ETHotfix
             Commodity commodity = ShoppingCommodityComponent.Ins.GetCommdity(commodityId);
             if (commodity.MonetaryType == GoodsId.CNY)
             {
-                WeChatOrderInfo weChatOrderInfo = WeChatPayComponent.Ins.WeChatPlaceOrder(commodity.Price);
+                var weChatOrderInfo = WeChatPayComponent.Ins.WeChatPlaceOrder(commodity.Price);
                 TopUpRecord topUpRecord = TopUpRecordFactory.Create(weChatOrderInfo.outTradeNo, userId, commodity);
                 await Game.Scene.GetComponent<DBProxyComponent>().Save(topUpRecord); //存储充值记录
                 return weChatOrderInfo;
@@ -30,21 +30,22 @@ namespace ETHotfix
                     iResponse.Message = "钻石不足";
                 }
             }
+            
             return null;
         }
-        
+
         // 完成支付
         public static async void FinishPay(this TopUpComponent topUpComponent, string outTradeNo, bool isRepairOrder = false)
         {
-            DBProxyComponent dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
-            List<TopUpRecord> topUpRecords = await dbProxyComponent.Query<TopUpRecord>(topUpRecord => topUpRecord.OrderId.Equals(outTradeNo));
+            var dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
+            var topUpRecords = await dbProxyComponent.Query<TopUpRecord>(topUpRecord => topUpRecord.OrderId.Equals(outTradeNo));
             if (topUpRecords.Count <= 0)
             {
                 Log.Error("没有充值记录 订单id:" + outTradeNo);
             }
             else
             {
-                TopUpRecord topUpRecord = topUpRecords[0];
+                var topUpRecord = topUpRecords[0];
                 if (topUpRecord.TopUpState == TopUpStateType.NoPay)
                 {
                     await UserHelper.GoodsChange(topUpRecord.TopUpUserId, topUpRecord.GoodsId, topUpRecord.GoodsAmount, GoodsChangeType.ShopPurchase);
@@ -61,7 +62,7 @@ namespace ETHotfix
                 }
             }
         }
-        
+
         // 补单 就是完成支付
         public static void RepairOrder(this TopUpComponent topUpComponent, string outTradeNo, IResponse iResponse)
         {

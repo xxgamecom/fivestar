@@ -5,7 +5,7 @@ namespace ETHotfix
     /// <summary>
     /// 斗地主入口
     /// </summary>
-    [GameEntry(ToyGameId.JoyLandlords)]
+    [GameEntry(GameEntryId.JoyLandlords)]
     public class JoyLandlordsEntry: AGameEntry
     {
 
@@ -14,7 +14,7 @@ namespace ETHotfix
             base.StartGame();
 
             Log.Debug("进入游戏欢乐斗地主");
-            UIComponent.GetUiView<BaseHallPanelComponent>().ShowChangeBaseHallUI(ToyGameId.JoyLandlords);
+            UIComponent.GetUiView<BaseHallPanelComponent>().ShowChangeBaseHallUI(GameEntryId.JoyLandlords);
         }
 
         public override async void EndGame()

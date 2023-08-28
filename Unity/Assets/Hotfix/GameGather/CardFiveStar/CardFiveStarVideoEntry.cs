@@ -6,7 +6,7 @@ namespace ETHotfix
     /// <summary>
     /// 卡五星游戏入口
     /// </summary>
-    [GameEntry(ToyGameId.CardFiveStarVideo)]
+    [GameEntry(GameEntryId.CardFiveStarVideo)]
     public class CardFiveStarVideoEntry: AGameEntry
     {
 
@@ -27,7 +27,7 @@ namespace ETHotfix
         public static void EnterRoom(ParticularMiltaryRecordDataInfo miltaryRecordDataInfo)
         {
             List<object> datas = FiveStarVideoRecordDataDispose.DisposeRecordData(miltaryRecordDataInfo.MiltaryRecordDatas);
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.CardFiveStarVideo, datas);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.CardFiveStarVideo, datas);
         }
 
         public override void EndAndStartOtherGame()

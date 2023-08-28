@@ -25,7 +25,7 @@ namespace ETHotfix
           //  GameVersionsConfig[] AllGameVersionsConfig =Game.Scene.GetComponent<GameVersionsConfigComponent>().GetAllGameVersionsConfig();
            // foreach (var gameVersions in AllGameVersionsConfig)
             {
-            //    if (gameVersions.Id == ToyGameId.Common)
+            //    if (gameVersions.Id == GameEntryId.Common)
           //      {
           //          continue;
           //      }

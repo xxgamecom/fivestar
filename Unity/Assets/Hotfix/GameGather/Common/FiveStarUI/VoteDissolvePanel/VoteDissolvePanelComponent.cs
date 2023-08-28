@@ -82,7 +82,7 @@ namespace ETHotfix
             }
             else
             {
-                Game.Scene.GetComponent<ToyGameComponent>().EndGame();//直接结束游戏
+                Game.Scene.GetComponent<GameEntryComponent>().EndGame();//直接结束游戏
             }
         }
         //设置显示投票按钮的状态

@@ -21,7 +21,7 @@ namespace ETHotfix
         // 每周刷新一次
         public static async void WeekRefreshSingState(this SingInActivityComponent singInActivityComponent)
         {
-            List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(state => true);
+            var userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(state => true);
             for (int i = 0; i < userSingInStates.Count; i++)
             {
                 userSingInStates[i].SingInDays = 0; //所有人签到的天 都被置为0
@@ -32,7 +32,7 @@ namespace ETHotfix
         // 获取玩家签到信息
         public static async Task<UserSingInState> GetUserSingInState(this SingInActivityComponent singInActivityComponent, long userId)
         {
-            List<UserSingInState> userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
+            var userSingInStates = await singInActivityComponent.dbProxyComponent.Query<UserSingInState>(userSingInState => userSingInState.UserId == userId);
             if (userSingInStates.Count > 0)
             {
                 return userSingInStates[0];

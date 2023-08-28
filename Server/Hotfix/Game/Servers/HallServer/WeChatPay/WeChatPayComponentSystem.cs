@@ -13,6 +13,7 @@ namespace ETHotfix
             new MonitorWxPayHttp();
         }
     }
+    
     public static  class WeChatPayComponentSystem
     {
         /// <summary>

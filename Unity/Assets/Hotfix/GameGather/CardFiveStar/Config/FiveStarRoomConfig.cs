@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.Collections;
+﻿using ETModel;
+using Google.Protobuf.Collections;
 
 namespace ETHotfix
 {

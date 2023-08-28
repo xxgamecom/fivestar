@@ -273,14 +273,14 @@ namespace ETHotfix {
       }
     }
 
-    private long toyGameId_;
+    private long gameEntryId_;
     /// <summary>
     ///游戏类型ID
     /// </summary>
-    public long ToyGameId {
-      get { return toyGameId_; }
+    public long GameEntryId {
+      get { return gameEntryId_; }
       set {
-        toyGameId_ = value;
+        gameEntryId_ = value;
       }
     }
 
@@ -307,9 +307,9 @@ namespace ETHotfix {
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ToyGameId != 0L) {
+      if (GameEntryId != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt64(ToyGameId);
+        output.WriteInt64(GameEntryId);
       }
       roomConfigLists_.WriteTo(output, _repeated_roomConfigLists_codec);
       if (FriendsCircleId != 0) {
@@ -348,8 +348,8 @@ namespace ETHotfix {
       if (SessionActorId != 0L) {
         size += 2 + pb::CodedOutputStream.ComputeInt64Size(SessionActorId);
       }
-      if (ToyGameId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToyGameId);
+      if (GameEntryId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameEntryId);
       }
       size += roomConfigLists_.CalculateSize(_repeated_roomConfigLists_codec);
       if (FriendsCircleId != 0) {
@@ -359,7 +359,7 @@ namespace ETHotfix {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
-      toyGameId_ = 0;
+      gameEntryId_ = 0;
       roomConfigLists_.Clear();
       friendsCircleId_ = 0;
       rpcId_ = 0;
@@ -373,7 +373,7 @@ namespace ETHotfix {
             input.SkipLastField();
             break;
           case 8: {
-            ToyGameId = input.ReadInt64();
+            GameEntryId = input.ReadInt64();
             break;
           }
           case 18:

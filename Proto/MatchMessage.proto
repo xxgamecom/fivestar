@@ -27,7 +27,7 @@ message C2M_CreateRoom // IUserActorRequest
 	int64 UserId = 91;
 	User User = 92;
 	int64 SessionActorId = 93; //网关的InsinId
-	int64 ToyGameId = 1; //游戏类型ID
+	int64 GameEntryId = 1; //游戏类型ID
 	repeated int32  RoomConfigLists = 2; // 房间配置信息
 	int32 FriendsCircleId = 3;//亲友圈ID 如果不为0就是在亲友群创建的房间 
 }

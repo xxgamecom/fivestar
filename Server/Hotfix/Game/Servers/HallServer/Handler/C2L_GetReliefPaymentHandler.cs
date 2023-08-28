@@ -12,10 +12,10 @@ namespace ETHotfix
             var response = new L2C_GetReliefPayment();
             try
             {
-                List<ReliefPaymentInfo> reliefPaymentInfos = await GameLobby.Ins.dbProxyComponent.Query<ReliefPaymentInfo>(info => info.UserId == message.UserId);
+                var reliefPaymentInfos = await GameLobby.Ins.dbProxyComponent.Query<ReliefPaymentInfo>(info => info.UserId == message.UserId);
                 if (reliefPaymentInfos.Count <= 0)
                 {
-                    ReliefPaymentInfo reliefPaymentInfo = ComponentFactory.Create<ReliefPaymentInfo>();
+                    var reliefPaymentInfo = ComponentFactory.Create<ReliefPaymentInfo>();
                     reliefPaymentInfo.UserId = message.UserId;
                     reliefPaymentInfo.Number = 0;
                     reliefPaymentInfos.Add(reliefPaymentInfo);
@@ -32,7 +32,7 @@ namespace ETHotfix
                 }
                 reliefPaymentInfos[0].Time = TimeTool.GetCurrenTimeStamp(); //记录当前领取的时机
                 reliefPaymentInfos[0].Number++;                             //领取的次数++
-                //给用户加上豆子
+                // 给用户加上豆子
                 await UserHelper.GoodsChange(message.UserId, GoodsId.Besans, GameLobby.ReliefPaymentBeansNum, GoodsChangeType.None, false);
                 await GameLobby.Ins.dbProxyComponent.Save(reliefPaymentInfos[0]); //存储 领取救济金信息
                 reply(response);

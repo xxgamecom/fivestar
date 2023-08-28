@@ -6,7 +6,7 @@ namespace ETHotfix
     [BsonIgnoreExtraElements]
     public partial class MatchRoomConfig: Entity
     {
-        //public long ToyGameId { get; set; }//配置游戏的Id
+        //public long GameEntryId { get; set; }//配置游戏的Id
 
         //public int GameNumber { get; set; }//人数
 
@@ -14,7 +14,7 @@ namespace ETHotfix
 
         public override void Dispose()
         {
-            ToyGameId = 0;
+            GameEntryId = 0;
             GameNumber = 0;
             RoomConfigs = null;
             base.Dispose();

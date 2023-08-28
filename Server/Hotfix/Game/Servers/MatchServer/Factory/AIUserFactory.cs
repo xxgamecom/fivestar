@@ -13,7 +13,7 @@ namespace ETHotfix
         private static int _AIUserUseIndex = 0;
 
         private static int _IconNameUseIndex = 0;
-        public static async  Task<User> Create(int minBeansNum)
+        public static async Task<User> Create(int minBeansNum)
         {
             if (_AiMatchUsers == null)
             {
@@ -25,14 +25,14 @@ namespace ETHotfix
             }
             User userAi = _AIUsers[_AIUserUseIndex];
             _IconNameUseIndex++;
-            if (_IconNameUseIndex >= _AINames.Count|| _IconNameUseIndex >= _AIIcons.Count)
+            if (_IconNameUseIndex >= _AINames.Count || _IconNameUseIndex >= _AIIcons.Count)
             {
                 _IconNameUseIndex = 0;
             }
             userAi.Icon = _AIIcons[_IconNameUseIndex];
             userAi.Name = _AINames[_IconNameUseIndex];
             int oughtBeansNum = minBeansNum + RandomTool.Random(1, 10) * (minBeansNum / 10);
-            int aiAddBeansNum =(int)(oughtBeansNum - userAi.Beans);
+            int aiAddBeansNum = (int)(oughtBeansNum - userAi.Beans);
             userAi.Beans = oughtBeansNum;
             for (int i = 0; i < _AiMatchUsers.Count; i++)
             {
@@ -40,26 +40,26 @@ namespace ETHotfix
                 {
                     _AiMatchUsers[i].BeansTotalResult += aiAddBeansNum;
                     await Game.Scene.GetComponent<DBProxyComponent>().Save(_AiMatchUsers[i]);
-                  
+
                     break;
                 }
             }
             return UserFactory.AIUserCopy(userAi);
         }
 
-        private static List<MatchAIUser> _AiMatchUsers;//AI配置
-        private static List<User> _AIUsers=new List<User>();//可用的AIUser
+        private static List<MatchAIUser> _AiMatchUsers;        //AI配置
+        private static List<User> _AIUsers = new List<User>(); //可用的AIUser
 
         public static async Task InitAIUsers()
         {
             _AiMatchUsers = await Game.Scene.GetComponent<DBProxyComponent>().Query<MatchAIUser>(AI => true);
             if (_AiMatchUsers.Count <= 0)
             {
-               await SaveDefaultAIUser();
+                await SaveDefaultAIUser();
             }
             for (int i = 0; i < _AiMatchUsers.Count; i++)
             {
-                List<User> users=await Game.Scene.GetComponent<DBProxyComponent>().Query<User>(user => user.UserId== _AiMatchUsers[i].UserId);
+                List<User> users = await Game.Scene.GetComponent<DBProxyComponent>().Query<User>(user => user.UserId == _AiMatchUsers[i].UserId);
                 _AIUsers.AddRange(users);
             }
         }
@@ -77,7 +77,7 @@ namespace ETHotfix
             }
         }
 
-        public static List<string> _AINames=new List<string>()
+        public static List<string> _AINames = new List<string>()
         {
             "陈大胡子",
             "北方有孤城",
@@ -95,7 +95,7 @@ namespace ETHotfix
             "如风过境",
             "书生夺命剑",
         };
-        public static List<string> _AIIcons=new List<string>()
+        public static List<string> _AIIcons = new List<string>()
         {
             "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1560007602&di=49deb87c9ae669ae5049d3642be91b13&src=http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190226/84cd65d72d2048b4b2175ff8b8ed8368.jpeg",
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560017750825&di=4288c551bec31f46788602b94a10c11e&imgtype=0&src=http%3A%2F%2Fimg0.pconline.com.cn%2Fpconline%2F1507%2F18%2F6716136_05_thumb.jpg",

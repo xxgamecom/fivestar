@@ -15,7 +15,7 @@ namespace ETHotfix
             var response = new L2C_QueryWinPrizeRecord();
             try
             {
-                List<WinPrizeRecord> winPrizeRecords = await TurntableComponent.Ins.GetWinPrizeRecord(message.QueryUserId);
+                var winPrizeRecords = await TurntableComponent.Ins.GetWinPrizeRecord(message.QueryUserId);
                 response.Records.Add(winPrizeRecords.ToArray());
                 reply(response);
             }

@@ -140,11 +140,11 @@
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\FiveStarRoomConfigFactory.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarRoom\RoomStateType.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarSound\CardFiveStarSoundMgr.cs" />
-    <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideoEntry.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoData.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoOpcode.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoRecordDataDispose.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideo\FiveStarVideoRoom.cs" />
+    <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\CardFiveStarVideoEntry.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\Config\CardFiveStarRoomConfig.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\Config\FiveStarRoomConfig.cs" />
     <Compile Include="Assets\Hotfix\GameGather\CardFiveStar\Handler\Actor_FiveStar_CanDaPiaoHandler.cs" />
@@ -285,10 +285,10 @@
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\FriendsCircle\FriendsCircleAndCreateUserFactory.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\FriendsCircle\RanKingPlayerInfo.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\AGameEntry.cs" />
+    <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\GameEntryComponent.cs" />
+    <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\GameEntryId.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\LobbyEntry.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\LoginEntry.cs" />
-    <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\ToyGameComponent.cs" />
-    <Compile Include="Assets\Hotfix\GameGather\Common\Module\GameEntry\ToyGameId.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\GoodsId.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\KCP\HeartbeatComponent.cs" />
     <Compile Include="Assets\Hotfix\GameGather\Common\Module\KCP\KCPLocalizationDispose.cs" />

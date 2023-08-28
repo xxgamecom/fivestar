@@ -57,7 +57,7 @@ namespace ETHotfix
         public void OutBtnEvent()
         {
             Hide();
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
         }
     }
 }

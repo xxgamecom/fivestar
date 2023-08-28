@@ -10,7 +10,7 @@ namespace ETHotfix
     {
         protected override void Run(ETModel.Session session, Actor_CompelAccount message)
         {
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
             UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("您的账号在别处登陆",null, PopOptionType.Single);
         }
     }

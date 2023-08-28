@@ -7,9 +7,9 @@ namespace ETHotfix
     public static partial class MatchRoomSystem
     {
         //创建房间
-        public static MatchRoom CreateRoom(this MatchRoomComponent matchRoomComponent, RepeatedField<int> roomConfigLists, int friendsCircleId, long toyGameId, long userJewelNum, IResponse iResponse)
+        public static MatchRoom CreateRoom(this MatchRoomComponent matchRoomComponent, RepeatedField<int> roomConfigLists, int friendsCircleId, long gameEntryId, long userJewelNum, IResponse iResponse)
         {
-            MatchRoom matchRoom = MatchRoomFactory.Create(roomConfigLists, toyGameId, matchRoomComponent.RandomRoomId(), friendsCircleId, userJewelNum, iResponse);
+            MatchRoom matchRoom = MatchRoomFactory.Create(roomConfigLists, gameEntryId, matchRoomComponent.RandomRoomId(), friendsCircleId, userJewelNum, iResponse);
             if (matchRoom == null)
             {
                 return null; //为空表示创建房间失败

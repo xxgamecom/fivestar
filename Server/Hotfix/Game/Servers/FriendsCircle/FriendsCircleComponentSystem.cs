@@ -8,7 +8,7 @@ namespace ETHotfix
     public static class FriendsCircleComponentSystem
     {
         // 创建亲友圈
-        public static async Task<FriendsCircle> CreatorFriendsCircle(this FriendsCircleComponent self, long creatorUserId, string name, string announcement, RepeatedField<int> roomConfigs, long toyGameId, IResponse iResponse)
+        public static async Task<FriendsCircle> CreatorFriendsCircle(this FriendsCircleComponent self, long creatorUserId, string name, string announcement, RepeatedField<int> roomConfigs, long gameEntryId, IResponse iResponse)
         {
             User creatorUser = await UserHelper.QueryUserInfo(creatorUserId);
             if (creatorUser.Jewel < 200)
@@ -18,7 +18,7 @@ namespace ETHotfix
             }
 
             // 效验配置 如果配置错误 会使用默认配置
-            if (!RoomConfigIntended.IntendedRoomConfigParameter(roomConfigs, toyGameId))
+            if (!RoomConfigIntended.IntendedRoomConfigParameter(roomConfigs, gameEntryId))
             {
                 iResponse.Message = "玩法配置错误 无法创建";
                 return null;

@@ -185,7 +185,7 @@ namespace ETHotfix
             }
             else if (outSeatIndex == 0)
             {
-                Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Lobby);
+                Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Lobby);
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel("房主解散了房间");
             }
             else

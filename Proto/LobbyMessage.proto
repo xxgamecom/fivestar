@@ -165,7 +165,7 @@ message C2L_GetMatchRoomConfigs // IUserRequest
 {
   int32 RpcId = 90;
   int64 UserId = 91;
-  int64 ToyGameId = 1;
+  int64 GameEntryId = 1;
 }
 
 message L2C_GetMatchRoomConfigs // IResponse
@@ -408,7 +408,7 @@ message Miltary
   int32 MiltaryId = 1;//录像Id 对应小局的小局信息的录像id
   int32 RoomNumber = 2;//房号
   int32 FriendCircleId = 3;//所属的亲友圈ID 0就是 正常房卡打牌 不在亲友圈里面
-  int64 ToyGameId = 4;//所属游戏ID
+  int64 GameEntryId = 4;//所属游戏ID
   int64 Time = 5;//战绩时间
   repeated MiltaryPlayerInfo PlayerInofs = 6;//玩家信息
 
@@ -473,7 +473,7 @@ message L2C_GetMiltaryRecordDataInfo // IResponse
 message ParticularMiltaryRecordDataInfo
 {
   int32 DataId = 1;//对应的录像战绩数据Id
-  int64 ToyGameId = 2;//对应的游戏类型Id
+  int64 GameEntryId = 2;//对应的游戏类型Id
   repeated MiltaryRecordData MiltaryRecordDatas = 3;//全部对局信息
 }
 

@@ -139,9 +139,9 @@ namespace ETHotfix
         private RepeatedField<MatchRoomConfig> _MatchRoomConfigs;
         private async Task RequestMatchRoomConfigs()
         {
-            L2C_GetMatchRoomConfigs l2CGetMatchRoomConfigs = (L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Call(new C2L_GetMatchRoomConfigs()
+            var l2CGetMatchRoomConfigs = (L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Call(new C2L_GetMatchRoomConfigs()
             {
-                ToyGameId = ToyGameId.CardFiveStar
+                GameEntryId = GameEntryId.CardFiveStar
             });
             _MatchRoomConfigs = l2CGetMatchRoomConfigs.MatchRoomConfigs;
         }

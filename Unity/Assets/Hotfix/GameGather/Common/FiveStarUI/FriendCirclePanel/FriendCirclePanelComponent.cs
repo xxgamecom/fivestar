@@ -129,7 +129,7 @@ namespace ETHotfix
 
         public void CloseBtnEvent()
         {
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Lobby);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Lobby);
         }
         //显示无亲友圈的UI
         public void ShowNodeFrienCircleUI()

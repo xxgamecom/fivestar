@@ -64,7 +64,7 @@ message MatchRoomConfig
 	int32 BaseScore = 3; //随机匹配的底分
 	int32 CostConsume = 4;//每小局消耗豆子的数量
 	int32 MatchRoomId = 5;//房间ID
-	int64 ToyGameId = 6;//游戏ID
+	int64 GameEntryId = 6;//游戏ID
 	int32 GameNumber = 7;//房间人数
 	repeated int32 RoomConfigs = 8;//房间配置信息
 }

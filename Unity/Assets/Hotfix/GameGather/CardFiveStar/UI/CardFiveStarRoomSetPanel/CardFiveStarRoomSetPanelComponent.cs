@@ -6,10 +6,12 @@ using UnityEngine.UI;
 namespace ETHotfix
 {
     [UIComponent(UIType.CardFiveStarRoomSetPanel)]
-    public class CardFiveStarRoomSetPanelComponent : PopUpUIView
+    public class CardFiveStarRoomSetPanelComponent: PopUpUIView
     {
         public override float MaskLucencyValue => 0f;
-        #region 脚本工具生成的代码
+
+#region 脚本工具生成的代码
+
         private Button mOutBtn;
         private Text mOutDescText;
         private Button mRuleBtn;
@@ -34,11 +36,17 @@ namespace ETHotfix
             mExpressionToggle = rc.Get<GameObject>("ExpressionToggle").GetComponent<Toggle>();
             InitPanel();
         }
-        #endregion
+
+#endregion
+
         public override bool isShakeAnimation
         {
-            get { return false; }
+            get
+            {
+                return false;
+            }
         }
+
         private MusicSoundComponent _MusicSoundComponent;
         public void InitPanel()
         {
@@ -46,7 +54,7 @@ namespace ETHotfix
             mCloseBtn.Add(Hide);
             mOutBtn.Add(OutBtnEvent);
             mRuleBtn.Add(RuleBtnEvent);
-           
+
             mMusicSlider.Add(MusiceSliderEvent);
             mSoundSlider.Add(SoundSliderEvent);
         }
@@ -66,13 +74,12 @@ namespace ETHotfix
         {
             if (CardFiveStarRoom.Ins._RoomType == RoomType.RoomCard)
             {
-                if ( CardFiveStarRoom.Ins._RoomState == RoomStateType.GameIn||
-                    CardFiveStarRoom.Ins._RoomState == RoomStateType.ReadyIn)
+                if (CardFiveStarRoom.Ins._RoomState == RoomStateType.GameIn || CardFiveStarRoom.Ins._RoomState == RoomStateType.ReadyIn)
                 {
                     //申请解算房间
                     UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("是否申请解散房间？", SendOutRoom);
                 }
-                else 
+                else
                 {
                     if (CardFiveStarRoom.Ins._ServerSeatIndexInPlayer[0]._user.UserId == UserComponent.Ins.pUserId)
                     {
@@ -96,9 +103,8 @@ namespace ETHotfix
                 else
                 {
                     Hide();
-                    Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+                    Game.Scene.GetComponent<GameEntryComponent>().EndGame();
                 }
-                   
             }
         }
 
@@ -108,27 +114,26 @@ namespace ETHotfix
             {
                 return;
             }
-            M2C_OutRoom m2COut=(M2C_OutRoom)await SessionComponent.Instance.Call(new C2M_OutRoom());
+            M2C_OutRoom m2COut = (M2C_OutRoom)await SessionComponent.Instance.Call(new C2M_OutRoom());
             if (!string.IsNullOrEmpty(m2COut.Message))
             {
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel(m2COut.Message);
             }
             if (CardFiveStarRoom.Ins._RoomState == RoomStateType.AwaitPerson)
             {
-                Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+                Game.Scene.GetComponent<GameEntryComponent>().EndGame();
             }
             Hide();
         }
         public override void OnShow()
         {
             base.OnShow();
+            
             mMusicSlider.value = _MusicSoundComponent.MusicVolume;
             mSoundSlider.value = _MusicSoundComponent.SoundVolume;
             if (CardFiveStarRoom.Ins._RoomType == RoomType.RoomCard)
             {
-                if (CardFiveStarRoom.Ins._ServerSeatIndexInPlayer[0]._user.UserId == UserComponent.Ins.pUserId ||
-                    CardFiveStarRoom.Ins._RoomState == RoomStateType.GameIn ||
-                    CardFiveStarRoom.Ins._RoomState == RoomStateType.ReadyIn)
+                if (CardFiveStarRoom.Ins._ServerSeatIndexInPlayer[0]._user.UserId == UserComponent.Ins.pUserId || CardFiveStarRoom.Ins._RoomState == RoomStateType.GameIn || CardFiveStarRoom.Ins._RoomState == RoomStateType.ReadyIn)
                 {
                     mOutDescText.text = "解散房间";
                     return;

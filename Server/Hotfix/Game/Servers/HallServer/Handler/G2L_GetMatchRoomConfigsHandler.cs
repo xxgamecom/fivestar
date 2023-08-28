@@ -11,7 +11,7 @@ namespace ETHotfix
             var response = new L2C_GetMatchRoomConfigs();
             try
             {
-                var matchRoomConfigs = Game.Scene.GetComponent<GameMatchRoomConfigComponent>().GetMatachRoomConfigs(message.ToyGameId);
+                var matchRoomConfigs = Game.Scene.GetComponent<GameMatchRoomConfigComponent>().GetMatachRoomConfigs(message.GameEntryId);
                 response.MatchRoomConfigs.AddRange(matchRoomConfigs.ToArray());
                 reply(response);
             }

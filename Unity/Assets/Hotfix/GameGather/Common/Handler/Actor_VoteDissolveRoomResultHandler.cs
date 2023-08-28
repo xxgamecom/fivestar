@@ -10,7 +10,7 @@ namespace ETHotfix
     {
         protected override void Run(ETModel.Session session, Actor_VoteDissolveRoomResult message)
         {
-            if (Game.Scene.GetComponent<ToyGameComponent>().CurrToyGame != ToyGameId.CardFiveStar)
+            if (Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame != GameEntryId.CardFiveStar)
             {
                 return;//当前是不在游戏就 不接收
             }

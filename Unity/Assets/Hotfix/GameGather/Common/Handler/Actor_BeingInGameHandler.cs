@@ -7,10 +7,10 @@ namespace ETHotfix
     {
         protected override void Run(ETModel.Session session, Actor_BeingInGame message)
         {
-            long currToyGameId = Game.Scene.GetComponent<ToyGameComponent>().CurrToyGame;
+            long currGameId = Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame;
             if (message.IsGameBeing)
             {
-                if (currToyGameId == ToyGameId.Lobby || currToyGameId == ToyGameId.Login) //在游戏中 当前场景如果在大厅或者登陆界面 就给个提示
+                if (currGameId == GameEntryId.Lobby || currGameId == GameEntryId.Login) //在游戏中 当前场景如果在大厅或者登陆界面 就给个提示
                 {
                     UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("您有一局未完成的游戏点击确定进入游戏", PopConfirmCall, PopOptionType.Single);
                 }
@@ -21,9 +21,9 @@ namespace ETHotfix
             }
             else
             {
-                if (currToyGameId != ToyGameId.Lobby && currToyGameId != ToyGameId.Login) //不在游戏中 当前场景 不是大厅和登陆界面 就进入大厅
+                if (currGameId != GameEntryId.Lobby && currGameId != GameEntryId.Login) //不在游戏中 当前场景 不是大厅和登陆界面 就进入大厅
                 {
-                    Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Lobby);
+                    Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Lobby);
                 }
                 //看是否 有参数加入房间
                 if (!string.IsNullOrEmpty(SdkCall.OpenAppUrl))

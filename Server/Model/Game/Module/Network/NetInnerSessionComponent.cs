@@ -72,21 +72,21 @@ namespace ETModel
         }
 
         //给一个游戏获取一个游戏类型的服务器 暂时使用随机分配 固定为第一个
-        public Session GetGameServerSession(long toyGameId)
+        public Session GetGameServerSession(long gameEntryId)
         {
             try
             {
                 StartConfig startConfig;
-                switch (toyGameId)
+                switch (gameEntryId)
                 {
-                    case ToyGameId.JoyLandlords:
+                    case GameEntryId.JoyLandlords:
                         startConfig = StartConfigComponent.Instance.JoyLandlordsConfigs[0];
                         break;
-                    case ToyGameId.CardFiveStar:
+                    case GameEntryId.CardFiveStar:
                         startConfig = StartConfigComponent.Instance.CardFiveStartConfigs[0];
                         break;
                     default:
-                        throw new Exception("没有这种类型游戏服务器" + toyGameId);
+                        throw new Exception("没有这种类型游戏服务器" + gameEntryId);
 
                 }
                 return GetSession(startConfig);

@@ -17,7 +17,7 @@ namespace ETHotfix
             try
             {
                 Log.Info("斗地主服收到开始游戏消息");
-                if (message.RoomConfig.ToyGameId != ToyGameId.JoyLandlords)
+                if (message.RoomConfig.GameEntryId != GameEntryId.JoyLandlords)
                 {
                     return;
                 }

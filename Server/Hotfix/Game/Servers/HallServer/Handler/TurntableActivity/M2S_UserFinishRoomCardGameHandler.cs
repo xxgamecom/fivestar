@@ -13,7 +13,8 @@ namespace ETHotfix
         {
             try
             {
-                TurntableComponent.Ins.FinishTaskAddLotteryCount(message.UserIds); //玩家完成一局 游戏 增加免费抽奖次数
+                // 玩家完成一局 游戏 增加免费抽奖次数
+                TurntableComponent.Ins.FinishTaskAddLotteryCount(message.UserIds);
             }
             catch (Exception e)
             {

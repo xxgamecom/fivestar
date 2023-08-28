@@ -845,14 +845,14 @@ namespace ETHotfix {
       }
     }
 
-    private long toyGameId_;
+    private long gameEntryId_;
     /// <summary>
     ///游戏ID
     /// </summary>
-    public long ToyGameId {
-      get { return toyGameId_; }
+    public long GameEntryId {
+      get { return gameEntryId_; }
       set {
-        toyGameId_ = value;
+        gameEntryId_ = value;
       }
     }
 
@@ -899,9 +899,9 @@ namespace ETHotfix {
         output.WriteRawTag(40);
         output.WriteInt32(MatchRoomId);
       }
-      if (ToyGameId != 0L) {
+      if (GameEntryId != 0L) {
         output.WriteRawTag(48);
-        output.WriteInt64(ToyGameId);
+        output.WriteInt64(GameEntryId);
       }
       if (GameNumber != 0) {
         output.WriteRawTag(56);
@@ -927,8 +927,8 @@ namespace ETHotfix {
       if (MatchRoomId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MatchRoomId);
       }
-      if (ToyGameId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToyGameId);
+      if (GameEntryId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameEntryId);
       }
       if (GameNumber != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameNumber);
@@ -943,7 +943,7 @@ namespace ETHotfix {
       baseScore_ = 0;
       costConsume_ = 0;
       matchRoomId_ = 0;
-      toyGameId_ = 0;
+      gameEntryId_ = 0;
       gameNumber_ = 0;
       roomConfigs_.Clear();
       uint tag;
@@ -973,7 +973,7 @@ namespace ETHotfix {
             break;
           }
           case 48: {
-            ToyGameId = input.ReadInt64();
+            GameEntryId = input.ReadInt64();
             break;
           }
           case 56: {

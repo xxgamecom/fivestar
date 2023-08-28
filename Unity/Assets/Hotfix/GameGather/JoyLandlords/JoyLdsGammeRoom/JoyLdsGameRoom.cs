@@ -112,7 +112,7 @@ namespace ETHotfix
         //退出房间
         public void OutRoom()
         {
-            Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+            Game.Scene.GetComponent<GameEntryComponent>().EndGame();
         }
         //出牌请求
         public void RequestPlayCard(params object[] objs)

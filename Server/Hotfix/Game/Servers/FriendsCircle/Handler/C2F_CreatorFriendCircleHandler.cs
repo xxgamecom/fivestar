@@ -14,7 +14,7 @@ namespace ETHotfix
             var response = new F2C_CreatorFriendCircle();
             try
             {
-                response.FriendsCircle = await FriendsCircleComponent.Ins.CreatorFriendsCircle(message.UserId, message.Name, message.Announcement, message.WanFaCofigs, message.ToyGameId, response);
+                response.FriendsCircle = await FriendsCircleComponent.Ins.CreatorFriendsCircle(message.UserId, message.Name, message.Announcement, message.WanFaCofigs, message.GameEntryId, response);
                 reply(response);
             }
             catch (Exception e)

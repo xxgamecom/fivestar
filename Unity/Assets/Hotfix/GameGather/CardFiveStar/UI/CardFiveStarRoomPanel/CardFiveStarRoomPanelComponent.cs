@@ -133,7 +133,7 @@ namespace ETHotfix
         public void WanFaBtnEvent()
         {
            UIComponent.GetUiView<WanFaPanelComponent>().Show();
-           // Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+           // Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
         }
         public async void MatchBtnEvent()
         {

@@ -109,10 +109,10 @@ namespace ETHotfix
         }
 
         // 修改玩法
-        public static async Task AlterWanFa(this FriendsCircle friendsCircle, RepeatedField<int> roomConfigs, long toyGameId, IResponse iResponse)
+        public static async Task AlterWanFa(this FriendsCircle friendsCircle, RepeatedField<int> roomConfigs, long gameEntryId, IResponse iResponse)
         {
             // 效验配置 如果配置错误 会使用默认配置
-            if (!RoomConfigIntended.IntendedRoomConfigParameter(roomConfigs, toyGameId))
+            if (!RoomConfigIntended.IntendedRoomConfigParameter(roomConfigs, gameEntryId))
             {
                 //效验不通过 不会修改
                 iResponse.Message = "玩法参数有误 无法修改";

@@ -56,7 +56,7 @@ namespace ETHotfix
         }
         public  void UrlOpenApp(string message)
         {
-            if (Game.Scene.GetComponent<ToyGameComponent>().CurrToyGame == ToyGameId.Lobby)
+            if (Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame == GameEntryId.Lobby)
             {
                 CardFiveStarEntry.JoinRoom(message);
             }

@@ -9,15 +9,15 @@
     {
         public long pToyGameType { private set; get; }
 
-        private ToyGameComponent mToyGameComponent;
+        private GameEntryComponent mToyGameComponent;
 
-        protected ToyGameComponent pToyGameComponent
+        protected GameEntryComponent pToyGameComponent
         {
             get
             {
                 if (mToyGameComponent == null)
                 {
-                    mToyGameComponent = Game.Scene.GetComponent<ToyGameComponent>();
+                    mToyGameComponent = Game.Scene.GetComponent<GameEntryComponent>();
                 }
 
                 return mToyGameComponent;
@@ -42,7 +42,7 @@
         // 不一定调   玩家调用直接开启其他游戏就不会调 后调
         public virtual async void EndGame()
         {
-            pToyGameComponent.StartGame(ToyGameId.Lobby);
+            pToyGameComponent.StartGame(GameEntryId.Lobby);
         }
 
     }

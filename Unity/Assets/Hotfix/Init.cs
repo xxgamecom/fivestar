@@ -67,11 +67,11 @@ namespace ETHotfix
                 Game.Scene.AddComponent<VersionsShowComponent>(); //版本号显示组件
                 Game.Scene.AddComponent<KCPUseManage>();          //KCP使用组件
                 Game.Scene.AddComponent<UserComponent>();         //用户信息管理组件
-                Game.Scene.AddComponent<ToyGameComponent>();      //游戏场景 管理组件
+                Game.Scene.AddComponent<GameEntryComponent>();    //游戏场景 管理组件
                 Game.Scene.AddComponent<MusicSoundComponent>();   //音乐 音效组件
                 Game.Scene.AddComponent<FrienCircleComponet>();   //亲友圈组件
-                Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
-                //  Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.CardFiveStar);
+                Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
+                //  Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.CardFiveStar);
                 GameObject.Find("Reporter").SetActive(ETModel.Init.IsAdministrator); //打印日志
             }
             catch (Exception e)

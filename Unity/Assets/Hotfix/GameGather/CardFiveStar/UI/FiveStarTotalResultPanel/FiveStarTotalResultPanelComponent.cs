@@ -42,7 +42,7 @@ namespace ETHotfix
 
         public void ReturnEvent()
         {
-            Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+            Game.Scene.GetComponent<GameEntryComponent>().EndGame();
             Hide();
         }
         //初始化总结算 玩家Player信息

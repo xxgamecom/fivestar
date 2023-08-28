@@ -92,7 +92,7 @@ namespace ETHotfix
                 {
                     if (bol)
                     {
-                        Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+                        Game.Scene.GetComponent<GameEntryComponent>().EndGame();
                     }
                 });
                
@@ -103,7 +103,7 @@ namespace ETHotfix
             }
             else if (pParentUIType == UIType.BaseHallPanel)
             {
-                Game.Scene.GetComponent<ToyGameComponent>().EndGame();
+                Game.Scene.GetComponent<GameEntryComponent>().EndGame();
             }
         }
         private void ShareBtnEenvt()

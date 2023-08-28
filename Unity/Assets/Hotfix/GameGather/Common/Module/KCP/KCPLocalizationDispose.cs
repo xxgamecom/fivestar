@@ -50,7 +50,7 @@ namespace ETHotfix
             }
             else
             {
-                Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+                Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
             }
         }
 
@@ -65,7 +65,7 @@ namespace ETHotfix
             Game.Scene.GetComponent<UserComponent>().SetSelfUser(user);
 
             // 进入大厅通道
-            Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Lobby);
+            Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Lobby);
 
             // 添加心跳组件
             SessionComponent.Instance.Session.AddComponent<HeartbeatComponent>();
@@ -95,7 +95,7 @@ namespace ETHotfix
                 }
                 else
                 {
-                    Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
+                    Game.Scene.GetComponent<GameEntryComponent>().StartGame(GameEntryId.Login);
                 }
             });
         }

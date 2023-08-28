@@ -214,7 +214,7 @@ namespace ETHotfix
             m2SStartGame.RoomConfig = matchRoom.RoomConfig;
             m2SStartGame.NeedJeweNumCount = matchRoom.NeedJeweNumCount;
             m2SStartGame.FriendsCircleId = matchRoom.FriendsCircleId;
-            Session toyGameSession = Game.Scene.GetComponent<NetInnerSessionComponent>().GetGameServerSession(matchRoom.RoomConfig.ToyGameId);
+            Session toyGameSession = Game.Scene.GetComponent<NetInnerSessionComponent>().GetGameServerSession(matchRoom.RoomConfig.GameEntryId);
             toyGameSession.Send(m2SStartGame);
         }
 

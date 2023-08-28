@@ -49,14 +49,14 @@ namespace ETHotfix
         // 获取新手礼包领取状态
         public static async Task<bool> GreenGiftGetStatu(this GeneralizeComponent generalizeComponent, long userId)
         {
-            List<GetGreenGiftInfo> giftInfo = await generalizeComponent.dbProxyComponent.Query<GetGreenGiftInfo>((getGreenGift) => getGreenGift.GetUserId == userId);
+            var giftInfo = await generalizeComponent.dbProxyComponent.Query<GetGreenGiftInfo>((getGreenGift) => getGreenGift.GetUserId == userId);
             return giftInfo.Count > 0;
         }
 
         // 获取推广奖励信息
         public static async Task<GeneralizeAwardInfo> GetGeneralizeAwardInfo(this GeneralizeComponent generalizeComponent, long userId)
         {
-            List<GeneralizeAwardInfo> giftInfo = await generalizeComponent.dbProxyComponent.Query<GeneralizeAwardInfo>((generlie) => generlie.UserId == userId);
+            var giftInfo = await generalizeComponent.dbProxyComponent.Query<GeneralizeAwardInfo>((generlie) => generlie.UserId == userId);
             if (giftInfo.Count > 0)
             {
                 return giftInfo[0];
@@ -70,7 +70,7 @@ namespace ETHotfix
         // 创建推广奖励信息
         private static GeneralizeAwardInfo CreateGeneralizeAwardInfo(long userId)
         {
-            GeneralizeAwardInfo generalizeAwardInfo = ComponentFactory.Create<GeneralizeAwardInfo>();
+            var generalizeAwardInfo = ComponentFactory.Create<GeneralizeAwardInfo>();
             generalizeAwardInfo.UserId = userId;
             return generalizeAwardInfo;
         }

@@ -5,7 +5,7 @@ namespace ETHotfix
     /// <summary>
     /// 负责登录的是登录通道
     /// </summary>
-    [GameEntry(ToyGameId.Login)]
+    [GameEntry(GameEntryId.Login)]
     public class LoginEntry: AGameEntry
     {
 
@@ -23,6 +23,7 @@ namespace ETHotfix
         public override void EndGame()
         {
             //base.EndGame();
+            
             // Log.Error("处于登陆界面无法退出");
             //Game.Scene.GetComponent<UIComponent>().Show(UIType.LobbyPanel);
         }

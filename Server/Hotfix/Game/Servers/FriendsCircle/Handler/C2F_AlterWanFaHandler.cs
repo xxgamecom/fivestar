@@ -28,7 +28,7 @@ namespace ETHotfix
                     return;
                 }
 
-                await friendsCircle.AlterWanFa(message.WanFaCofigs, message.ToyGameId, response);
+                await friendsCircle.AlterWanFa(message.WanFaCofigs, message.GameEntryId, response);
                 reply(response);
             }
             catch (Exception e)

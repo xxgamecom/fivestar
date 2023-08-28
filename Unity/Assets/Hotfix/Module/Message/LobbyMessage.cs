@@ -1903,18 +1903,18 @@ namespace ETHotfix {
       }
     }
 
-    private long toyGameId_;
-    public long ToyGameId {
-      get { return toyGameId_; }
+    private long gameEntryId_;
+    public long GameEntryId {
+      get { return gameEntryId_; }
       set {
-        toyGameId_ = value;
+        gameEntryId_ = value;
       }
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ToyGameId != 0L) {
+      if (GameEntryId != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt64(ToyGameId);
+        output.WriteInt64(GameEntryId);
       }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
@@ -1934,14 +1934,14 @@ namespace ETHotfix {
       if (UserId != 0L) {
         size += 2 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
-      if (ToyGameId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToyGameId);
+      if (GameEntryId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameEntryId);
       }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
-      toyGameId_ = 0;
+      gameEntryId_ = 0;
       rpcId_ = 0;
       userId_ = 0;
       uint tag;
@@ -1951,7 +1951,7 @@ namespace ETHotfix {
             input.SkipLastField();
             break;
           case 8: {
-            ToyGameId = input.ReadInt64();
+            GameEntryId = input.ReadInt64();
             break;
           }
           case 720: {
@@ -4838,14 +4838,14 @@ namespace ETHotfix {
       }
     }
 
-    private long toyGameId_;
+    private long gameEntryId_;
     /// <summary>
     ///所属游戏ID
     /// </summary>
-    public long ToyGameId {
-      get { return toyGameId_; }
+    public long GameEntryId {
+      get { return gameEntryId_; }
       set {
-        toyGameId_ = value;
+        gameEntryId_ = value;
       }
     }
 
@@ -4884,9 +4884,9 @@ namespace ETHotfix {
         output.WriteRawTag(24);
         output.WriteInt32(FriendCircleId);
       }
-      if (ToyGameId != 0L) {
+      if (GameEntryId != 0L) {
         output.WriteRawTag(32);
-        output.WriteInt64(ToyGameId);
+        output.WriteInt64(GameEntryId);
       }
       if (Time != 0L) {
         output.WriteRawTag(40);
@@ -4906,8 +4906,8 @@ namespace ETHotfix {
       if (FriendCircleId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(FriendCircleId);
       }
-      if (ToyGameId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToyGameId);
+      if (GameEntryId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameEntryId);
       }
       if (Time != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
@@ -4920,7 +4920,7 @@ namespace ETHotfix {
       miltaryId_ = 0;
       roomNumber_ = 0;
       friendCircleId_ = 0;
-      toyGameId_ = 0;
+      gameEntryId_ = 0;
       time_ = 0;
       for (int i = 0; i < playerInofs_.Count; i++) { MessagePool.Instance.Recycle(playerInofs_[i]); }
       playerInofs_.Clear();
@@ -4943,7 +4943,7 @@ namespace ETHotfix {
             break;
           }
           case 32: {
-            ToyGameId = input.ReadInt64();
+            GameEntryId = input.ReadInt64();
             break;
           }
           case 40: {
@@ -5639,14 +5639,14 @@ namespace ETHotfix {
       }
     }
 
-    private long toyGameId_;
+    private long gameEntryId_;
     /// <summary>
     ///对应的游戏类型Id
     /// </summary>
-    public long ToyGameId {
-      get { return toyGameId_; }
+    public long GameEntryId {
+      get { return gameEntryId_; }
       set {
-        toyGameId_ = value;
+        gameEntryId_ = value;
       }
     }
 
@@ -5666,9 +5666,9 @@ namespace ETHotfix {
         output.WriteRawTag(8);
         output.WriteInt32(DataId);
       }
-      if (ToyGameId != 0L) {
+      if (GameEntryId != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(ToyGameId);
+        output.WriteInt64(GameEntryId);
       }
       miltaryRecordDatas_.WriteTo(output, _repeated_miltaryRecordDatas_codec);
     }
@@ -5678,8 +5678,8 @@ namespace ETHotfix {
       if (DataId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(DataId);
       }
-      if (ToyGameId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ToyGameId);
+      if (GameEntryId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameEntryId);
       }
       size += miltaryRecordDatas_.CalculateSize(_repeated_miltaryRecordDatas_codec);
       return size;
@@ -5687,7 +5687,7 @@ namespace ETHotfix {
 
     public void MergeFrom(pb::CodedInputStream input) {
       dataId_ = 0;
-      toyGameId_ = 0;
+      gameEntryId_ = 0;
       for (int i = 0; i < miltaryRecordDatas_.Count; i++) { MessagePool.Instance.Recycle(miltaryRecordDatas_[i]); }
       miltaryRecordDatas_.Clear();
       uint tag;
@@ -5701,7 +5701,7 @@ namespace ETHotfix {
             break;
           }
           case 16: {
-            ToyGameId = input.ReadInt64();
+            GameEntryId = input.ReadInt64();
             break;
           }
           case 26: {
