@@ -37,9 +37,9 @@ namespace ETHotfix
         public void ReceiveChatInfoEvnet(params object[] objs)
         {
 
-            if (Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame != GameEntryId.CardFiveStar)
+            if (Game.Scene.GetComponent<GameEntryComponent>().CurrentGameId != GameEntryId.CardFiveStar)
             {
-                Log.Error("当前游戏类型 只有卡五星 收到到聊天消息时 却不在卡五星游戏中:"+ Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame);
+                Log.Error("当前游戏类型 只有卡五星 收到到聊天消息时 却不在卡五星游戏中:"+ Game.Scene.GetComponent<GameEntryComponent>().CurrentGameId);
                 return;
             }
             long userId = (long)objs[0];

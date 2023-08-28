@@ -18,7 +18,7 @@ namespace ETHotfix
     /// </summary>
     public class GameEntryComponent: Component
     {
-        public long CurrToyGame = GameEntryId.None;
+        public long CurrentGameId = GameEntryId.None;
 
         // 游戏通道字典, { key: GameEntryId, value: 游戏通道 }
         private readonly Dictionary<long, AGameEntry> _gameEntryDict = new Dictionary<long, AGameEntry>();
@@ -49,9 +49,9 @@ namespace ETHotfix
         {
             if (_gameEntryDict.ContainsKey(gameType))
             {
-                if (CurrToyGame != GameEntryId.None)
+                if (CurrentGameId != GameEntryId.None)
                 {
-                    _gameEntryDict[CurrToyGame].EndAndStartOtherGame();
+                    _gameEntryDict[CurrentGameId].EndAndStartOtherGame();
                 }
                 _gameEntryDict[gameType].StartGame(objs);
             }
@@ -63,13 +63,13 @@ namespace ETHotfix
 
         public void EndGame()
         {
-            if (_gameEntryDict.ContainsKey(CurrToyGame))
+            if (_gameEntryDict.ContainsKey(CurrentGameId))
             {
-                _gameEntryDict[CurrToyGame].EndGame();
+                _gameEntryDict[CurrentGameId].EndGame();
             }
             else
             {
-                Log.Error("系统错误,目前状态游戏不存在:" + CurrToyGame);
+                Log.Error("系统错误,目前状态游戏不存在:" + CurrentGameId);
             }
         }
 

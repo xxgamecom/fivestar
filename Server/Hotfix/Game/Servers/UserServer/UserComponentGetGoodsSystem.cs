@@ -8,7 +8,7 @@ namespace ETModel
 {
     public static class UserComponentGetGoodsSystem
     {
-        public static async Task<User> UserGetGoods(this UserComponent self, long userId, List<GetGoodsOne> goodsOnes,int goodsChangeType, bool isShowHintPanel)
+        public static async Task<User> UserGetGoods(this UserComponent self, long userId, List<GetGoodsOne> goodsOnes, int goodsChangeType, bool isShowHintPanel)
         {
             bool userOnline = true;
             User user = self.GetUser(userId);
@@ -22,8 +22,9 @@ namespace ETModel
                 Log.Error("要增加物品的玩家更本不存在UserId:" + userId);
                 return null;
             }
-            
-            user.UpdataGoods(goodsOnes);//更新物品数量
+
+            // 更新物品数量
+            user.UpdateGoods(goodsOnes);
             self.SaveGoodsDealRecord(user, goodsOnes, goodsChangeType); //存储物品 变化记录 只会存储钻石的
             await self.SaveUserDB(user);
             if (userOnline)
@@ -44,14 +45,15 @@ namespace ETModel
                 }
                 actorUserGetGoods.GetGoodsList.AddRange(goodsOnes.ToArray());
                 actorUserGetGoods.IsShowHintPanel = isShowHintPanel;
-                //向User发送Actor
-                user.SendeSessionClientActor(actorUserGetGoods);
+
+                // 向User发送Actor
+                user.SendSessionClientActor(actorUserGetGoods);
             }
             return user;
         }
 
         //存储物品 变化记录 只会存储钻石的
-        public static async void SaveGoodsDealRecord(this UserComponent self, User user, List<GetGoodsOne> goodsOnes,int changeType)
+        public static async void SaveGoodsDealRecord(this UserComponent self, User user, List<GetGoodsOne> goodsOnes, int changeType)
         {
             for (int i = 0; i < goodsOnes.Count; i++)
             {
@@ -67,7 +69,6 @@ namespace ETModel
                 goodsDealRecord.FinishNowAmount = (int)user.Jewel;
                 await self.dbProxyComponent.Save(goodsDealRecord);
             }
-           
         }
     }
 }

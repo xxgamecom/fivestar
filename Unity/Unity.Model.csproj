@@ -483,9 +483,6 @@
     <Compile Include="Assets\Model\Module\FrameSync\AnimatorComponent.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\CameraComponent.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\MoveComponent.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\Player.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\PlayerComponent.cs" />
-    <Compile Include="Assets\Model\Module\FrameSync\PlayerFactory.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\SessionComponent.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\Unit.cs" />
     <Compile Include="Assets\Model\Module\FrameSync\UnitComponent.cs" />

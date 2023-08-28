@@ -24,7 +24,7 @@ namespace ETHotfix
         public override void EndGame()
         {
             //base.EndGame();
-            pToyGameComponent.StartGame(GameEntryId.Login);
+            GameEntryComponent.StartGame(GameEntryId.Login);
         }
     }
 }

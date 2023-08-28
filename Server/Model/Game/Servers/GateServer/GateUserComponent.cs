@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ETHotfix;
-using ETModel;
 
 namespace ETModel
 {
 
     [ObjectSystem]
-    public class GateUserComponentAwakeSystem : AwakeSystem<GateUserComponent>
+    public class GateUserComponentAwakeSystem: AwakeSystem<GateUserComponent>
     {
         public override void Awake(GateUserComponent self)
         {
             self.Awake();
         }
     }
-    public class GateUserComponent : Component
+
+    public class GateUserComponent: Component
     {
-        public readonly Dictionary<long, User> mUserDic = new Dictionary<long, User>();
+        public static GateUserComponent Ins { private set; get; }
+
+        public readonly Dictionary<long, User> UserDict = new Dictionary<long, User>();
+
         private Session userSession;
         private Session matchSession;
 
@@ -32,6 +31,7 @@ namespace ETModel
                 {
                     userSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.User);
                 }
+                
                 return userSession;
             }
         }
@@ -44,10 +44,11 @@ namespace ETModel
                 {
                     matchSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.Match);
                 }
+                
                 return matchSession;
             }
         }
-        public static GateUserComponent Ins { private set; get; }
+
         public void Awake()
         {
             Ins = this;

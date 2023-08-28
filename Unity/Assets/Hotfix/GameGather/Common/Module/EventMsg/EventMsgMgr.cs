@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ETHotfix
 {
@@ -9,8 +8,7 @@ namespace ETHotfix
 
         private static Dictionary<string, EventFunc> _messageHanlde = new Dictionary<string, EventFunc>();
 
-
-        //注册消息
+        // 注册消息
         public static void RegisterEvent(string eventID, EventFunc func)
         {
             if (_messageHanlde.ContainsKey(eventID))
@@ -43,12 +41,12 @@ namespace ETHotfix
         //发送消息
         public static bool SendEvent(string eventID, params object[] objs)
         {
-            EventFunc func;
-            if (_messageHanlde.TryGetValue(eventID, out func))
+            if (_messageHanlde.TryGetValue(eventID, out var func))
             {
                 func(objs);
                 return true;
             }
+
             return false;
         }
     }

@@ -6,52 +6,53 @@ using ETModel;
 
 namespace ETHotfix
 {
-  public static class UserComponentLoginSystem
+    public static class UserComponentLoginSystem
     {
-        //编辑状态下登陆
-        public static async Task<AccountInfo>  EditorLogin(this UserComponent userComponent, string account)
+        // 编辑状态下登陆
+        public static async Task<AccountInfo> EditorLogin(this UserComponent self, string account)
         {
-            List<AccountInfo> accountInfos =await userComponent.dbProxyComponent.Query<AccountInfo>(AccountInfo => AccountInfo.Account == account);
+            List<AccountInfo> accountInfos = await self.dbProxyComponent.Query<AccountInfo>(AccountInfo => AccountInfo.Account == account);
             if (accountInfos.Count == 0)
             {
-                AccountInfo accountInfo =await UserFactory.EditRegisterCreatUser(account);
+                AccountInfo accountInfo = await UserFactory.EditRegisterCreatUser(account);
                 accountInfos.Add(accountInfo);
             }
             return accountInfos[0];
         }
 
-        //微信登陆
-        public static async Task<AccountInfo> WeChatLogin(this UserComponent userComponent, string accessTokenAndOpenid)
+        // 微信登陆
+        public static async Task<AccountInfo> WeChatLogin(this UserComponent self, string accessTokenAndOpenid)
         {
-            WeChatJsonData  weChatJsonData=WeChatJsonAnalysis.HttpGetUserInfoJson(accessTokenAndOpenid);
+            var weChatJsonData = WeChatJsonAnalysis.HttpGetUserInfoJson(accessTokenAndOpenid);
             if (weChatJsonData == null)
             {
                 return null;
             }
-            List<AccountInfo> accountInfos = await userComponent.dbProxyComponent.Query<AccountInfo>(AccountInfo => AccountInfo.Account == weChatJsonData.unionid);
+
+            var accountInfos = await self.dbProxyComponent.Query<AccountInfo>(AccountInfo => AccountInfo.Account == weChatJsonData.unionid);
             if (accountInfos.Count == 0)
             {
-                AccountInfo accountInfo = await UserFactory.WeChatRegisterCreatUser(weChatJsonData);
+                var accountInfo = await UserFactory.WeChatRegisterCreatUser(weChatJsonData);
                 accountInfos.Add(accountInfo);
             }
             accountInfos[0].Password = TimeTool.GetCurrenTimeStamp().ToString();
-            await userComponent.dbProxyComponent.Save(accountInfos[0]);
+            await self.dbProxyComponent.Save(accountInfos[0]);
             return accountInfos[0];
         }
 
-        //凭证登陆 就是 userId'|'密码
-        public static async Task<AccountInfo> VoucherLogin(this UserComponent userComponent, string userIdAndPassword)
+        // 凭证登陆 就是 userId'|'密码
+        public static async Task<AccountInfo> VoucherLogin(this UserComponent self, string userIdAndPassword)
         {
             string[] userIdPassword = userIdAndPassword.Split('|');
             if (userIdPassword.Length != 2)
             {
                 return null;
             }
+
             try
             {
                 long queryUserId = long.Parse(userIdPassword[0]);
-                List<AccountInfo> accountInfos = await userComponent.dbProxyComponent.Query<AccountInfo>(AccountInfo =>
-                    AccountInfo.UserId== queryUserId && AccountInfo.Password == userIdPassword[1]);
+                var accountInfos = await self.dbProxyComponent.Query<AccountInfo>(AccountInfo => AccountInfo.UserId == queryUserId && AccountInfo.Password == userIdPassword[1]);
                 if (accountInfos.Count > 0)
                 {
                     return accountInfos[0];
@@ -62,6 +63,7 @@ namespace ETHotfix
                 Console.WriteLine(e);
                 throw;
             }
+            
             return null;
         }
     }

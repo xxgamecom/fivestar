@@ -7,31 +7,31 @@
     /// </summary>
     public abstract class AGameEntry
     {
-        public long pToyGameType { private set; get; }
+        public long GameId { private set; get; }
 
-        private GameEntryComponent mToyGameComponent;
+        private GameEntryComponent _gameEntryComponent;
 
-        protected GameEntryComponent pToyGameComponent
+        protected GameEntryComponent GameEntryComponent
         {
             get
             {
-                if (mToyGameComponent == null)
+                if (_gameEntryComponent == null)
                 {
-                    mToyGameComponent = Game.Scene.GetComponent<GameEntryComponent>();
+                    _gameEntryComponent = Game.Scene.GetComponent<GameEntryComponent>();
                 }
 
-                return mToyGameComponent;
+                return _gameEntryComponent;
             }
         }
 
-        public virtual void Awake(long gameType)
+        public virtual void Awake(long gameEntryId)
         {
-            pToyGameType = gameType;
+            GameId = gameEntryId;
         }
 
         public virtual void StartGame(params object[] objs)
         {
-            pToyGameComponent.CurrToyGame = pToyGameType;
+            GameEntryComponent.CurrentGameId = GameId;
         }
 
         // 一定调  不管调用进入其他游戏 还是调用结算本游戏 先调
@@ -42,7 +42,7 @@
         // 不一定调   玩家调用直接开启其他游戏就不会调 后调
         public virtual async void EndGame()
         {
-            pToyGameComponent.StartGame(GameEntryId.Lobby);
+            GameEntryComponent.StartGame(GameEntryId.Lobby);
         }
 
     }

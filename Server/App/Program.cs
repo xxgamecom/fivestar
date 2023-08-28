@@ -73,7 +73,6 @@ namespace App
                     }
                     case AppType.Gate:
                     {
-                        Game.Scene.AddComponent<PlayerComponent>();
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address);
                         Game.Scene.AddComponent<GateSessionKeyComponent>();
                         Game.Scene.AddComponent<GateUserComponent>();     // 网关管理用户的组件
@@ -146,8 +145,6 @@ namespace App
                     }
                     case AppType.AllServer:
                     {
-                        Game.Scene.AddComponent<PlayerComponent>();
-                        
                         Game.Scene.AddComponent<LocationComponent>(); // 本地实体组件 
 
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address); // 外网地址组件

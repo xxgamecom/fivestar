@@ -7,7 +7,7 @@ namespace ETHotfix
     {
         protected override void Run(ETModel.Session session, Actor_BeingInGame message)
         {
-            long currGameId = Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame;
+            long currGameId = Game.Scene.GetComponent<GameEntryComponent>().CurrentGameId;
             if (message.IsGameBeing)
             {
                 if (currGameId == GameEntryId.Lobby || currGameId == GameEntryId.Login) //在游戏中 当前场景如果在大厅或者登陆界面 就给个提示

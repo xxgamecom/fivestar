@@ -45,7 +45,7 @@ namespace ETHotfix
             }
             if (fiveStarPlayer.User != null)
             {
-                fiveStarPlayer.User.SendeSessionClientActor(iActorMessage);
+                fiveStarPlayer.User.SendSessionClientActor(iActorMessage);
             }
         }
 

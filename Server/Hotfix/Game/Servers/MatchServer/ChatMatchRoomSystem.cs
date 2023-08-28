@@ -17,7 +17,7 @@ namespace ETHotfix
             actorUserChatInfo.ChatInfo = chatInfo;
             for (int i = 0; i < matchRoom.PlayerInfoDic.Count; i++)
             {
-                matchRoom.PlayerInfoDic[i].User.SendeSessionClientActor(actorUserChatInfo);
+                matchRoom.PlayerInfoDic[i].User.SendSessionClientActor(actorUserChatInfo);
             }
 
             return true;

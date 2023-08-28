@@ -47,7 +47,7 @@ namespace ETHotfix
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel($"豆子不足{mData.BesansLowest}无法进入");
                 return;
             }
-            switch (Game.Scene.GetComponent<GameEntryComponent>().CurrToyGame)
+            switch (Game.Scene.GetComponent<GameEntryComponent>().CurrentGameId)
             {
                 case GameEntryId.JoyLandlords:
                     Game.Scene.AddComponent<JoyLdsGameRoom,long>(mData.MatchRoomId); 

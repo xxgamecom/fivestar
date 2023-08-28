@@ -8,7 +8,7 @@ namespace ETHotfix
         // 获取当前网关连接User中的信息
         public static User GetUser(this GateUserComponent self, long userId)
         {
-            if (!self.mUserDic.TryGetValue(userId, out var user))
+            if (!self.UserDict.TryGetValue(userId, out var user))
             {
                 //Log.Error($"玩家{userId}不存在或不在游戏中");
             }
@@ -34,7 +34,7 @@ namespace ETHotfix
                 SessionActorId = sessionActorId
             });
             // 记录玩家信息
-            self.mUserDic[userId] = user;
+            self.UserDict[userId] = user;
 
             return user;
         }
@@ -43,18 +43,18 @@ namespace ETHotfix
         public static void UserOffline(this GateUserComponent self, long userId)
         {
             long playerSessionActorId = 0;
-            if (self.mUserDic.ContainsKey(userId))
+            if (self.UserDict.ContainsKey(userId))
             {
-                playerSessionActorId = self.mUserDic[userId].GetUserClientSession().GetComponent<SessionUserComponent>().GamerSessionActorId;
+                playerSessionActorId = self.UserDict[userId].GetUserClientSession().GetComponent<SessionUserComponent>().GamerSessionActorId;
             }
             if (playerSessionActorId != 0)
             {
                 // 告诉游戏服 用户下线
                 ActorHelper.SendActor(playerSessionActorId, new Actor_UserOffLine());
             }
-            if (self.mUserDic.ContainsKey(userId))
+            if (self.UserDict.ContainsKey(userId))
             {
-                self.mUserDic.Remove(userId);
+                self.UserDict.Remove(userId);
             }
             // 给其他服务器广播玩家下线消息
             self.BroadcastOnAndOffLineMessage(new G2S_UserOffline()

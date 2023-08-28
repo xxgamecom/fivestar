@@ -276,7 +276,7 @@ namespace ETHotfix
         {
             foreach (var player in matchRoom.PlayerInfoDic)
             {
-                player.Value.User.SendeSessionClientActor(iActorMessage);
+                player.Value.User.SendSessionClientActor(iActorMessage);
             }
         }
     }

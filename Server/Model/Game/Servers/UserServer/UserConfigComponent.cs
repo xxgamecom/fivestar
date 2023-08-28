@@ -6,13 +6,14 @@ using System.Text;
 namespace ETModel
 {
     [ObjectSystem]
-    public class GameConfiguredComponentAwakeSystem : AwakeSystem<UserConfigComponent>
+    public class GameConfiguredComponentAwakeSystem: AwakeSystem<UserConfigComponent>
     {
         public override void Awake(UserConfigComponent self)
         {
             self.Awake();
         }
     }
+
     public class UserConfigComponent: Component
     {
         public UserConfig InitUserBeans { private set; get; }
@@ -27,7 +28,7 @@ namespace ETModel
             Ins = this;
             dbProxyComponent = Game.Scene.GetComponent<DBProxyComponent>();
 
-            List<User> userIdMax =await dbProxyComponent.SortQuery<User>(user=>true, user=> user.UserId == -1, 1);
+            List<User> userIdMax = await dbProxyComponent.SortQuery<User>(user => true, user => user.UserId == -1, 1);
             if (userIdMax.Count > 0)
             {
                 MaximumUserId = (userIdMax[0] as User).UserId;
@@ -36,8 +37,8 @@ namespace ETModel
             {
                 MaximumUserId = 1000;
             }
-           
-            List<UserConfig> userConfigs = await dbProxyComponent.Query<UserConfig>(userConfig =>true);
+
+            List<UserConfig> userConfigs = await dbProxyComponent.Query<UserConfig>(userConfig => true);
             if (userConfigs.Count > 0)
             {
                 SetConfigured(userConfigs);
@@ -46,7 +47,6 @@ namespace ETModel
             {
                 SaveConfigured();
             }
-
         }
 
         public void SetConfigured(List<UserConfig> userConfigs)
@@ -69,7 +69,7 @@ namespace ETModel
         }
         public async void SaveConfigured()
         {
-            InitUserBeans =new UserConfig();
+            InitUserBeans = new UserConfig();
             InitUserBeans.Id = 1;
             InitUserBeans.ConfigName = "InitUserBeans";
             InitUserBeans.Value = 3000;
