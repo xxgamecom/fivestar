@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ETHotfix;
-
-namespace ETModel
+﻿namespace ETModel
 {
-    public class UserClientSessionComponent : Component
+    /// <summary>
+    /// 用户所对应的Session
+    /// </summary>
+    public class UserClientSessionComponent: Component
     {
-        public Session session { get; set; }//用户所对应的客户端所对应的session
-
+        // 用户所对应的客户端所对应的session
+        public Session Session { get; set; }
 
     }
 

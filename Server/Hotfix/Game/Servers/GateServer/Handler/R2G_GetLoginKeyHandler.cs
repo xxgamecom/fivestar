@@ -12,7 +12,7 @@ namespace ETHotfix
             try
             {
                 long accessToken = RandomHelper.RandInt64();
-                Game.Scene.GetComponent<GateSessionKeyComponent>().Add(accessToken, message.UserId);
+                Game.Scene.GetComponent<GateAccessTokenManager>().Add(accessToken, message.UserId);
                 response.Key = accessToken;
                 reply(response);
             }

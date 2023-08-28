@@ -20,8 +20,8 @@ namespace ETHotfix
                 //g2UUploadingLocationIp.Ip = session.RemoteAddress.Address.ToString();
                 //var userSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.User);
                 //response = (S2C_UploadingLocationIp)await userSession.Call(g2UUploadingLocationIp);
-                session.GetComponent<SessionUserComponent>().user.Ip = session.RemoteAddress.Address.ToString(); //IP和地址 信息只用网关记录 就行 
-                session.GetComponent<SessionUserComponent>().user.Location = message.Location;
+                session.GetComponent<SessionUserComponent>().User.Ip = session.RemoteAddress.Address.ToString(); //IP和地址 信息只用网关记录 就行 
+                session.GetComponent<SessionUserComponent>().User.Location = message.Location;
                 response.Ip = session.RemoteAddress.Address.ToString();
                 reply(response);
             }

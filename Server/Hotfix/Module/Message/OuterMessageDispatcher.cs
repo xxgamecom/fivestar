@@ -28,8 +28,7 @@ namespace ETHotfix
 			        }
                 }
 			    //如果收到 一秒收到的消息 大于规定的消息 就认定是DOSS攻击 直接销毁
-			    if (++sessionHeartbeatComponent.SecondTotalMessageNum >=
-			        SessionHeartbeatComponent.DestroySeesiontSecondTotalNum)
+			    if (++sessionHeartbeatComponent.SecondTotalMessageNum >= SessionHeartbeatComponent.DestroySessionSecondTotalNum)
 			    {
                     //断开连接
 			        sessionHeartbeatComponent.DisposeSession();
@@ -55,7 +54,7 @@ namespace ETHotfix
                             if (iUserRequest is IUserActorRequest userActorRequest)
                             {
                                 userActorRequest.SessionActorId = session.Id;
-                                userActorRequest.User = sessionUserComponent.user;
+                                userActorRequest.User = sessionUserComponent.User;
                             }
                             if (iUserRequest is IAdministratorRequest administratorRequest)
                             {

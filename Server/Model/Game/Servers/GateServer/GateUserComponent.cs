@@ -4,15 +4,9 @@ using ETHotfix;
 namespace ETModel
 {
 
-    [ObjectSystem]
-    public class GateUserComponentAwakeSystem: AwakeSystem<GateUserComponent>
-    {
-        public override void Awake(GateUserComponent self)
-        {
-            self.Awake();
-        }
-    }
-
+    /// <summary>
+    /// 网关用户
+    /// </summary>
     public class GateUserComponent: Component
     {
         public static GateUserComponent Ins { private set; get; }
@@ -31,7 +25,7 @@ namespace ETModel
                 {
                     userSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.User);
                 }
-                
+
                 return userSession;
             }
         }
@@ -44,7 +38,7 @@ namespace ETModel
                 {
                     matchSession = Game.Scene.GetComponent<NetInnerSessionComponent>().Get(AppType.Match);
                 }
-                
+
                 return matchSession;
             }
         }

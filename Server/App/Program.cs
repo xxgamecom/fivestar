@@ -74,9 +74,9 @@ namespace App
                     case AppType.Gate:
                     {
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address);
-                        Game.Scene.AddComponent<GateSessionKeyComponent>();
-                        Game.Scene.AddComponent<GateUserComponent>();     // 网关管理用户的组件
-                        Game.Scene.AddComponent<HeartbeatMgrComponent>(); // 与客户端有连接都要加, 心跳管理组件
+                        Game.Scene.AddComponent<GateAccessTokenManager>(); // 访问token管理组件
+                        Game.Scene.AddComponent<GateUserComponent>();      // 网关用户管理组件
+                        Game.Scene.AddComponent<HeartbeatMgrComponent>();  // 与客户端有连接都要加, 心跳管理组件
                         break;
                     }
                     case AppType.Location:
@@ -150,7 +150,7 @@ namespace App
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address); // 外网地址组件
                         Game.Scene.AddComponent<AppManagerComponent>();                          // 服务器管理组件
                         Game.Scene.AddComponent<RealmGateAddressComponent>();                    // 验证服组件
-                        Game.Scene.AddComponent<GateSessionKeyComponent>();                      // 网关秘钥组件
+                        Game.Scene.AddComponent<GateAccessTokenManager>();                       // 网关秘钥组件
 
                         // DB服
                         Game.Scene.AddComponent<DBComponent>();

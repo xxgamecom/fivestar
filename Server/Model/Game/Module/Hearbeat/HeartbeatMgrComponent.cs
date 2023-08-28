@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ETModel
 {
     [ObjectSystem]
-    public class HeartbeatMgrComponentAwakeSystem : AwakeSystem<HeartbeatMgrComponent>
+    public class HeartbeatMgrComponentAwakeSystem: AwakeSystem<HeartbeatMgrComponent>
     {
-        public static List<SessionHeartbeatComponent> _DestroyHeartbeatComponents=new List<SessionHeartbeatComponent>();
+        public static List<SessionHeartbeatComponent> _DestroyHeartbeatComponents = new List<SessionHeartbeatComponent>();
+
         public override async void Awake(HeartbeatMgrComponent self)
         {
             HeartbeatMgrComponent.Ins = self;
+
             while (true)
             {
                 await Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000);
@@ -21,19 +20,19 @@ namespace ETModel
                     self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].SecondTotalMessageNum = 0;
                     self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].UpReceiveMessageDistance++;
 
-                    if (self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].UpReceiveMessageDistance>=
-                        SessionHeartbeatComponent.DestroySeesiontTime)
+                    if (self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].UpReceiveMessageDistance >= SessionHeartbeatComponent.DestroySessionTime)
                     {
-                        self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].DisposeSession();//如果上次收到时间 过长 就直接销毁DisposeSession
+                        self.SessionHeartbeatDic[self.SessionHeartbeatIds[i]].DisposeSession(); //如果上次收到时间 过长 就直接销毁DisposeSession
                     }
                 }
             }
         }
     }
+
     public class HeartbeatMgrComponent: Component
     {
-        public List<long> SessionHeartbeatIds=new List<long>();
-        public Dictionary<long, SessionHeartbeatComponent> SessionHeartbeatDic=new Dictionary<long, SessionHeartbeatComponent>();
+        public List<long> SessionHeartbeatIds = new List<long>();
+        public Dictionary<long, SessionHeartbeatComponent> SessionHeartbeatDic = new Dictionary<long, SessionHeartbeatComponent>();
         public static HeartbeatMgrComponent Ins { get; set; }
 
         /// <summary>

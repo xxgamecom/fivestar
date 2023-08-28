@@ -11,7 +11,7 @@ namespace ETHotfix
             var response = new G2C_GateLogin();
             try
             {
-                long userId = Game.Scene.GetComponent<GateSessionKeyComponent>().Get(message.Key);
+                long userId = Game.Scene.GetComponent<GateAccessTokenManager>().Get(message.Key);
                 // 添加收取Actor消息组件 并且本地化一下 就是所有服务器都能向这个对象发 并添加一个消息拦截器
                 await session.AddComponent<MailBoxComponent, string>(ActorInterceptType.GateSession).AddLocation();
                 // 通知GateUserComponent组件和用户服玩家上线 并获取User实体
@@ -23,10 +23,10 @@ namespace ETHotfix
                     return;
                 }
 
-                // 记录客户端session在User中
-                user.AddComponent<UserClientSessionComponent>().session = session;
-                // 给Session组件添加下线监听组件和添加User实体
-                session.AddComponent<SessionUserComponent>().user = user;
+                // user <-> session 互相关联
+                user.AddComponent<UserClientSessionComponent>().Session = session; // 记录客户端session在User中
+                session.AddComponent<SessionUserComponent>().User = user;          // 给Session组件添加下线监听组件和添加User实体
+
                 // 返回客户端User信息和 当前服务器时间
                 response.User = user;
                 response.ServerTime = TimeTool.GetCurrenTimeStamp();

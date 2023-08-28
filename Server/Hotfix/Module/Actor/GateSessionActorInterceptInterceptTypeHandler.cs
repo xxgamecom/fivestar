@@ -26,11 +26,11 @@ namespace ETHotfix
 			    {
                     case Actor_UserGetGoods userGetGoods:
                         SendClient(clientSession, iActorMessage);
-                        clientSession.GetComponent<SessionUserComponent>().user.RefreshGoods(userGetGoods.GetGoodsList);
+                        clientSession.GetComponent<SessionUserComponent>().User.RefreshGoods(userGetGoods.GetGoodsList);
                         break;
                     case Actor_CompelAccount compelAccount:
                         SendClient(clientSession, iActorMessage);
-                        clientSession.GetComponent<SessionUserComponent>().user = null;
+                        clientSession.GetComponent<SessionUserComponent>().User = null;
                         break;
 			        case Actor_UserStartGame startGame:
 			            clientSession.GetComponent<SessionUserComponent>().GamerSessionActorId = startGame.SessionActorId;
