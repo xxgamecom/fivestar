@@ -6,16 +6,19 @@ using UnityEngine.UI;
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class MathRoomItemAwakeSystem : AwakeSystem<MathRoomItem, GameObject, MatchRoomConfig>
+    public class MathRoomItemAwakeSystem: AwakeSystem<MathRoomItem, GameObject, MatchRoomConfig>
     {
         public override void Awake(MathRoomItem self, GameObject go, MatchRoomConfig data)
         {
             self.Awake(go, data, UIType.MatchingRoomPanel);
         }
     }
-    public class MathRoomItem : BaseItem<MatchRoomConfig>
+
+    public class MathRoomItem: BaseItem<MatchRoomConfig>
     {
-        #region 脚本工具生成的代码
+
+#region 脚本工具生成的代码
+
         private Text mBottomScoreText;
         private Text mLimitingText;
         private Text mBottomScoreDescText;
@@ -31,7 +34,9 @@ namespace ETHotfix
             mItemButton = gameObject.GetComponent<Button>();
             InitPanel();
         }
-        #endregion
+
+#endregion
+
         public void InitPanel()
         {
             mItemButton.Add(EnterRoom);
@@ -48,14 +53,15 @@ namespace ETHotfix
                 mBgImage.sprite = GetResoure<Sprite>("matchingpanel_6");
             }
             mBgImage.SetNativeSize();
-            mBottomScoreText.text =mData.BaseScore+"分";
+            mBottomScoreText.text = mData.BaseScore + "分";
             mLimitingText.text = "限制:" + mData.BesansLowest;
-            mBottomScoreDescText.text= "底分:" + mData.BaseScore;
+            mBottomScoreDescText.text = "底分:" + mData.BaseScore;
         }
 
         public void EnterRoom()
         {
-            CardFiveStarAisle.MatchingEnterRoom(mData.MatchRoomId,mData.RoomConfigs);
+            // 进入对应MatchRoomId的房间
+            CardFiveStarEntry.MatchingEnterRoom(mData.MatchRoomId, mData.RoomConfigs);
         }
     }
 }

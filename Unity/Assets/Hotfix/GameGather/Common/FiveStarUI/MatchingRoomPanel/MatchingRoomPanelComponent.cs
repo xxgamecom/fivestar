@@ -9,9 +9,11 @@ using UnityEngine.UI;
 namespace ETHotfix
 {
     [UIComponent(UIType.MatchingRoomPanel)]
-    public class MatchingRoomPanelComponent : NormalUIView
+    public class MatchingRoomPanelComponent: NormalUIView
     {
-        #region 脚本工具生成的代码
+
+#region 脚本工具生成的代码
+
         private GameObject mRoomItemGo;
         private Button mCloseBtn;
         private Button mFastStartBtn;
@@ -28,8 +30,10 @@ namespace ETHotfix
             mBeasnsNumText = rc.Get<GameObject>("BeasnsNumText").GetComponent<Text>();
             InitPanel();
         }
-        #endregion
-        public  void InitPanel()
+
+#endregion
+
+        public void InitPanel()
         {
             mCloseBtn.Add(CloseBtnEvent);
             mBeasnsAddBtn.Add(BeasnsAddBtnEvent);
@@ -37,14 +41,13 @@ namespace ETHotfix
             InitRoomList();
             SetBeasnsNum();
             EventMsgMgr.RegisterEvent(CommEventID.SelfUserInfoRefresh, SetBeasnsNum);
-
         }
 
         public void CloseBtnEvent()
         {
             UIComponent.GetUiView<FiveStarLobbyPanelComponent>().Show();
         }
-        public void SetBeasnsNum(params  object[] objs)
+        public void SetBeasnsNum(params object[] objs)
         {
             mBeasnsNumText.text = UserComponent.Ins.pSelfUser.Beans.ToString();
         }
@@ -54,9 +57,9 @@ namespace ETHotfix
         }
         public void FastStartBtnEvent()
         {
-            for (int i = _RoomLists.Count-1; i >= 0; i--)
+            for (int i = _RoomLists.Count - 1; i >= 0; i--)
             {
-                if (_RoomLists[i].mData.BesansLowest< UserComponent.Ins.pSelfUser.Beans)
+                if (_RoomLists[i].mData.BesansLowest < UserComponent.Ins.pSelfUser.Beans)
                 {
                     _RoomLists[i].EnterRoom();
                     return;
@@ -66,25 +69,34 @@ namespace ETHotfix
         }
 
         public List<MathRoomItem> _RoomLists;
+
+        /// <summary>
+        /// 使用协程初始化房间列表
+        /// </summary>
         private async void InitRoomList()
         {
-            if (_MatchRoomConfigs==null)
+            // 匹配房间配置没有，请求服务器
+            if (_MatchRoomConfigs == null)
             {
                 await RequestMatchRoomConfigs();
             }
+
             Transform roomItemParent = mRoomItemGo.transform.parent;
-            _RoomLists=roomItemParent.CreatorChildAndAddItem<MathRoomItem, MatchRoomConfig>(
-                _MatchRoomConfigs);
+            _RoomLists = roomItemParent.CreatorChildAndAddItem<MathRoomItem, MatchRoomConfig>(_MatchRoomConfigs);
         }
 
         private bool IsHaveReliefPayment = true;
-        //开始匹配
+
+        /// <summary>
+        /// 开始匹配
+        /// </summary>
+        /// <param name="roomId"></param>
         public async ETTask<bool> StartMatch(int roomId)
         {
-            MatchRoomConfig matchRoomConfig=await GetMatchRoomConfig(roomId);
-            if (IsHaveReliefPayment&&UserComponent.Ins.pSelfUser.Beans < 1000)
+            MatchRoomConfig matchRoomConfig = await GetMatchRoomConfig(roomId);
+            if (IsHaveReliefPayment && UserComponent.Ins.pSelfUser.Beans < 1000)
             {
-                L2C_GetReliefPayment  l2CGetReliefPayment= (L2C_GetReliefPayment)await SessionComponent.Instance.Call(new C2L_GetReliefPayment());
+                L2C_GetReliefPayment l2CGetReliefPayment = (L2C_GetReliefPayment)await SessionComponent.Instance.Call(new C2L_GetReliefPayment());
                 if (!string.IsNullOrEmpty(l2CGetReliefPayment.Message))
                 {
                     IsHaveReliefPayment = false;
@@ -92,7 +104,7 @@ namespace ETHotfix
                 }
                 else
                 {
-                    UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("成功领取救济金 每日三次",null, PopOptionType.Single);
+                    UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("成功领取救济金 每日三次", null, PopOptionType.Single);
                 }
             }
             if (matchRoomConfig.BesansLowest > UserComponent.Ins.pSelfUser.Beans)
@@ -100,7 +112,10 @@ namespace ETHotfix
                 UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("豆子数低于房间最低限制 是否购买", ShowShop);
                 return false;
             }
-            M2C_StartMatch m2CStartMatch = (M2C_StartMatch)await SessionComponent.Instance.Call(new C2M_StartMatch() { MatchRoomId = roomId });
+            M2C_StartMatch m2CStartMatch = (M2C_StartMatch)await SessionComponent.Instance.Call(new C2M_StartMatch()
+            {
+                MatchRoomId = roomId
+            });
             if (!string.IsNullOrEmpty(m2CStartMatch.Message))
             {
                 UIComponent.GetUiView<NormalHintPanelComponent>().ShowHintPanel(m2CStartMatch.Message);
@@ -116,7 +131,7 @@ namespace ETHotfix
         {
             if (bol)
             {
-                UIComponent.GetUiView<ShopPanelComponent>().ShowGoodsList(GoodsId.Besans,UIType.CardFiveStarRoomPanel);
+                UIComponent.GetUiView<ShopPanelComponent>().ShowGoodsList(GoodsId.Besans, UIType.CardFiveStarRoomPanel);
             }
         }
 
@@ -124,7 +139,10 @@ namespace ETHotfix
         private RepeatedField<MatchRoomConfig> _MatchRoomConfigs;
         private async Task RequestMatchRoomConfigs()
         {
-            L2C_GetMatchRoomConfigs l2CGetMatchRoomConfigs = (L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Call(new C2L_GetMatchRoomConfigs() { ToyGameId = ToyGameId.CardFiveStar });
+            L2C_GetMatchRoomConfigs l2CGetMatchRoomConfigs = (L2C_GetMatchRoomConfigs)await SessionComponent.Instance.Call(new C2L_GetMatchRoomConfigs()
+            {
+                ToyGameId = ToyGameId.CardFiveStar
+            });
             _MatchRoomConfigs = l2CGetMatchRoomConfigs.MatchRoomConfigs;
         }
 
@@ -145,8 +163,6 @@ namespace ETHotfix
             Log.Error("获取匹配房间 配置信息错误");
             return null;
         }
-
-
 
     }
 }

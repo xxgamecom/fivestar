@@ -12,16 +12,13 @@ namespace ETHotfix
             await ETModel.Game.Scene.GetComponent<TimerComponent>().WaitAsync(500);
             return null;
         }
+        
         public static void Start()
         {
-
-
             try
             {
-
                 // 注册热更层回调
                 ETModel.Game.Hotfix.OnApplicationQuit = () => { OnApplicationQuit(); };
-
 
                 Game.Scene.AddComponent<UIComponent>();
                 Game.Scene.AddComponent<OpcodeTypeComponent>();
@@ -37,8 +34,6 @@ namespace ETHotfix
                 Log.Error(e);
             }
         }
-
-
 
         public static void OnApplicationQuit()
         {

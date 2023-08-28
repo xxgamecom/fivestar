@@ -159,7 +159,6 @@
     <Compile Include="Assets\Model\Component\Config\StartConfig.cs" />
     <Compile Include="Assets\Model\Component\GlobalConfigComponent.cs" />
     <Compile Include="Assets\Model\Component\SceneChangeComponent.cs" />
-    <Compile Include="Assets\Model\Component\SeeiondiushiComept.cs" />
     <Compile Include="Assets\Model\Component\TimerComponent.cs" />
     <Compile Include="Assets\Model\Entity\Game.cs" />
     <Compile Include="Assets\Model\Entity\Hotfix.cs" />
@@ -167,9 +166,9 @@
     <Compile Include="Assets\Model\Entity\UnityWebRequestAsync.cs" />
     <Compile Include="Assets\Model\GameGather\Administrator\AdministratorHotfix.cs" />
     <Compile Include="Assets\Model\GameGather\Administrator\AdministratorInit.cs" />
+    <Compile Include="Assets\Model\GameGather\GameEntryAttribute.cs" />
     <Compile Include="Assets\Model\GameGather\Helper\ButtonAnimationEffect.cs" />
     <Compile Include="Assets\Model\GameGather\Helper\PointerEvent.cs" />
-    <Compile Include="Assets\Model\GameGather\Moudule\ToyGame\ToyGameAttribute.cs" />
     <Compile Include="Assets\Model\GameGather\Tools\CloneObject.cs" />
     <Compile Include="Assets\Model\GameGather\Tools\DelayActionTool.cs" />
     <Compile Include="Assets\Model\GameGather\Tools\LoadResoure.cs" />

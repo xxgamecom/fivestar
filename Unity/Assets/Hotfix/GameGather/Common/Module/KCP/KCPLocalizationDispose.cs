@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ETModel;
 
 namespace ETHotfix
 {
     [ObjectSystem]
-    public class KCPDisconnectDisposeAwakeSystem : AwakeSystem<KCPLocalizationDispose>
+    public class KCPDisconnectDisposeAwakeSystem: AwakeSystem<KCPLocalizationDispose>
     {
         public override void Awake(KCPLocalizationDispose self)
         {
             self.Awake();
         }
     }
-    public class KCPLocalizationDispose : Component
+
+    public class KCPLocalizationDispose: Component
     {
         public void Awake()
         {
@@ -40,7 +36,7 @@ namespace ETHotfix
             UIComponent.GetUiView<LoadingIconPanelComponent>().Show();
         }
         //连接失败
-        private  void ConnectFailureEvent()
+        private void ConnectFailureEvent()
         {
             UIComponent.GetUiView<LoadingIconPanelComponent>().Hide();
             UIComponent.GetUiView<PopUpHintPanelComponent>().ShowOptionWindow("网络连接失败是否重试", ConnectFailureConift);
@@ -57,20 +53,29 @@ namespace ETHotfix
                 Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Login);
             }
         }
-        //连接成功
+
+        // 连接成功
         private void ConnectSuccessEvent(G2C_GateLogin g2CGateLogin)
         {
+            // 隐藏了负责显示加载的UI面板LoadingIconPanel
             UIComponent.GetUiView<LoadingIconPanelComponent>().Hide();
+
+            // 获取用户User信息并进行设置
             User user = g2CGateLogin.User;
-            Game.Scene.GetComponent<UserComponent>().SetSelfUser(user); ;
+            Game.Scene.GetComponent<UserComponent>().SetSelfUser(user);
+
+            // 进入大厅通道
             Game.Scene.GetComponent<ToyGameComponent>().StartGame(ToyGameId.Lobby);
-            SessionComponent.Instance.Session.AddComponent<HeartbeatComponent>();//添加心跳组件 
+
+            // 添加心跳组件
+            SessionComponent.Instance.Session.AddComponent<HeartbeatComponent>();
         }
-        //重连成功
+
+        // 重连成功
         private void AgainConnectSuccessEvent(G2C_GateLogin g2CGateLogin)
         {
             UIComponent.GetUiView<LoadingIconPanelComponent>().Hide();
-            SessionComponent.Instance.Session.AddComponent<HeartbeatComponent>();//添加心跳组件 
+            SessionComponent.Instance.Session.AddComponent<HeartbeatComponent>(); //添加心跳组件 
         }
         //连接断开
         private void ConnectLostEvent()

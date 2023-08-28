@@ -2,18 +2,21 @@
 
 namespace ETHotfix
 {
-    [ToyGame(ToyGameId.Lobby)]
-    public class LobbyAisle : ToyGameAisleBase
+    /// <summary>
+    /// 大厅通道
+    /// </summary>
+    [GameEntry(ToyGameId.Lobby)]
+    public class LobbyEntry: AGameEntry
     {
-        public override void Awake(long gameType)
-        {
-            base.Awake(gameType);
 
-        }
-
+        /// <summary>
+        /// 在StartGame(ToyGameId.Lobby)时执行
+        /// </summary>
+        /// <param name="objs"></param>
         public override void StartGame(params object[] objs)
         {
             base.StartGame();
+            
             Log.Debug("进入大厅");
             UIComponent.GetUiView<FiveStarLobbyPanelComponent>().Show();
         }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace ETModel
 {
-   public static class LoadResoure
-   {
-       private static Dictionary<string, Sprite> _DownFinshDic = new Dictionary<string, Sprite>();
-        public static async ETTask<Sprite> LoadSprite(string url,Action<Sprite> loadCall=null)
+    public static class LoadResoure
+    {
+        private static Dictionary<string, Sprite> _DownFinshDic = new Dictionary<string, Sprite>();
+
+        public static async ETTask<Sprite> LoadSprite(string url, Action<Sprite> loadCall = null)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -18,10 +19,10 @@ namespace ETModel
             {
                 return _DownFinshDic[url];
             }
-            WWW www=new WWW(url);
+            WWW www = new WWW(url);
             while (!www.isDone)
             {
-                await ETModel.Game.Scene.GetComponent<TimerComponent>().WaitAsync(500);
+                await Game.Scene.GetComponent<TimerComponent>().WaitAsync(500);
             }
             if (string.IsNullOrEmpty(www.error))
             {
@@ -32,7 +33,7 @@ namespace ETModel
             }
             else
             {
-                Log.Error("下载错误"+ www.error);
+                Log.Error("下载错误" + www.error);
                 loadCall?.Invoke(null);
                 return null;
             }

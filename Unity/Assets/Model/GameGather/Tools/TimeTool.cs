@@ -14,8 +14,6 @@ namespace ETModel
         /// </summary>            
         public const long DaysTime = 864000000000;
 
-        
-
         /// <summary>
         /// 一星期的时间
         /// </summary>               
@@ -39,7 +37,7 @@ namespace ETModel
         //获取当前时间戳
         public static long GetCurrenTimeStamp() //除以10000 就是毫秒
         {
-            return  DateTime.UtcNow.Ticks - _1970DataTimeTicks;
+            return DateTime.UtcNow.Ticks - _1970DataTimeTicks;
         }
 
         //获取下个星期一00:00的时间距离 现在 时间的时间戳
@@ -47,12 +45,12 @@ namespace ETModel
         {
             DateTime dateTime = GetCurrenDateTime();
             //星期日 按算应该算7 而程序定义是0 所以判断一下 手动更改
-            int datweek = (int) dateTime.DayOfWeek;
+            int datweek = (int)dateTime.DayOfWeek;
             if (datweek == 0)
             {
                 datweek = 7;
             }
-            dateTime = dateTime.Date.AddDays(7- datweek + 1);//7-当前星期数 就是星期天00点 加1就是下星期一00点
+            dateTime = dateTime.Date.AddDays(7 - datweek + 1); //7-当前星期数 就是星期天00点 加1就是下星期一00点
             return ConvertDateTimeToLong(dateTime) - GetCurrenTimeStamp();
         }
 
@@ -69,10 +67,9 @@ namespace ETModel
             {
                 return false;
             }
-
         }
 
-        private static DateTime _1970DataTime=new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+        private static DateTime _1970DataTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
         private static long _1970DataTimeTicks = new System.DateTime(1970, 1, 1, 0, 0, 0, 0).Ticks;
         /// <summary>  
         /// 将c# DateTime时间格式转换为Unix时间戳格式  
@@ -95,7 +92,6 @@ namespace ETModel
         {
             return ConvertStringToDateTime(long.Parse(timeStamp));
         }
-
 
         /// <summary>        
         /// 时间戳转为C#格式时间        

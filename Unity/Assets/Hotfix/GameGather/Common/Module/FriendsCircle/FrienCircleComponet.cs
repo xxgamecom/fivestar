@@ -112,7 +112,7 @@ namespace ETHotfix
         //创建房间
         public void CreateRoom(RepeatedField<int> configs)
         {
-            CardFiveStarAisle.CreateRoom(configs, CuurSelectFriendsCircle.FriendsCircleId);
+            CardFiveStarEntry.CreateRoom(configs, CuurSelectFriendsCircle.FriendsCircleId);
         }
         private Dictionary<int, FriendsCircle> _FriendsCircleDic = new Dictionary<int, FriendsCircle>();
         //获取亲友圈信息

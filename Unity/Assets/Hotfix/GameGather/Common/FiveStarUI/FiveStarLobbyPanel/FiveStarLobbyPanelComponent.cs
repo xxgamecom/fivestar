@@ -58,7 +58,7 @@ namespace ETHotfix
         {
             if (Game.Scene.GetComponent<ToyGameComponent>().CurrToyGame == ToyGameId.Lobby)
             {
-                CardFiveStarAisle.JoinRoom(message);
+                CardFiveStarEntry.JoinRoom(message);
             }
         }
         public async void Location(string message)

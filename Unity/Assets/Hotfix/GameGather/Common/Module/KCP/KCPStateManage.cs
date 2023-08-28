@@ -14,26 +14,28 @@ namespace ETHotfix
         public const string Disconnectl = "Disconnectl";
         public const string Connect = "Connect";
     }
+
     [ObjectSystem]
-    public class KCPConnectStateEventAwakeSystem : AwakeSystem<KCPStateManage>
+    public class KCPConnectStateEventAwakeSystem: AwakeSystem<KCPStateManage>
     {
         public override void Awake(KCPStateManage self)
         {
             self.Awake();
         }
     }
-    public  class KCPStateManage:Component
-    {
-        public string pKCPNetWorkState {  set; get; }
 
-        public Action pStartConnectCall;//开始连接
-        public Action<G2C_GateLogin> pConnectSuccessCall;//连接成功
-        public Action pConnectFailureCall; //连接失败
-        public Action pConnectLostCall;//连接断开
-        public Action pStartReconnectionCall;//开始重连
-        public Action<G2C_GateLogin> pAgainConnectSuccessCall;//重连成功
-        public Action pAgainConnectFailureCall;//重连失败
-        public Action pInitiativeDisconnectCall;//主动断开连接
+    public class KCPStateManage: Component
+    {
+        public string pKCPNetWorkState { set; get; }
+
+        public Action pStartConnectCall;                       //开始连接
+        public Action<G2C_GateLogin> pConnectSuccessCall;      //连接成功
+        public Action pConnectFailureCall;                     //连接失败
+        public Action pConnectLostCall;                        //连接断开
+        public Action pStartReconnectionCall;                  //开始重连
+        public Action<G2C_GateLogin> pAgainConnectSuccessCall; //重连成功
+        public Action pAgainConnectFailureCall;                //重连失败
+        public Action pInitiativeDisconnectCall;               //主动断开连接
 
         //单例模式
         public static KCPStateManage Ins { private set; get; }
@@ -49,15 +51,16 @@ namespace ETHotfix
             pKCPNetWorkState = KCPNetWorkState.BebeingConnect;
             pStartConnectCall?.Invoke();
         }
-        //连接成功
+        
+        // 连接成功
         public void ConnectSuccess(G2C_GateLogin g2CGateLogin)
         {
             Log.Debug("连接成功");
             pKCPNetWorkState = KCPNetWorkState.Connect;
-            pConnectSuccessCall?.Invoke(g2CGateLogin);
+            pConnectSuccessCall?.Invoke(g2CGateLogin); // fire ConnectSuccessEvent
         }
 
-        //连接失败
+        // 连接失败
         public void ConnectFailure()
         {
             Log.Debug("连接失败");
@@ -70,7 +73,7 @@ namespace ETHotfix
         {
             Log.Debug("连接断开");
             pKCPNetWorkState = KCPNetWorkState.Disconnectl;
-            await ETModel.Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000);//连接断开后等待1秒 才发起重连 因为底层需要对Session进行一些处理
+            await ETModel.Game.Scene.GetComponent<TimerComponent>().WaitAsync(1000); //连接断开后等待1秒 才发起重连 因为底层需要对Session进行一些处理
             pConnectLostCall?.Invoke();
         }
 
@@ -91,11 +94,9 @@ namespace ETHotfix
         //重连失败
         public void AgainConnectFailure()
         {
-
             Log.Debug("重连失败");
             pKCPNetWorkState = KCPNetWorkState.Disconnectl;
             pAgainConnectFailureCall?.Invoke();
-
         }
         //主动断开连接
         public void DisconnectInitiative()
