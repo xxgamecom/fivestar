@@ -15,7 +15,7 @@ namespace ETHotfix
             try
             {
 
-                await UserComponent.Ins.StopSealOperate(message.StopSeal, response);
+                await UserManager.Ins.StopSealOperate(message.StopSeal, response);
                 reply(response);
             }
             catch (Exception e)

@@ -9,7 +9,10 @@ namespace ETHotfix
     {
         public static async Task<User> QueryUserInfo(long userId)
         {
-            var users = await Game.Scene.GetComponent<DBProxyComponent>().Query<User>(user => user.UserId == userId);
+            var users = await Game.Scene
+                                  .GetComponent<DBProxyComponent>()
+                                  .Query<User>(user => user.UserId == userId);
+            
             if (users.Count > 0)
             {
                 return users[0];

@@ -3,10 +3,10 @@ using ETModel;
 
 namespace ETHotfix
 {
-    public static class GateUserComponentSystem
+    public static class GateUserManagerSystem
     {
         // 获取当前网关连接User中的信息
-        public static User GetUser(this GateUserComponent self, long userId)
+        public static User GetUser(this GateUserManager self, long userId)
         {
             if (!self.UserDict.TryGetValue(userId, out var user))
             {
@@ -17,7 +17,7 @@ namespace ETHotfix
         }
 
         // 玩家上线事件
-        public static async Task<User> UserOnLine(this GateUserComponent self, long userId, long sessionActorId)
+        public static async Task<User> UserOnLine(this GateUserManager self, long userId, long sessionActorId)
         {
             var user = await UserHelper.QueryUserInfo(userId);
             if (user == null)
@@ -40,7 +40,7 @@ namespace ETHotfix
         }
 
         // 玩家下线事件
-        public static void UserOffline(this GateUserComponent self, long userId)
+        public static void UserOffline(this GateUserManager self, long userId)
         {
             long playerSessionActorId = 0;
             if (self.UserDict.ContainsKey(userId))
@@ -64,7 +64,7 @@ namespace ETHotfix
         }
 
         // 给其他服务器广播用户 上 下线消息
-        public static void BroadcastOnAndOffLineMessage(this GateUserComponent self, IMessage iMessage)
+        public static void BroadcastOnAndOffLineMessage(this GateUserManager self, IMessage iMessage)
         {
             var appType = StartConfigComponent.Instance.StartConfig.AppType;
             if (appType == AppType.AllServer)

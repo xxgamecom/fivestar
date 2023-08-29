@@ -75,7 +75,7 @@ namespace App
                     {
                         Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address);
                         Game.Scene.AddComponent<GateAccessTokenManager>(); // 访问token管理组件
-                        Game.Scene.AddComponent<GateUserComponent>();      // 网关用户管理组件
+                        Game.Scene.AddComponent<GateUserManager>();        // 网关用户管理组件
                         Game.Scene.AddComponent<HeartbeatMgrComponent>();  // 与客户端有连接都要加, 心跳管理组件
                         break;
                     }
@@ -96,7 +96,7 @@ namespace App
                     // 用户服
                     case AppType.User:
                     {
-                        Game.Scene.AddComponent<UserComponent>();       // 用户服管理组件
+                        Game.Scene.AddComponent<UserManager>();         // 用户服管理组件
                         Game.Scene.AddComponent<UserConfigComponent>(); // 用户配置组件
                         break;
                     }
@@ -159,9 +159,9 @@ namespace App
 
                         // 自己添加组件
                         // 网关
-                        Game.Scene.AddComponent<GateUserComponent>(); // 网关管理用户的组件
+                        Game.Scene.AddComponent<GateUserManager>(); // 网关管理用户的组件
                         // 用户服
-                        Game.Scene.AddComponent<UserComponent>();       // 用户服管理组件
+                        Game.Scene.AddComponent<UserManager>();         // 用户服管理组件
                         Game.Scene.AddComponent<UserConfigComponent>(); // 用户配置组件
                         // 大厅服
                         Game.Scene.AddComponent<ShoppingCommodityComponent>(); // 商品配置组件

@@ -14,7 +14,7 @@ namespace ETHotfix
             U2M_GetAIUser response = new U2M_GetAIUser();
             try
             {
-                UserComponent userComponent = Game.Scene.GetComponent<UserComponent>();
+                UserManager userComponent = Game.Scene.GetComponent<UserManager>();
                 response.users =await userComponent.dbProxyComponent.SortQuery<User>(user => true, user => user.Beans==1,100);
                 reply(response);
             }

@@ -5,11 +5,11 @@ namespace ETModel
 {
 
     /// <summary>
-    /// 网关用户
+    /// 网关用户管理
     /// </summary>
-    public class GateUserComponent: Component
+    public class GateUserManager: Component
     {
-        public static GateUserComponent Ins { private set; get; }
+        public static GateUserManager Ins { private set; get; }
 
         public readonly Dictionary<long, User> UserDict = new Dictionary<long, User>();
 

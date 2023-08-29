@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ETModel;
 using UnityEngine;
 
@@ -22,14 +18,14 @@ namespace ETHotfix
             if (sprite == null)
             {
                 //默认头像
-                sprite=ResourcesComponent.Ins.GetResoure("", "defaultIcon") as Sprite;
+                sprite = ResourcesComponent.Ins.GetResoure("", "defaultIcon") as Sprite;
             }
             _SpriteIcon = sprite;
             return _SpriteIcon;
         }
 
         //获取显示ID 因为有可能是机器人
-        private long _showUserId=0;
+        private long _showUserId = 0;
         public long GetShowUserId()
         {
             if (UserId >= 1000)
@@ -45,6 +41,7 @@ namespace ETHotfix
 
         //定位信息 str
         private string[] _LocationSplit;
+
         private string[] LocationSplit
         {
             get
@@ -56,6 +53,7 @@ namespace ETHotfix
                 return _LocationSplit;
             }
         }
+
         //定位地址名称
         public string GetLocationAddress()
         {
@@ -86,19 +84,16 @@ namespace ETHotfix
             return GetDistance(GetLng(), GetLat(), targetUser.GetLng(), targetUser.GetLat());
         }
 
-        public static double GetDistance(double lng1, double lat1, double lng2,
-            double lat2)
+        public static double GetDistance(double lng1, double lat1, double lng2, double lat2)
         {
             double radLat1 = rad(lat1);
             double radLat2 = rad(lat2);
             double a = radLat1 - radLat2;
             double b = rad(lng1) - rad(lng2);
-            double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(a / 2), 2)
-                                               + Math.Cos(radLat1) * Math.Cos(radLat2)
-                                               * Math.Pow(Math.Sin(b / 2), 2)));
+            double s = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(a / 2), 2) + Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(b / 2), 2)));
             s = s * EARTH_RADIUS;
             s = Math.Round(s * 10000d) / 10000d;
-            s = s * 1000;//返回的是米
+            s = s * 1000; //返回的是米
             return s;
         }
         private static double EARTH_RADIUS = 6378.137;

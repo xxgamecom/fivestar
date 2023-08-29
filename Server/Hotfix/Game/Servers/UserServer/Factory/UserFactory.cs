@@ -19,7 +19,7 @@ namespace ETHotfix
             user.Sex = SexType.WoMan;//游客或者编辑登陆 性别默认是女
             await Game.Scene.GetComponent<DBProxyComponent>().Save(user);
 
-            AccountInfo accountInfo = ComponentFactory.Create<AccountInfo>();
+            var accountInfo = ComponentFactory.Create<AccountInfo>();
             accountInfo.UserId = user.UserId;
             accountInfo.Account = account;
             accountInfo.Password = string.Empty;
@@ -39,7 +39,7 @@ namespace ETHotfix
             user.Sex = weChatJsonData.sex;
             await Game.Scene.GetComponent<DBProxyComponent>().Save(user);
 
-            AccountInfo accountInfo = ComponentFactory.Create<AccountInfo>();
+            var accountInfo = ComponentFactory.Create<AccountInfo>();
             accountInfo.UserId = user.UserId;
             accountInfo.Account = weChatJsonData.unionid;
             accountInfo.IsStopSeal = false;

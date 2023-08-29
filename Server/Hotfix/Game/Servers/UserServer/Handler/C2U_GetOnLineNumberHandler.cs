@@ -11,11 +11,11 @@ namespace ETHotfix
     {
         protected override async void Run(Session session, C2U_GetOnLineNumber message, Action<U2C_GetOnLineNumber> reply)
         {
-            U2C_GetOnLineNumber response = new U2C_GetOnLineNumber();
+            var response = new U2C_GetOnLineNumber();
             try
             {
 
-                response.OnLineNumber = UserComponent.Ins.mOnlineUserDic.Count;
+                response.OnLineNumber = UserManager.Ins.OnlineUserDict.Count;
                 reply(response);
             }
             catch (Exception e)

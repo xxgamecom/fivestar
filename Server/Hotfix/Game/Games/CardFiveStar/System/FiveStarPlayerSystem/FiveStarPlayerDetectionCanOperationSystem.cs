@@ -6,148 +6,148 @@ namespace ETHotfix
     {
 
         //检测能不能进行操作 
-        public static bool IsCanOperate(this FiveStarPlayer fiveStarPlayer, int playCard = 0, int playCardIndex = 0)
+        public static bool IsCanOperate(this FiveStarPlayer self, int playCard = 0, int playCardIndex = 0)
         {
-            if (fiveStarPlayer.IsRestIn) //如果是在休息中 直接不能操作
+            if (self.IsRestIn) //如果是在休息中 直接不能操作
             {
                 return false;
             }
 
-            fiveStarPlayer.canOperateLists.Clear();              //可操作列表清空
-            fiveStarPlayer.canGangCards.Clear();                 //可杠列表清空
-            if (fiveStarPlayer.IsCanHu(playCard, playCardIndex)) //检测能不能胡牌
+            self.canOperateLists.Clear();              //可操作列表清空
+            self.canGangCards.Clear();                 //可杠列表清空
+            if (self.IsCanHu(playCard, playCardIndex)) //检测能不能胡牌
             {
-                fiveStarPlayer.canOperateLists.Add(FiveStarOperateType.FangChongHu);
+                self.canOperateLists.Add(FiveStarOperateType.FangChongHu);
             }
             if (playCard > 0)
             {
                 //别人打牌的时候
-                fiveStarPlayer.intData = fiveStarPlayer.IsCanPengAndGang(playCard);
-                if (fiveStarPlayer.intData != 0) //检测能不能碰和暗杆
+                self.intData = self.IsCanPengAndGang(playCard);
+                if (self.intData != 0) //检测能不能碰和暗杆
                 {
-                    if (fiveStarPlayer.IsLiangDao && fiveStarPlayer.intData == FiveStarOperateType.MingGang && fiveStarPlayer.LiangDaoNoneCards.Contains(playCard))
+                    if (self.IsLiangDao && self.intData == FiveStarOperateType.MingGang && self.LiangDaoNoneCards.Contains(playCard))
                     {
-                        fiveStarPlayer.AddCanGangOpearte();
+                        self.AddCanGangOpearte();
                     }
-                    else if (fiveStarPlayer.intData == FiveStarOperateType.Peng)
+                    else if (self.intData == FiveStarOperateType.Peng)
                     {
-                        fiveStarPlayer.canOperateLists.Add(FiveStarOperateType.Peng);
+                        self.canOperateLists.Add(FiveStarOperateType.Peng);
                     }
-                    else if (fiveStarPlayer.intData == FiveStarOperateType.MingGang)
+                    else if (self.intData == FiveStarOperateType.MingGang)
                     {
-                        fiveStarPlayer.canOperateLists.Add(FiveStarOperateType.Peng);
-                        fiveStarPlayer.AddCanGangOpearte();
+                        self.canOperateLists.Add(FiveStarOperateType.Peng);
+                        self.AddCanGangOpearte();
                     }
                 }
             }
             else
             {
                 //自己摸牌的时候
-                if (fiveStarPlayer.IsCanCaGang() || fiveStarPlayer.IsCanAnGang())
+                if (self.IsCanCaGang() || self.IsCanAnGang())
                 {
-                    fiveStarPlayer.AddCanGangOpearte();
+                    self.AddCanGangOpearte();
                 }
             }
             //广播可操作消息
-            return fiveStarPlayer.canOperateLists.Count > 0;
+            return self.canOperateLists.Count > 0;
         }
         //添加可以杠的操作
-        public static void AddCanGangOpearte(this FiveStarPlayer fiveStarPlayer)
+        public static void AddCanGangOpearte(this FiveStarPlayer self)
         {
-            if (fiveStarPlayer.FiveStarRoom.ResidueCards.Count > 0) //摸的最后一张牌不能杠所以 不显示
+            if (self.FiveStarRoom.ResidueCards.Count > 0) //摸的最后一张牌不能杠所以 不显示
             {
-                fiveStarPlayer.canOperateLists.Add(FiveStarOperateType.MingGang);
+                self.canOperateLists.Add(FiveStarOperateType.MingGang);
             }
         }
         //添加可以杠的牌
-        public static void AddCanGangCard(this FiveStarPlayer fiveStarPlayer, int cardSize, int gangType)
+        public static void AddCanGangCard(this FiveStarPlayer self, int cardSize, int gangType)
         {
-            fiveStarPlayer.canGangCards[cardSize] = gangType;
+            self.canGangCards[cardSize] = gangType;
         }
 
         //检测能不能暗杆
-        public static bool IsCanAnGang(this FiveStarPlayer fiveStarPlayer)
+        public static bool IsCanAnGang(this FiveStarPlayer self)
         {
-            fiveStarPlayer.intData = 0;
-            for (int i = 0; i < fiveStarPlayer.Hands.Count - 1; i++)
+            self.intData = 0;
+            for (int i = 0; i < self.Hands.Count - 1; i++)
             {
-                if (fiveStarPlayer.Hands[i] == fiveStarPlayer.Hands[i + 1])
+                if (self.Hands[i] == self.Hands[i + 1])
                 {
-                    fiveStarPlayer.intData++;
+                    self.intData++;
                 }
                 else
                 {
-                    if (fiveStarPlayer.intData >= 3) //3次相同 就表示有4张一样的
+                    if (self.intData >= 3) //3次相同 就表示有4张一样的
                     {
-                        fiveStarPlayer.AddCanAnGangCard(fiveStarPlayer.Hands[i]);
+                        self.AddCanAnGangCard(self.Hands[i]);
                     }
-                    fiveStarPlayer.intData = 0;
+                    self.intData = 0;
                 }
             }
-            if (fiveStarPlayer.intData >= 3) //3次相同 就表示有4张一样的
+            if (self.intData >= 3) //3次相同 就表示有4张一样的
             {
-                fiveStarPlayer.AddCanAnGangCard(fiveStarPlayer.Hands[fiveStarPlayer.Hands.Count - 1]);
+                self.AddCanAnGangCard(self.Hands[self.Hands.Count - 1]);
             }
-            return fiveStarPlayer.canGangCards.Count > 0;
+            return self.canGangCards.Count > 0;
         }
         //添加可以暗杠的牌
-        public static void AddCanAnGangCard(this FiveStarPlayer fiveStarPlayer, int card)
+        public static void AddCanAnGangCard(this FiveStarPlayer self, int card)
         {
-            if (fiveStarPlayer.IsLiangDao)
+            if (self.IsLiangDao)
             {
-                if (!fiveStarPlayer.LiangDaoNoneCards.Contains(card) || fiveStarPlayer.MoEndHand != card)
+                if (!self.LiangDaoNoneCards.Contains(card) || self.MoEndHand != card)
                 {
                     return; //如果玩家 亮倒了  而且 亮倒无关牌中 没有这张牌 他就不能暗杠这张牌 而且 只能暗杠杠摸的那种牌
                 }
             }
-            fiveStarPlayer.AddCanGangCard(card, FiveStarOperateType.AnGang);
+            self.AddCanGangCard(card, FiveStarOperateType.AnGang);
         }
         //检测能不能碰或者杠
-        public static int IsCanPengAndGang(this FiveStarPlayer fiveStarPlayer, int card)
+        public static int IsCanPengAndGang(this FiveStarPlayer self, int card)
         {
-            fiveStarPlayer.intData = 0;
-            for (int i = 0; i < fiveStarPlayer.Hands.Count; i++)
+            self.intData = 0;
+            for (int i = 0; i < self.Hands.Count; i++)
             {
-                if (fiveStarPlayer.Hands[i] == card)
+                if (self.Hands[i] == card)
                 {
-                    fiveStarPlayer.intData++;
+                    self.intData++;
                 }
             }
-            if (fiveStarPlayer.intData == 2)
+            if (self.intData == 2)
             {
-                if (fiveStarPlayer.IsLiangDao)
+                if (self.IsLiangDao)
                 {
                     return FiveStarOperateType.None;
                 }
                 return FiveStarOperateType.Peng;
             }
-            else if (fiveStarPlayer.intData == 3)
+            else if (self.intData == 3)
             {
-                if (fiveStarPlayer.IsLiangDao && !fiveStarPlayer.LiangDaoNoneCards.Contains(card))
+                if (self.IsLiangDao && !self.LiangDaoNoneCards.Contains(card))
                 {
                     return FiveStarOperateType.None;
                 }
-                fiveStarPlayer.AddCanGangCard(card, FiveStarOperateType.MingGang);
+                self.AddCanGangCard(card, FiveStarOperateType.MingGang);
                 return FiveStarOperateType.MingGang;
             }
             return FiveStarOperateType.None;
         }
 
         //检测能不能擦杠
-        public static bool IsCanCaGang(this FiveStarPlayer fiveStarPlayer)
+        public static bool IsCanCaGang(this FiveStarPlayer self)
         {
-            for (int i = 0; i < fiveStarPlayer.OperateInfos.Count; i++)
+            for (int i = 0; i < self.OperateInfos.Count; i++)
             {
-                if (fiveStarPlayer.OperateInfos[i].OperateType == FiveStarOperateType.Peng)
+                if (self.OperateInfos[i].OperateType == FiveStarOperateType.Peng)
                 {
-                    if (fiveStarPlayer.Hands.Contains(fiveStarPlayer.OperateInfos[i].Card))
+                    if (self.Hands.Contains(self.OperateInfos[i].Card))
                     {
                         //如果亮倒了 擦杠的牌 只能是刚才自己摸的牌
-                        if (fiveStarPlayer.IsLiangDao)
+                        if (self.IsLiangDao)
                         {
-                            if (fiveStarPlayer.MoEndHand == fiveStarPlayer.OperateInfos[i].Card)
+                            if (self.MoEndHand == self.OperateInfos[i].Card)
                             {
-                                fiveStarPlayer.AddCanGangCard(fiveStarPlayer.OperateInfos[i].Card, FiveStarOperateType.CaGang);
+                                self.AddCanGangCard(self.OperateInfos[i].Card, FiveStarOperateType.CaGang);
                                 return true;
                             }
                             else
@@ -155,7 +155,7 @@ namespace ETHotfix
                                 return false;
                             }
                         }
-                        fiveStarPlayer.AddCanGangCard(fiveStarPlayer.OperateInfos[i].Card, FiveStarOperateType.CaGang);
+                        self.AddCanGangCard(self.OperateInfos[i].Card, FiveStarOperateType.CaGang);
                         return true;
                     }
                 }
@@ -164,58 +164,58 @@ namespace ETHotfix
         }
 
         //检测能不能胡
-        public static bool IsCanHu(this FiveStarPlayer fiveStarPlayer, int card = 0, int playCardIndex = 0)
+        public static bool IsCanHu(this FiveStarPlayer self, int card = 0, int playCardIndex = 0)
         {
             if (card > 0)
             {
-                fiveStarPlayer.Hands.Add(card);
+                self.Hands.Add(card);
             }
-            fiveStarPlayer.boolData = CardFiveStarHuPaiLogic.IsHuPai(fiveStarPlayer.Hands);
+            self.boolData = CardFiveStarHuPaiLogic.IsHuPai(self.Hands);
             //不是自摸要判断 是否是平胡
-            if (fiveStarPlayer.boolData && card > 0)
+            if (self.boolData && card > 0)
             {
                 //如果有一家亮倒 可以胡
-                if (fiveStarPlayer.IsLiangDao || fiveStarPlayer.FiveStarRoom.FiveStarPlayerDic[playCardIndex].IsLiangDao)
+                if (self.IsLiangDao || self.FiveStarRoom.FiveStarPlayerDic[playCardIndex].IsLiangDao)
                 {
                 }
                 //如果没有亮倒 并且胡牌的倍数小于 最小放冲胡的倍数就不能胡
-                else if (CardFiveStarHuPaiLogic.GetMultiple(fiveStarPlayer.Hands, fiveStarPlayer.PengGangs, card, fiveStarPlayer.FiveStarRoom.IsGangShangCard) < FiveStarRoom.FaangChongHuMinHuCardMultiple)
+                else if (CardFiveStarHuPaiLogic.GetMultiple(self.Hands, self.PengGangs, card, self.FiveStarRoom.IsGangShangCard) < FiveStarRoom.FaangChongHuMinHuCardMultiple)
                 {
-                    fiveStarPlayer.boolData = false;
+                    self.boolData = false;
                 }
             }
             if (card > 0)
             {
-                fiveStarPlayer.Hands.Remove(card);
+                self.Hands.Remove(card);
             }
-            return fiveStarPlayer.boolData;
+            return self.boolData;
         }
         //检测能不能听牌
-        public static bool IsTingCard(this FiveStarPlayer fiveStarPlayer)
+        public static bool IsTingCard(this FiveStarPlayer self)
         {
-            return CardFiveStarHuPaiLogic.IsCanTingPai(fiveStarPlayer.Hands);
+            return CardFiveStarHuPaiLogic.IsCanTingPai(self.Hands);
         }
 
         //移除指定牌数量 如果不够移除 会还原被移除的牌
-        public static bool RemoveCardCount(this FiveStarPlayer fiveStarPlayer, int card, int count)
+        public static bool RemoveCardCount(this FiveStarPlayer self, int card, int count)
         {
-            fiveStarPlayer.boolData = true;
+            self.boolData = true;
             for (int i = 0; i < count; i++)
             {
-                if (fiveStarPlayer.Hands.Contains(card))
+                if (self.Hands.Contains(card))
                 {
-                    fiveStarPlayer.Hands.Remove(card);
+                    self.Hands.Remove(card);
                 }
                 else
                 {
-                    fiveStarPlayer.boolData = false;
+                    self.boolData = false;
                     for (int j = 0; j < i; j++)
                     {
-                        fiveStarPlayer.Hands.Add(card);
+                        self.Hands.Add(card);
                     }
                 }
             }
-            return fiveStarPlayer.boolData;
+            return self.boolData;
         }
     }
 }

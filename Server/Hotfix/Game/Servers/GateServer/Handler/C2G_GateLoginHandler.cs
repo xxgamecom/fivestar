@@ -12,10 +12,14 @@ namespace ETHotfix
             try
             {
                 long userId = Game.Scene.GetComponent<GateAccessTokenManager>().Get(message.Key);
+
                 // 添加收取Actor消息组件 并且本地化一下 就是所有服务器都能向这个对象发 并添加一个消息拦截器
                 await session.AddComponent<MailBoxComponent, string>(ActorInterceptType.GateSession).AddLocation();
+
+                var gateUserManager = Game.Scene.GetComponent<GateUserManager>();
+                
                 // 通知GateUserComponent组件和用户服玩家上线 并获取User实体
-                var user = await Game.Scene.GetComponent<GateUserComponent>().UserOnLine(userId, session.Id);
+                var user = await gateUserManager.UserOnLine(userId, session.Id);
                 if (user == null)
                 {
                     response.Message = "用户信息查询不到";
